@@ -1,0 +1,36 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / Astro
+node_modules/
+dist/
+.astro/
+.output/
+.vercel/
+.netlify/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+npm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+
+# Temp
+*.tmp
+/tmp/
+
+# Raw downloaded asset packs (curate into brand/assets/ instead — never commit raw zips)
+*.zip
+
+# Raw video/image masters (regenerable — keep local, never commit)
+/*.mov
+/hf_*.mp4
+*.mhtml

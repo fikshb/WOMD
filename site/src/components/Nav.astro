@@ -1,0 +1,96 @@
+---
+import { navItems } from "../data/content";
+// Mobile menu: pillars collapsed into one "Five pillars" entry
+const mobileItems = [
+  { id: "who", label: "Who we are" },
+  { id: "belief", label: "Core belief" },
+  { id: "what-we-do", label: "Five pillars" },
+  { id: "process", label: "How we work" },
+  { id: "team", label: "Who's behind it" },
+  { id: "different", label: "What makes us different" },
+  { id: "audience", label: "Who we work with" },
+  { id: "future", label: "The future" },
+  { id: "contact", label: "Contact" },
+];
+---
+
+<!-- Desktop dot nav — color adapts to the active section (light/dark) via scroll-spy -->
+<nav id="sectionNav" class="fixed right-5 top-1/2 z-50 hidden -translate-y-1/2 text-white transition-colors duration-300 md:block" aria-label="Section navigation">
+  <ul class="flex flex-col gap-3.5">
+    {navItems.map((item) => (
+      <li>
+        <a href={`#${item.id}`} data-nav={item.id} class="nav-dot group flex items-center justify-end gap-2" aria-label={item.label}>
+          <span class="nav-label text-[10px] font-semibold uppercase tracking-wider opacity-0 transition-opacity group-hover:opacity-100">
+            {item.label}
+          </span>
+          <span class="nav-bullet block h-2.5 w-2.5 rounded-full border-2 border-current bg-transparent transition-all duration-300 group-hover:bg-current"></span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<!-- Mobile hamburger -->
+<button id="navToggle" class="fixed right-5 top-5 z-[60] flex h-11 w-11 items-center justify-center text-white md:hidden" style="mix-blend-mode: difference;" aria-label="Open menu" aria-expanded="false">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="menu-bars h-6 w-6"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="menu-x h-6 w-6"><path d="M6 6l12 12M18 6 6 18"/></svg>
+</button>
+
+<!-- Mobile overlay menu -->
+<div id="navOverlay" class="fixed inset-0 z-[55] hidden flex-col items-center justify-center gap-5 bg-ink/95 px-6 text-center backdrop-blur md:hidden">
+  {mobileItems.map((item) => (
+    <a href={`#${item.id}`} class="font-headline text-2xl font-extrabold uppercase tracking-wide text-white transition-colors active:text-brand-yellow">
+      {item.label}
+    </a>
+  ))}
+</div>
+
+<script is:inline>
+  (function () {
+    // Section ids whose background is light (dots should be dark there)
+    const LIGHT = new Set(["who", "pillar-01", "pillar-02", "pillar-03", "pillar-04", "pillar-05", "team", "audience"]);
+
+    const nav = document.getElementById("sectionNav");
+    const dots = Array.from(document.querySelectorAll(".nav-dot"));
+    if (nav && dots.length) {
+      const apply = (id) => {
+        dots.forEach((d) => d.classList.toggle("is-active", d.getAttribute("data-nav") === id));
+        nav.classList.toggle("is-light", LIGHT.has(id));
+      };
+      const sections = dots
+        .map((d) => document.getElementById(d.getAttribute("data-nav")))
+        .filter(Boolean);
+      if ("IntersectionObserver" in window && sections.length) {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => e.isIntersecting && apply(e.target.id)),
+          { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+        );
+        sections.forEach((s) => io.observe(s));
+      }
+    }
+
+    // Mobile hamburger overlay
+    const toggle = document.getElementById("navToggle");
+    const overlay = document.getElementById("navOverlay");
+    if (toggle && overlay) {
+      const open = () => {
+        overlay.classList.remove("hidden");
+        overlay.classList.add("flex");
+        toggle.classList.add("is-open");
+        toggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+      };
+      const close = () => {
+        overlay.classList.add("hidden");
+        overlay.classList.remove("flex");
+        toggle.classList.remove("is-open");
+        toggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      };
+      toggle.addEventListener("click", () =>
+        overlay.classList.contains("hidden") ? open() : close()
+      );
+      overlay.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
+    }
+  })();
+</script>

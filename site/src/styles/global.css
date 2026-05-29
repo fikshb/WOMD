@@ -1,0 +1,175 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Decorative display face — display use only (see brand/design.md §4) */
+@font-face {
+  font-family: "Moderniz";
+  src: url("/fonts/Moderniz.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Hybrid scroll (D-005): proximity snap on the document.
+   Punchy/full-height sections (.snap) gently snap; dense sections scroll freely. */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+}
+
+.snap {
+  scroll-snap-align: start;
+  /* tall/content-dense sections shouldn't trap the scroll */
+  scroll-snap-stop: normal;
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+    scroll-snap-type: none;
+  }
+}
+
+/* Disable proximity snap on small screens so long content stays reachable */
+@media (max-width: 767px) {
+  html {
+    scroll-snap-type: none;
+  }
+}
+
+/* Scroll-reveal (D-007). Only hides when JS is present (.js on <html>),
+   so no-JS users still see everything. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Icon idle animation — subtle continuous float (no Lottie; CSS on <img>).
+   Staggered via inline animation-delay; paused for reduced-motion. */
+@keyframes icon-float {
+  0%, 100% { transform: translateY(10%); }
+  50% { transform: translateY(-6%); }
+}
+.anim-icon {
+  animation: icon-float 3.2s ease-in-out infinite;
+  animation-delay: var(--anim-delay, 0s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .anim-icon { animation: none; }
+}
+
+/* Ambient halftone drift — very subtle, slow; disabled for reduced-motion */
+@keyframes halftone-drift {
+  0%, 100% { transform: scale(1.1) translate3d(0, 0, 0); }
+  50% { transform: scale(1.14) translate3d(-5%, 3%, 0); }
+}
+/* Halftone textures kept static (drift disabled) for a calmer, more premium feel */
+.halftone-anim {
+  transform: scale(1.04);
+}
+/* Alternate drift — gentle counter-direction sway + slight rotation (for pillars 02 & 04) */
+@keyframes halftone-drift-2 {
+  0%, 100% { transform: scale(1.12) translate3d(0, 0, 0) rotate(-1.5deg); }
+  50% { transform: scale(1.16) translate3d(5%, -3%, 0) rotate(1.5deg); }
+}
+.halftone-anim-2 {
+  animation: halftone-drift-2 22s ease-in-out infinite;
+  will-change: transform;
+}
+/* Third drift — slow zoom pulse + vertical lift (for pillar 04) */
+@keyframes halftone-drift-3 {
+  0%, 100% { transform: scale(1.08) translate3d(0, 0, 0); }
+  50% { transform: scale(1.2) translate3d(-3%, -5%, 0); }
+}
+.halftone-anim-3 {
+  animation: halftone-drift-3 30s ease-in-out infinite;
+  will-change: transform;
+}
+/* Faded drift via opacity pulse (subtle) — for pillars 02 & 04 */
+@keyframes halftone-fade {
+  0%, 100% { opacity: 0.05; }
+  50% { opacity: 0.13; }
+}
+.halftone-fade { animation: halftone-fade 14s ease-in-out infinite; }
+@keyframes halftone-fade-2 {
+  0%, 100% { opacity: 0.13; }
+  50% { opacity: 0.04; }
+}
+.halftone-fade-2 { animation: halftone-fade-2 19s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) {
+  .halftone-anim,
+  .halftone-anim-2,
+  .halftone-anim-3,
+  .halftone-fade,
+  .halftone-fade-2 { animation: none; }
+}
+
+/* Section dot-nav — active slide indicator (set by scroll-spy in Nav.astro).
+   Bullet fill is white; mix-blend-difference on the list keeps it visible on any bg. */
+.nav-dot.is-active .nav-bullet {
+  background: currentColor;
+  transform: scale(1.45);
+}
+.nav-dot.is-active .nav-label {
+  opacity: 1;
+}
+/* On light-background sections the dots flip to ink so they stay visible */
+#sectionNav.is-light {
+  color: #2b2b2b;
+}
+
+/* Mobile hamburger icon state */
+#navToggle .menu-x {
+  display: none;
+}
+#navToggle.is-open .menu-bars {
+  display: none;
+}
+#navToggle.is-open .menu-x {
+  display: block;
+}
+
+/* Logo marquee (Trusted by) — seamless auto-scroll, like the Katalis reference */
+.marquee {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+}
+.marquee__track {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 4rem;
+  animation: marquee 38s linear infinite;
+}
+.marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2.5rem 4rem;
+  }
+}

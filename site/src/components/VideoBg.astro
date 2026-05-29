@@ -1,0 +1,47 @@
+---
+// Reusable looping background video with a scrim overlay for text contrast.
+interface Props {
+  src: string;
+  /** optional portrait-oriented source; shown on portrait devices (cover, no bars) */
+  srcPortrait?: string;
+  poster?: string;
+  /** scrim strength 0-100 (black overlay opacity %) */
+  scrim?: number;
+  /** radial vignette: darken center (behind text) only, keep edges bright */
+  vignette?: boolean;
+  /** contain the video within the viewport (no crop) instead of cover */
+  contain?: boolean;
+}
+const { src, srcPortrait, poster, scrim = 45, vignette = false, contain = false } = Astro.props;
+const overlay = vignette
+  ? `radial-gradient(ellipse 72% 62% at 50% 50%, rgba(0,0,0,${scrim / 100}) 0%, rgba(0,0,0,${scrim / 200}) 45%, rgba(0,0,0,0) 78%)`
+  : `rgba(0,0,0,${scrim / 100})`;
+const fit = contain ? "object-contain" : "object-cover";
+---
+
+<div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden bg-black">
+  {srcPortrait ? (
+    <>
+      <video
+        class:list={["h-full w-full landscape:block portrait:hidden", fit]}
+        autoplay muted loop playsinline preload="metadata" poster={poster}
+      >
+        <source src={src} type="video/mp4" />
+      </video>
+      <video
+        class:list={["h-full w-full portrait:block landscape:hidden", fit]}
+        autoplay muted loop playsinline preload="metadata" poster={poster}
+      >
+        <source src={srcPortrait} type="video/mp4" />
+      </video>
+    </>
+  ) : (
+    <video
+      class:list={["h-full w-full", fit]}
+      autoplay muted loop playsinline preload="metadata" poster={poster}
+    >
+      <source src={src} type="video/mp4" />
+    </video>
+  )}
+  <div class="absolute inset-0" style={`background: ${overlay}`}></div>
+</div>

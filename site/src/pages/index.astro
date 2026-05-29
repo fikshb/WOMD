@@ -1,0 +1,295 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import VideoBg from "../components/VideoBg.astro";
+import {
+  hero, stats, whoWeAre, belief, pillars, process, differentiators, audience, clients, team, closing,
+} from "../data/content";
+
+const V = {
+  splash: "/video/WOMD_bg_liquid-splash_loop_1080.mp4",
+  splashPortrait: "/video/WOMD_bg_liquid-splash_loop_portrait.mp4",
+  stripes: "/video/WOMD_bg_yellow-stripes_1080.mp4",
+};
+const halftone = "background-image:url('/textures/halftone-white.png');background-size:cover;";
+// Per-product icons — order matches pillars[].products (WOMD icon set)
+const productIcons = [
+  ["/icons/prod-playbook.svg", "/icons/prod-social.svg", "/icons/prod-leadership.svg"],
+  ["/icons/prod-research.svg", "/icons/prod-pmf.svg", "/icons/prod-dashboard.svg"],
+  ["/icons/prod-lms.svg", "/icons/prod-ai.svg", "/icons/prod-website.svg"],
+  ["/icons/prod-brand.svg", "/icons/prod-visual.svg"],
+  ["/icons/prod-org.svg", "/icons/prod-training.svg", "/icons/prod-hiring.svg"],
+];
+---
+
+<Base>
+  <a href="#hero" class="fixed left-5 top-5 z-50 flex items-center gap-3" aria-label="WOMD home">
+    <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="WOMD" width="44" height="44" class="h-11 w-11" />
+    <span class="max-w-[55vw] font-headline text-[0.65rem] font-bold uppercase leading-tight tracking-[0.18em] text-brand-yellow sm:max-w-none sm:text-[0.7rem]" style="text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">Strategic Transformation<br />Consultancy</span>
+  </a>
+  <Nav />
+
+  <!-- 1. HERO -->
+  <section id="hero" class="snap relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 text-center text-white md:pb-[14vh]">
+    <VideoBg src={V.splash} srcPortrait={V.splashPortrait} scrim={28} vignette contain />
+    <div class="reveal relative mx-auto flex max-w-4xl flex-col items-center">
+      <img src="/logo/WOMD_Wordmark_transparent_1500.png" alt="WOMD — Weapons of Mass Discussion" width="640" height="195" class="mx-auto block w-[84vw] max-w-4xl drop-shadow-[0_8px_40px_rgba(0,0,0,0.45)]" />
+      <p class="mt-7 font-headline text-eyebrow font-bold uppercase text-brand-yellow" style="text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">{hero.tagline}</p>
+      <p class="mt-7 max-w-5xl font-headline text-[clamp(1.5rem,1rem+1.6vw,2.4rem)] font-extrabold leading-[1.12] tracking-[-0.01em] text-white" style="text-shadow:-1.5px -1.5px 0 #000,1.5px -1.5px 0 #000,-1.5px 1.5px 0 #000,1.5px 1.5px 0 #000;">
+        {hero.subheadPre} <span class="text-brand-yellow">{hero.subheadAccent}</span>
+      </p>
+    </div>
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-20 bg-cover opacity-[0.1] mix-blend-screen" style="background-image:url('/textures/grain.jpg')"></div>
+  </section>
+
+  <!-- 2. WHO WE ARE -->
+  <section id="who" class="snap relative flex min-h-screen items-center overflow-hidden bg-white px-6 py-24 text-ink sm:px-12 lg:px-20">
+    <div class="halftone-anim pointer-events-none absolute inset-0 bg-cover bg-right" style="background-image:url('/imagery/yellow-polygon.jpg')"></div>
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/35"></div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl">
+      <p class="reveal font-headline text-[clamp(0.95rem,0.8rem+0.5vw,1.2rem)] font-bold uppercase tracking-[0.28em] text-ink/55">{whoWeAre.kicker}</p>
+      <h2 class="reveal mt-7 font-headline text-[clamp(2.6rem,1.4rem+5vw,5.5rem)] font-extrabold leading-[0.98] tracking-[-0.01em]" style="--reveal-delay:80ms">
+        {whoWeAre.headlineLead} <span class="box-decoration-clone bg-brand-yellow px-2 text-ink">{whoWeAre.headlineAccent}</span>
+      </h2>
+      <div class="reveal mt-12 max-w-4xl space-y-7 text-[clamp(1.15rem,1rem+0.7vw,1.6rem)] leading-relaxed text-ink/70" style="--reveal-delay:160ms">
+        {whoWeAre.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE BELIEF -->
+  <section id="belief" class="snap relative flex min-h-screen items-center overflow-hidden bg-ink px-6 py-24 text-white sm:px-12 lg:px-20">
+    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl">
+      <p class="reveal font-headline text-[clamp(0.95rem,0.8rem+0.5vw,1.2rem)] font-bold uppercase tracking-[0.28em] text-brand-yellow">{belief.kicker}</p>
+      <h2 class="reveal mt-7 max-w-5xl font-headline text-[clamp(2.6rem,1.4rem+5vw,5.5rem)] font-extrabold leading-[0.98] tracking-[-0.01em]" style="--reveal-delay:80ms">{belief.headline}</h2>
+
+      <ol class="relative mt-16 grid gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
+        <div class="absolute left-0 right-0 top-11 hidden h-px bg-gradient-to-r from-brand-yellow/30 via-brand-yellow/70 to-brand-yellow/30 lg:block"></div>
+        {belief.beats.map((b, i) => (
+          <li class="reveal relative flex flex-col items-center text-center sm:items-start sm:text-left" style={`--reveal-delay:${i * 120}ms`}>
+            <span class="relative z-10 flex h-[88px] w-[88px] shrink-0 items-center justify-center rounded-full bg-brand-yellow ring-8 ring-ink">
+              <img src={b.icon} alt="" width="48" height="48" class="anim-icon h-12 w-12" style={`--anim-delay:${i * 0.3}s`} />
+            </span>
+            <p class="mt-6 font-headline text-xl font-extrabold uppercase tracking-wide text-brand-yellow">{b.label}</p>
+            <p class="mt-2 text-lead text-white/75">{b.text}</p>
+            {i < belief.beats.length - 1 && <span aria-hidden="true" class="mt-8 h-10 w-px bg-brand-yellow/50 sm:hidden"></span>}
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. WHAT WE DO -->
+  <section id="what-we-do" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-28 sm:px-12 lg:px-20">
+    <VideoBg src={V.stripes} scrim={8} />
+    <div class="reveal relative z-10 mx-auto w-full max-w-6xl bg-white p-8 text-ink shadow-2xl sm:p-14">
+      <div class="flex items-center gap-3"><span class="font-headline text-eyebrow font-bold uppercase text-ink/55">What we do</span></div>
+      <h2 class="mt-4 font-headline text-h2 font-extrabold">Five pillars of transformation.</h2>
+      <p class="mt-4 max-w-3xl text-lead text-ink/70">Together, these pillars help organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.</p>
+      <div class="mt-10 border-t border-ink/15">
+        {pillars.map((p, i) => (
+          <a href={`#pillar-${p.num}`} class="group flex items-center gap-4 border-b border-ink/15 py-5 sm:gap-6 sm:py-6">
+            <span class="w-12 shrink-0 font-headline text-4xl font-extrabold leading-none text-ink/20 transition-colors group-hover:text-brand-yellow sm:w-16 sm:text-5xl">{p.num}</span>
+            <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-yellow transition-transform group-hover:scale-110"><img src={p.icon} alt="" width="22" height="22" class="h-[22px] w-[22px]" style={`--anim-delay:${i * 0.25}s`} /></span>
+            <span class="flex-1 font-headline text-xl font-bold leading-tight sm:text-2xl">{p.title}</span>
+            <span class="hidden text-sm text-ink/40 md:block">{p.products.length} services</span>
+            <span class="font-headline text-xl transition-transform group-hover:translate-x-1">↗</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5-9. PILLAR DETAIL -->
+  {pillars.map((p, i) => (
+    <section id={`pillar-${p.num}`} class:list={["snap flex min-h-screen items-center px-6 py-24 sm:px-12 lg:px-20 text-ink", i % 2 === 0 ? "bg-white" : "bg-[#f5f5f5]"]}>
+      <div class="mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.7fr_1.6fr] lg:gap-14">
+        <div class="reveal group lg:sticky lg:top-24 lg:self-start">
+          <div class="flex items-center gap-4">
+            <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-brand-yellow sm:h-20 sm:w-20">
+              <img src={p.icon} alt="" width="40" height="40" class="h-8 w-8 sm:h-10 sm:w-10" />
+            </span>
+            <span class="font-headline text-6xl font-extrabold leading-none text-ink/20 transition-colors group-hover:text-brand-yellow sm:text-7xl">{p.num}</span>
+          </div>
+          <h2 class="mt-6 font-headline text-[clamp(1.9rem,1.2rem+2vw,3.25rem)] font-extrabold leading-[1.02]">{p.title}</h2>
+          <p class="mt-5 text-lead text-ink/70">{p.intro}</p>
+        </div>
+        <div class="grid gap-6 sm:grid-cols-2">
+          {p.products.map((pr, j) => (
+            <div class="reveal flex flex-col border border-ink/15 bg-white p-7 text-ink transition-colors hover:border-brand-yellow" style={`--reveal-delay:${j * 80}ms`}>
+              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-yellow">
+                <img src={productIcons[i][j]} alt="" width="22" height="22" class="h-[22px] w-[22px]" />
+              </span>
+              <h3 class="mt-4 font-headline text-lg font-bold leading-snug">{pr.name}</h3>
+              <ul class="mt-4 space-y-2.5 text-[15px] text-ink/75">
+                {pr.bullets.map((b) => (
+                  <li class="flex items-start gap-2.5"><span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-yellow"></span><span>{b}</span></li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <!-- 10. HOW WE WORK — visual timeline -->
+  <section id="process" class="snap relative flex min-h-screen items-center overflow-hidden bg-ink px-6 py-24 text-white sm:px-12 lg:px-20">
+    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
+    <div class="relative z-10 mx-auto w-full max-w-3xl">
+      <p class="reveal font-headline text-eyebrow font-bold uppercase text-brand-yellow">{process.kicker}</p>
+      <h2 class="reveal mt-6 font-headline text-h2 font-extrabold" style="--reveal-delay:80ms">We begin with <span class="text-brand-yellow">clarity.</span></h2>
+      <ol class="relative mt-14">
+        <div class="absolute bottom-10 left-7 top-7 w-px bg-white/15"></div>
+        {process.steps.map((s, i) => (
+          <li class="reveal group relative flex gap-6 pb-10 last:pb-0" style={`--reveal-delay:${i * 110}ms`}>
+            <span class="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border-2 border-brand-yellow/40 bg-ink font-headline text-lg font-extrabold text-white/50 transition-colors group-hover:border-brand-yellow group-hover:text-brand-yellow">{`0${s.n}`}</span>
+            <div class="pt-1.5">
+              <div class="flex items-center gap-3">
+                <span class="block h-7 w-7 shrink-0 bg-brand-yellow" style={`-webkit-mask:url('${s.icon}') center/contain no-repeat;mask:url('${s.icon}') center/contain no-repeat;`}></span>
+                <h3 class="font-headline text-2xl font-bold text-brand-yellow">{s.title}</h3>
+              </div>
+              <p class="mt-2 text-lead text-white/70">{s.text}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- WHO'S BEHIND IT — Razi + his track record + brands worked with -->
+  <section id="team" class="snap relative flex min-h-screen items-center overflow-hidden bg-white px-6 py-24 text-ink sm:px-12 lg:px-20">
+    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.07]" style="background:url('/textures/halftone-black.png') center / cover no-repeat;"></div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl">
+      <p class="reveal font-headline text-eyebrow font-bold uppercase text-ink/55">{team.kicker}</p>
+      {team.members.map((m) => (
+        <div class="reveal mt-8 grid gap-8 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-12" style="--reveal-delay:80ms">
+          <img src={m.photo} alt={m.name} width="240" height="320" class="w-40 object-cover sm:w-52" />
+          <div>
+            <h2 class="font-headline text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-extrabold leading-[1]">{m.name}</h2>
+            <p class="mt-2 font-headline text-sm font-bold uppercase tracking-wide text-ink/55">{m.role}</p>
+            <p class="mt-4 max-w-xl text-lead text-ink/75">{m.bio}</p>
+          </div>
+        </div>
+      ))}
+
+      <div class="reveal mt-12 border-t border-ink/15 pt-9" style="--reveal-delay:160ms">
+        <p class="font-headline text-eyebrow font-bold uppercase text-ink/45">{clients.kicker}</p>
+        <div class="marquee mt-5">
+          <div class="marquee__track">
+            {[...clients.logos, ...clients.logos].map((c, i) => (
+              <img src={c.src} alt={i < clients.logos.length ? c.name : ""} aria-hidden={i >= clients.logos.length} loading="lazy" class="h-8 w-auto shrink-0 object-contain opacity-60 grayscale transition duration-300 hover:opacity-100 hover:grayscale-0 sm:h-10" />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal mt-10" style="--reveal-delay:220ms">
+        <p class="font-headline text-eyebrow font-bold uppercase text-ink/45">{stats.kicker}</p>
+        <div class="mt-6 grid grid-cols-2 gap-x-8 gap-y-8 lg:grid-cols-3">
+          {stats.items.map((s) => (
+            <div>
+              <p class="font-headline text-5xl font-extrabold leading-none text-ink sm:text-6xl">{s.value}</p>
+              <p class="mt-2 font-headline text-sm font-semibold uppercase tracking-wide text-ink/55">{s.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. WHAT MAKES US DIFFERENT -->
+  <section id="different" class="snap relative flex min-h-screen items-center overflow-hidden bg-ink px-6 py-28 text-white sm:px-12 lg:px-20">
+    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl">
+      <div class="reveal">
+        <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">{differentiators.kicker}</p>
+        <h2 class="mt-6 max-w-4xl font-headline text-[clamp(1.8rem,1.1rem+2.2vw,3.4rem)] font-extrabold leading-[1.05] tracking-[-0.01em]">We don't start from “what should we make?”<br class="hidden sm:block" /> We start from “what needs to change?”</h2>
+      </div>
+      <div class="mt-12 border-t border-white/15">
+        {differentiators.items.map((d, i) => (
+          <div class="reveal group flex flex-col gap-2 border-b border-white/15 py-6 sm:flex-row sm:items-baseline sm:gap-8" style={`--reveal-delay:${i * 90}ms`}>
+            <span class="w-12 shrink-0 font-headline text-4xl font-extrabold leading-none text-white/25 transition-colors group-hover:text-brand-yellow sm:w-20 sm:text-5xl">0{i + 1}</span>
+            <div class="flex-1">
+              <h3 class="font-headline text-xl font-bold sm:text-2xl">{d.title}</h3>
+              <p class="mt-1.5 text-lead text-white/75">{d.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. WHO WE WORK WITH -->
+  <section id="audience" class="snap relative flex min-h-screen items-center overflow-hidden bg-brand-yellow px-6 py-28 text-ink sm:px-12 lg:px-20">
+    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.08]" style="background:url('/textures/halftone-black.png') center / cover no-repeat;"></div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl">
+      <div class="reveal">
+        <div class="flex items-center gap-3"><span class="font-headline text-eyebrow font-bold uppercase text-ink/60">{audience.kicker}</span></div>
+        <h2 class="mt-6 max-w-4xl font-headline text-h2 font-extrabold">{audience.headline}</h2>
+      </div>
+      <ul class="mt-14 grid gap-x-10 sm:grid-cols-2">
+        {audience.items.map((a, i) => (
+          <li class="reveal flex items-start gap-4 border-b border-ink/20 py-5 font-headline text-xl font-bold sm:text-2xl" style={`--reveal-delay:${(i % 2) * 90}ms`}>
+            <span class="text-ink/40">→</span><span>{a}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <!-- 13a. PRE-CLOSING -->
+  <section id="future" class="snap relative flex min-h-screen items-center justify-center overflow-hidden bg-ink px-6 py-28 text-center text-white">
+    <div class="pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
+    <div class="reveal relative z-10 mx-auto max-w-5xl">
+      <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">The future</p>
+      <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.02]">{closing.statementLead} <span class="text-brand-yellow">{closing.statementAccent}</span></h2>
+      <p class="mx-auto mt-10 max-w-3xl text-xl leading-relaxed text-white/80 sm:text-2xl">{closing.statementBody}</p>
+      <a href="#contact" class="mt-14 inline-block bg-brand-yellow px-12 py-5 font-headline text-base font-bold uppercase tracking-[0.2em] text-ink transition hover:brightness-95">{closing.kicker}</a>
+    </div>
+  </section>
+
+  <!-- 13b. CONTACT -->
+  <section id="contact" class="snap relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-ink px-6 py-28 text-center text-white">
+    <div class="pointer-events-none absolute inset-0 bg-cover bg-center landscape:block portrait:hidden" style="background-image:url('/imagery/nuclear-explosion-wide.jpg')"></div>
+    <div class="pointer-events-none absolute inset-0 bg-cover bg-center portrait:block landscape:hidden" style="background-image:url('/imagery/nuclear-explosion-portrait.jpg')"></div>
+    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 88% 78% at 50% 50%, rgba(20,20,20,0.9) 0%, rgba(20,20,20,0.74) 58%, rgba(20,20,20,0.5) 100%)"></div>
+    <div class="reveal relative z-10 flex w-full max-w-4xl flex-col items-center [text-shadow:0_2px_14px_rgba(0,0,0,0.6)]">
+      <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">{closing.kicker}</p>
+      <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.02]">Make your ideas become public conversations <span class="text-brand-yellow">impossible to ignore.</span></h2>
+
+      <div class="mt-14 flex flex-col items-center gap-5 text-lg text-white/90 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-4">
+        <a href={`mailto:${closing.contact.email}`} class="inline-flex items-center gap-2 transition hover:text-brand-yellow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-brand-yellow"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>{closing.contact.email}
+        </a>
+        <a href={`tel:${closing.contact.phone.replace(/\s/g, "")}`} class="inline-flex items-center gap-2 transition hover:text-brand-yellow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-brand-yellow"><path d="M5 4h4l2 5-3 2a14 14 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg>{closing.contact.phone}
+        </a>
+        <a href={`https://${closing.contact.website}`} class="inline-flex items-center gap-2 transition hover:text-brand-yellow">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-brand-yellow"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg>{closing.contact.website}
+        </a>
+        <span class="inline-flex items-center gap-2">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-6 w-6 text-brand-yellow"><path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>{closing.contact.address}
+        </span>
+      </div>
+
+      <div class="mt-10 flex items-center gap-4">
+        <a href="#" aria-label="Instagram" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition hover:border-brand-yellow hover:bg-brand-yellow hover:text-ink">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-5 w-5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        </a>
+        <a href="#" aria-label="LinkedIn" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition hover:border-brand-yellow hover:bg-brand-yellow hover:text-ink">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM10 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.4c0-1.3 0-2.95-1.8-2.95s-2.07 1.4-2.07 2.85V21h-4z"/></svg>
+        </a>
+        <a href="#" aria-label="WhatsApp" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition hover:border-brand-yellow hover:bg-brand-yellow hover:text-ink">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-2.9.8.8-2.8-.2-.3A8 8 0 1 1 12 20zm4.4-5.6c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.6.1-.6.8-.8 1-.3.2-.5.1a6.5 6.5 0 0 1-1.9-1.2 7.2 7.2 0 0 1-1.3-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3A2.8 2.8 0 0 0 6 9.3a4.9 4.9 0 0 0 1 2.6 11.2 11.2 0 0 0 4.3 3.8c.6.3 1.1.4 1.5.5a3.6 3.6 0 0 0 1.6.1c.5-.1 1.4-.6 1.6-1.1s.2-1 .1-1.1z"/></svg>
+        </a>
+        <a href="#" aria-label="X" class="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 text-white transition hover:border-brand-yellow hover:bg-brand-yellow hover:text-ink">
+          <svg viewBox="0 0 24 24" fill="currentColor" class="h-[18px] w-[18px]"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.8l-5.3-7-6.1 7H1.7l8.1-9.3L1 2h7l4.8 6.4zm-2.4 18h1.9L7.6 4H5.6z"/></svg>
+        </a>
+      </div>
+
+      <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="WOMD" width="44" height="44" class="mt-12 h-10 w-10 opacity-80" />
+    </div>
+  </section>
+</Base>

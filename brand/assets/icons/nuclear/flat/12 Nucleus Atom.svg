@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <circle cx="14.779" cy="31.681" r="10.779" transform="translate(-18.073 19.73) rotate(-45)" style="fill: #eae265;"/>
+  <circle cx="21.097" cy="48.529" r="10.779" transform="translate(-31.812 49.449) rotate(-67.5)" style="fill: #eae265;"/>
+  <circle cx="43.351" cy="48.529" r="10.779" transform="translate(-7.214 7.571) rotate(-9.217)" style="fill: #eae265;"/>
+  <circle cx="49.221" cy="31.681" r="10.779" transform="translate(-5.962 12.156) rotate(-13.282)" style="fill: #eae265;"/>
+  <circle cx="41.959" cy="15.471" r="10.779" transform="translate(-2.432 10.054) rotate(-13.282)" style="fill: #eae265;"/>
+  <circle cx="23.132" cy="15.471" r="10.779" transform="translate(-2.936 5.728) rotate(-13.282)" style="fill: #eae265;"/>
+  <circle cx="43.351" cy="25.12" r="10.779" transform="translate(-5.066 38.011) rotate(-45)" style="fill: #e26676;"/>
+  <circle cx="20.401" cy="25.12" r="10.779" style="fill: #e26676;"/>
+  <circle cx="31.876" cy="20.902" r="10.779" transform="translate(-5.444 28.662) rotate(-45)" style="fill: #eeae65;"/>
+  <circle cx="31.876" cy="47.383" r="10.779" transform="translate(-10.034 8.591) rotate(-13.282)" style="fill: #e26676;"/>
+  <circle cx="43.351" cy="39.244" r="10.779" transform="translate(-5.726 7.451) rotate(-9.217)" style="fill: #eeae65;"/>
+  <circle cx="20.401" cy="39.244" r="10.779" style="fill: #eeae65;"/>
+  <circle cx="31.876" cy="33.26" r="10.779" transform="translate(-14.182 32.281) rotate(-45)" style="fill: #eae265;"/>
+</svg>
