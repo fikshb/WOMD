@@ -6,6 +6,47 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ## 2026-05-29
 
+### Hero swapped to yellow-stream bubbles (light theme)
+
+**Done:**
+- Replaced the hero background (`liquid-splash`, dark) with `WOMD_motion_chat-bubbles-yellow-stream_loop_1080.mp4` (copied into `site/public/video/`) + a poster frame (`WOMD_chat-bubbles-yellow-stream_poster.jpg`, grabbed at 3.4s).
+- The clip is **yellow bubbles on a pure-white background**, which inverts the hero's color logic. Adapted the whole section to a **light theme** (D-011):
+  - Section `text-white`→`text-ink`, added `bg-white`. `VideoBg` now takes a `bg` prop (default `bg-black`); hero passes `bg="bg-white"` + `scrim={0}` + `contain` so the white letterbox is invisible on web and mobile-portrait alike.
+  - Subhead/tagline flipped to ink; subhead accent is now a **yellow highlight box** (black-on-yellow, brand's primary pairing) so it stays legible over bubbles.
+  - Added a soft **white radial halo** behind the content so text always has a clean stage while bubbles read at the edges. Grain overlay switched `mix-blend-screen`→`multiply` (screen is invisible on white).
+  - Swapped the hero logo from the **square** `WOMD_Wordmark_transparent_1500.png` (1500×1500 — its transparent padding made the IMG ~896px tall and pushed the subhead off-screen) to the **horizontal** `WOMD_Wordmark_Horizontal_transparent.png` (1500×457). Same white+black-outline art, fits the viewport.
+- To avoid two near-white sections in a row, restyled **Who We Are** (see follow-ups — landed on full-yellow). New rhythm: white hero → yellow who → dark belief.
+
+**Verified (headless Chrome + composite):** desktop 1440×900 — logo fits, full subhead visible, ink text legible. Legibility over the *busiest* bubble frame confirmed via a composite (logo's black outline + radial halo hold up). Narrow render at 500px — content centers cleanly, no clipping. The apparent mobile "clipping" at 390px was a **headless artifact** (Chrome clamps layout to 500px min while writing a 390 canvas); a DOM scan proved `scrollWidth == viewport` (no real horizontal overflow). `npm run build` succeeds. **Bubbles don't render in headless** (autoplay hides poster, no frame compositing) — needs a real-browser `npm run dev` eyeball to confirm motion feel.
+
+**Follow-up fixes (same day):**
+- **Video wasn't showing** (reported): I'd added `bg-white` to the hero `<section>`, which painted over the `VideoBg` at `-z-10` (paint order: section bg at z0 covers child at z-10). Removed it — the white backdrop is already supplied by the `VideoBg` `bg="bg-white"` container at the correct layer (same pattern as the original dark hero, whose section had no bg). Confirmed bubbles render via a software-GL headless capture (`--use-gl=swiftshader`).
+- **Seamless loop** (requested): the clip streams bubbles *in* (empty→full), so a raw `loop` hard-cuts. Rebuilt `WOMD_motion_chat-bubbles-yellow-stream_loop_1080.mp4` as a **crossfade self-loop** (`xfade` last 0.8 s over first 0.8 s + concat middle; 8.03 s→7.27 s, forward-only motion, no reverse). First≈last frame verified → seamless join. Updated both `brand/motion/web/` and `site/public/video/`; documented in `brand/motion/README.md`.
+- **Ping-pong variant** (on request to try "rewind"): also generated `..._pingpong_1080.mp4` (forward+`reverse` concat, 16 s, 7.8 MB) and **swapped the hero to it** for evaluation. Both files live in `/video/`; reverting to the crossfade loop is a one-line `V.bubbles` change. Note: browsers never play `loop` backward — they restart; ping-pong is the only way to get literal reverse motion, which *is* a visible "rewind."
+- **Who We Are → full yellow** (on request): `yellow-polygon.jpg` cover + `bg-brand-yellow` base, text→ink, kicker→ink/60, body→ink/80 medium, and the headline accent flipped from a yellow box to an **ink box with yellow text** (a yellow box would vanish on yellow). Verified legible on desktop + narrow via an isolated composite (headless couldn't scroll the snap container to the section).
+- **Who We Are → cube-grid video** (on request): optimized `yellow-geometric-cube-grid-waving…mov` (2.7→2.1 MB, crf20 + faststart, video-only) → `WOMD_bg_yellow-cube-grid_loop_1080.mp4` (brand/motion + site). Natively seamless loop (verified). Wired behind Who via `VideoBg` (had to drop the section's `bg-brand-yellow` so it doesn't paint over the `-z-10` video — same stacking gotcha as the hero) + a left-heavy `brand-yellow` gradient scrim (`/85→/55→/30`) so black text stays legible over the busy cubes. Polygon image now unused (left in `imagery/`). Final color arc unchanged: white hero → yellow who → dark belief.
+- **Core Belief → glass-bubbles video** (on request; cube is for Who, not Belief): wired `WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4` (copied to site) behind Belief. Section stays dark (white text + yellow accents) — dropped `bg-ink` from the section (stacking), `VideoBg bg="bg-ink"`. Treatment iterated on request ("lebih gelap" + "vignette, not opacity"): flat `scrim={52}` for overall darkening **plus a cinematic edge-vignette overlay** (`radial transparent 22% → black 0.5 @60% → 0.92 @edges`). Knocks down the bright glass behind the dense 4-beat timeline so white text stays legible; corners go moody-dark. Verified via composite.
+- **Hero video → cover** (on request, "full ngikutin layar"): dropped `contain` on the hero `VideoBg` so the bubble loop fills the viewport edge-to-edge (was letterboxed/contained on white). On mobile portrait this zoom-crops the 16:9 clip — bubbles read larger/full-bleed.
+
+**Next:** eyeball in a real browser (`npm run dev`) for bubble motion + poster handoff; if the light hero feels too soft, dial the radial halo down or nudge content below the bubble band.
+
+### Chat-bubble motion assets: ingest, optimize, rename
+
+**Done:**
+- Took the loose `Glass Bubble Chat Asset/` drop (8 stock chat-bubble loops, ~44 MB) into `brand/motion/`.
+- All 8 were already H.264/1080p/30fps but web-hostile: `.mov` containers, no faststart, stray audio/timecode (`tmcd`) tracks, one at 11 Mbps, stock-dump filenames.
+- Re-encoded all → `brand/motion/web/` as single-stream H.264 `.mp4` (`libx264 -crf 20 -preset slow`, `+faststart`, audio + `tmcd` stripped, `yuv420p`), renamed to the site convention `WOMD_<bg|motion>_<slug>_loop_1080.mp4`. ~44 MB → ~35 MB (modest — sources were already compressed; the real wins are faststart, `.mp4` container, single stream, consistent naming).
+- Originals kept untouched in `brand/motion/masters/` — **filenames preserved on purpose** (the `…utc` stock IDs are license provenance).
+- `ffmpeg` isn't installed and there's no Homebrew, so I pulled a temporary `ffmpeg-static` npm binary, ran the batch, then `npm uninstall`-ed it so `site/` deps stay clean. (Hit the classic `ffmpeg`-eats-stdin bug in the loop → fixed with `-nostdin`.)
+- Documented the set + master→web map + re-run recipe in `brand/motion/README.md`.
+- **Not wired into the site** — these are library assets; placement (which clip on which section) is a separate decision.
+
+**Verified:** all 8 `web/*.mp4` probe as exactly 1 video stream, H.264 High / yuv420p / 1920×1080, moov-before-mdat (faststart) confirmed by byte-offset check. `site/package.json` + lockfile carry no `ffmpeg` residue.
+
+**Next:** decide whether any clip becomes a live section background (copy into `site/public/video/`, feed `VideoBg`); the brand-yellow stream loop (`WOMD_motion_chat-bubbles-yellow-stream`) is the most on-brand candidate.
+
+---
+
 ### Post-launch fixes: typography clipping + mobile overflow
 
 **Done:**

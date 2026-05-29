@@ -10,6 +10,9 @@ const V = {
   splash: "/video/WOMD_bg_liquid-splash_loop_1080.mp4",
   splashPortrait: "/video/WOMD_bg_liquid-splash_loop_portrait.mp4",
   stripes: "/video/WOMD_bg_yellow-stripes_1080.mp4",
+  bubbles: "/video/WOMD_motion_chat-bubbles-yellow-stream_pingpong_1080.mp4",
+  cubes: "/video/WOMD_bg_yellow-cube-grid_loop_1080.mp4",
+  glassBubbles: "/video/WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4",
 };
 const halftone = "background-image:url('/textures/halftone-white.png');background-size:cover;";
 // Per-product icons — order matches pillars[].products (WOMD icon set)
@@ -30,36 +33,39 @@ const productIcons = [
   <Nav />
 
   <!-- 1. HERO -->
-  <section id="hero" class="snap relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 text-center text-white md:pb-[14vh]">
-    <VideoBg src={V.splash} srcPortrait={V.splashPortrait} scrim={28} vignette contain />
-    <div class="reveal relative mx-auto flex max-w-4xl flex-col items-center">
-      <img src="/logo/WOMD_Wordmark_transparent_1500.png" alt="WOMD — Weapons of Mass Discussion" width="640" height="195" class="mx-auto block w-[84vw] max-w-4xl drop-shadow-[0_8px_40px_rgba(0,0,0,0.45)]" />
-      <p class="mt-7 font-headline text-eyebrow font-bold uppercase text-brand-yellow" style="text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">{hero.tagline}</p>
-      <p class="mt-7 max-w-5xl font-headline text-[clamp(1.5rem,1rem+1.6vw,2.4rem)] font-extrabold leading-[1.12] tracking-[-0.01em] text-white" style="text-shadow:-1.5px -1.5px 0 #000,1.5px -1.5px 0 #000,-1.5px 1.5px 0 #000,1.5px 1.5px 0 #000;">
-        {hero.subheadPre} <span class="text-brand-yellow">{hero.subheadAccent}</span>
+  <section id="hero" class="snap relative flex h-screen flex-col items-center justify-center overflow-hidden px-6 py-20 text-center text-ink md:pb-[14vh]">
+    <VideoBg src={V.bubbles} poster="/video/WOMD_chat-bubbles-yellow-stream_poster.jpg" scrim={0} bg="bg-white" />
+    <!-- soft white stage so text stays legible while bubbles read at the edges -->
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-0" style="background:radial-gradient(ellipse 78% 56% at 50% 50%, rgba(255,255,255,0.82) 0%, rgba(255,255,255,0.5) 42%, rgba(255,255,255,0) 72%)"></div>
+    <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center">
+      <img src="/logo/WOMD_Wordmark_Horizontal_transparent.png" alt="WOMD — Weapons of Mass Discussion" width="760" height="232" class="mx-auto block w-[84vw] max-w-3xl drop-shadow-[0_6px_28px_rgba(0,0,0,0.18)]" />
+      <p class="mt-7 font-headline text-eyebrow font-bold uppercase tracking-[0.08em] text-ink/80">{hero.tagline}</p>
+      <p class="mt-7 max-w-5xl font-headline text-[clamp(1.5rem,1rem+1.6vw,2.4rem)] font-extrabold leading-[1.12] tracking-[-0.01em] text-ink">
+        {hero.subheadPre} <span class="box-decoration-clone bg-brand-yellow px-2 text-ink">{hero.subheadAccent}</span>
       </p>
     </div>
-    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-20 bg-cover opacity-[0.1] mix-blend-screen" style="background-image:url('/textures/grain.jpg')"></div>
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 z-20 bg-cover opacity-[0.05] mix-blend-multiply" style="background-image:url('/textures/grain.jpg')"></div>
   </section>
 
   <!-- 2. WHO WE ARE -->
-  <section id="who" class="snap relative flex min-h-screen items-center overflow-hidden bg-white px-6 py-24 text-ink sm:px-12 lg:px-20">
-    <div class="halftone-anim pointer-events-none absolute inset-0 bg-cover bg-right" style="background-image:url('/imagery/yellow-polygon.jpg')"></div>
-    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-white via-white/92 to-white/35"></div>
+  <section id="who" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 text-ink sm:px-12 lg:px-20">
+    <VideoBg src={V.cubes} scrim={0} bg="bg-brand-yellow" />
+    <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-brand-yellow/85 via-brand-yellow/55 to-brand-yellow/30"></div>
     <div class="relative z-10 mx-auto w-full max-w-6xl">
-      <p class="reveal font-headline text-[clamp(0.95rem,0.8rem+0.5vw,1.2rem)] font-bold uppercase tracking-[0.28em] text-ink/55">{whoWeAre.kicker}</p>
+      <p class="reveal font-headline text-[clamp(0.95rem,0.8rem+0.5vw,1.2rem)] font-bold uppercase tracking-[0.28em] text-ink/60">{whoWeAre.kicker}</p>
       <h2 class="reveal mt-7 font-headline text-[clamp(1.7rem,0.5rem+6vw,5.5rem)] font-extrabold leading-[1.25] tracking-[-0.01em]" style="--reveal-delay:80ms">
-        {whoWeAre.headlineLead} <span class="box-decoration-clone bg-brand-yellow px-2 text-ink">{whoWeAre.headlineAccent}</span>
+        {whoWeAre.headlineLead} <span class="box-decoration-clone bg-ink px-2 text-brand-yellow">{whoWeAre.headlineAccent}</span>
       </h2>
-      <div class="reveal mt-12 max-w-4xl space-y-7 text-[clamp(1.15rem,1rem+0.7vw,1.6rem)] leading-relaxed text-ink/70" style="--reveal-delay:160ms">
+      <div class="reveal mt-12 max-w-4xl space-y-7 text-[clamp(1.15rem,1rem+0.7vw,1.6rem)] font-medium leading-relaxed text-ink/80" style="--reveal-delay:160ms">
         {whoWeAre.paragraphs.map((p) => <p>{p}</p>)}
       </div>
     </div>
   </section>
 
   <!-- CORE BELIEF -->
-  <section id="belief" class="snap relative flex min-h-screen items-center overflow-hidden bg-ink px-6 py-24 text-white sm:px-12 lg:px-20">
-    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
+  <section id="belief" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 text-white sm:px-12 lg:px-20">
+    <VideoBg src={V.glassBubbles} scrim={52} bg="bg-ink" />
+    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 85% 78% at 50% 48%, transparent 22%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.92) 100%)"></div>
     <div class="relative z-10 mx-auto w-full max-w-6xl">
       <p class="reveal font-headline text-[clamp(0.95rem,0.8rem+0.5vw,1.2rem)] font-bold uppercase tracking-[0.28em] text-brand-yellow">{belief.kicker}</p>
       <h2 class="reveal mt-7 max-w-5xl font-headline text-[clamp(1.7rem,0.5rem+6vw,5.5rem)] font-extrabold leading-[1.25] tracking-[-0.01em]" style="--reveal-delay:80ms">{belief.headline}</h2>

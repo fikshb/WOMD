@@ -5,6 +5,15 @@ User-facing / asset-facing changes. Format loosely follows Keep a Changelog.
 ## [Unreleased]
 
 ### Changed (2026-05-29)
+- **Hero is now a light theme** with the yellow chat-bubble loop (`WOMD_motion_chat-bubbles-yellow-stream`) on white, ink text, and a yellow highlight-box accent (+ poster frame for fast first paint). Hero logo switched to the horizontal wordmark so it fits the viewport. **Who We Are** flipped to dark to keep section rhythm. `VideoBg` gained a `bg` prop for light-background clips. (See D-011.)
+- **Who We Are** now runs a looping **yellow cube-grid video** background (`WOMD_bg_yellow-cube-grid_loop_1080.mp4`) under a yellow scrim, replacing the static polygon image.
+- **Core Belief** now runs a looping **glass chat-bubbles video** (`WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4`) on black, darkened with a scrim + cinematic edge-vignette (section stays dark / white text).
+- **Hero** video now fills the viewport (`cover`) instead of being contained.
+
+### Added (2026-05-29)
+- New `brand/motion/` library: 8 web-optimized chat-bubble loops in `web/` (H.264 1080p `.mp4`, faststart, video-only) + untouched stock originals in `masters/` + README. Renamed to the `WOMD_<bg|motion>_<slug>_loop_1080.mp4` convention. Not yet used on the site.
+
+### Changed (2026-05-29)
 - Rebuilt the site as a **15-slide deck** with a locked type system and adaptive 15-dot scroll-spy nav; added mobile hamburger overlay.
 - Merged Track Record + Trusted By into the founder section (Razi); aligned all copy to the source catalog; removed em-dashes.
 - Reduced motion (calmer feel), reserved background video/image for Hero + Contact bookends, flattened pillar sections.

@@ -30,7 +30,8 @@ npm-debug.log*
 # Raw downloaded asset packs (curate into brand/assets/ instead — never commit raw zips)
 *.zip
 
-# Raw video/image masters (regenerable — keep local, never commit)
+# Raw video/image masters (keep local, never commit — large stock source files)
 /*.mov
 /hf_*.mp4
 *.mhtml
+brand/motion/masters/

@@ -4,6 +4,14 @@ Lightweight ADRs. Record decisions that aren't obvious from the code/files — e
 
 ---
 
+## D-011 — Hero is a light-theme yellow-bubble video (partly revises D-009)
+
+- **Date:** 2026-05-29
+- **Decision:** Replace the dark `liquid-splash` hero with the white-background `WOMD_motion_chat-bubbles-yellow-stream` loop, and rebuild the hero as a **light theme**: white container, `object-contain` video (invisible white letterbox on web + mobile), ink text, a yellow highlight-box subhead accent, and a soft white radial halo behind the content. Added a `bg` prop to `VideoBg`. Made **Who We Are** a **full-yellow** section (`yellow-polygon.jpg` cover, ink text, accent flipped to an ink box with yellow text) so the deck doesn't run two near-white sections back-to-back. Switched the hero logo to the **horizontal** wordmark (the square 1500×1500 PNG's transparent padding made the IMG too tall and pushed the subhead off-screen).
+- **Why:** The chat-bubble motion is more on-brand for "Weapons of Mass *Discussion*" than the abstract splash, and reads as conversation/energy. The arc escalates **white hero → yellow who → dark belief**, each section a distinct brand color. (Who was briefly dark; changed to yellow on request — yellow separates the white hero and dark belief more cleanly and is bolder.)
+- **Tension with D-009:** D-009 reduced motion and reserved video for hero/contact "bookends." This keeps the bookend principle but makes the hero *more* energetic, not calmer. If it reads as too busy, raise the radial-halo opacity or move content below the bubble band — don't re-darken (that re-creates the white-on-white contrast problem the clip caused).
+- **Revisit if:** real-browser review shows bubbles fighting the wordmark, or the two-dark middle (who+belief) feels heavy.
+
 ## D-010 — Typography corrections: descender-safe line-height + mobile-safe type floor
 
 - **Date:** 2026-05-29
