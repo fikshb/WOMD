@@ -4,6 +4,19 @@ Lightweight ADRs. Record decisions that aren't obvious from the code/files — e
 
 ---
 
+## D-009 — Delivery polish: motion reduced, backgrounds as "bookends" only
+
+- **Date:** 2026-05-29
+- **Decision:** Dial back decoration for a calmer/premium feel. (a) **Motion cut**: infinite icon-float kept only on the Core Belief flow (removed from what-we-do/pillars/process); halftone "drift" made **static**. (b) **Backgrounds reserved for bookends**: Hero (splash video) + Contact (nuclear-explosion image), both responsive portrait/landscape; Who-We-Are keeps a single yellow-polygon accent; **what-we-do** keeps the stripes video; everything else flat/textured. (c) Bright AI videos (future/contact) replaced with **static dark + halftone** because they needed ~90% scrim to be legible (not worth ~13 MB).
+- **Why:** Multiple simultaneous motion systems + a video in many sections read as "busy/restless", not confident. Images should mark moments, not wallpaper. Result: **video payload 55 MB → 16 MB**.
+- **Also:** `scroll-snap-type` set to **mandatory** on desktop (deck feel), disabled `<768px`. Pillars flattened (no halftone), pillar 02/04 dark→light so the 5-pillar set reads as one cohesive light stretch (balances a dark-heavy deck).
+
+## D-008 — Locked type scale + 15-slide deck structure + adaptive dot-nav
+
+- **Date:** 2026-05-29
+- **Decision:** (a) **Lock section typography** to Tailwind tokens: section-title = `text-h2` (`clamp 2.6→5.5rem`, Montserrat extrabold), eyebrow = `text-eyebrow`; plus a dedicated **"long-title"** size (`clamp 1.8→3.4rem`) for long headings. (b) Expand to a **15-slide deck** and **merge** Track Record + Trusted By into the founder ("Who's Behind It") section — those are Razi's credentials, not WOMD's. (c) **Dot-nav = one dot per slide (15) + scroll-spy active state + deterministic light/dark color** (`is-light` toggle, not `mix-blend`, which proved unreliable on white). (d) **Mobile = hamburger → full-screen overlay** (pillars collapsed to one entry); horizontal swipe-deck rejected as risky for content-dense pillar slides.
+- **Why:** Consistency (every title same size/font), narrative completeness, and navigation that stays visible on any background and reflects scroll position.
+
 ## D-007 — Visualization pass: scroll-reveal, proof stats, timeline, clients, team; Lottie for animation
 
 - **Date:** 2026-05-28

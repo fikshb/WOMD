@@ -4,6 +4,33 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ---
 
+## 2026-05-29
+
+### Deck redesign, design polish & delivery prep
+
+**Done:**
+- **Restructured to a 15-slide deck** (was 13): hero, who, belief, what-we-do (Five Pillars overview), pillar 01–05, how-we-work (Process), who's-behind-it, what-makes-us-different, who-we-work-with, the-future, contact.
+- **Merged** Track Record (stats) + Trusted By (clients) into the **Who's Behind It** (Razi) section — those credentials belong to Razi, not WOMD yet. Stats personalized (20+ yrs, projects, brands).
+- **Locked type system:** section-title = `text-h2` token (`clamp 2.6→5.5rem`), eyebrow = `text-eyebrow` token, plus a "long-title" `clamp 1.8→3.4rem` for long headings. Bumped `h2`/`eyebrow` tokens in `tailwind.config.mjs`.
+- **Hero** rebuilt to ref: boxed→clean eyebrow path, big logo, tagline as eyebrow style, subhead as title with yellow accent ("impossible to ignore"), splash video bg (responsive **portrait+landscape**, boomerang loop, vignette). Content lifted via padding (not transform — `reveal` was overriding transform).
+- **Copy** aligned to source catalog (pillar intros = exact category descriptions; product names exact; removed all em-dashes; "What we do"/"How we work"/"Different"/"Audience"/closing copy per provided text).
+- **Icons:** per-product (14) + per-step + belief flow, via WOMD `ui`/`step` glyphs (yellow chips or CSS mask).
+- **Navigation:** dot-nav expanded to **15 dots + scroll-spy** (active slide) + **adaptive light/dark color** (`mix-blend` replaced by deterministic `is-light` toggle). **Mobile hamburger → full-screen overlay** (pillars collapsed to one item).
+- **Scroll:** `scroll-snap-type` set to **mandatory** (deck feel) on desktop; off `<768px`.
+- **Visual rhythm:** backgrounds reserved for "bookends" — Hero (splash video) + Contact (bomb image, responsive). Who-we-are = yellow-polygon accent. Pillars flattened (white/`#f5f5f5`, no halftone). Pillar 02/04 dark→light for a calmer set.
+- **Delivery refactor:** cut simultaneous motion (float icons → belief only; halftone drift → static); replaced 2 bright AI videos (future/contact) with static dark + texture; **videos 55 MB → 16 MB**; removed orphan assets; cleaned `V` map & dead code.
+- **Git:** committed everything, added remote `github.com/fikshb/WOMD`, pushed `main`. **Squashed history** to drop oversized legacy assets (`.git` 243 MB → 96 MB), force-pushed. Gitignored raw video/image masters + `.mhtml`.
+- Wrote `docs/EXECUTIVE-SUMMARY.md` (build overview + asset usage + token/cost estimate).
+
+**Verified:** `npm run build` passes throughout; 15 dots + section ids present; no dangling asset refs.
+
+**Next:**
+- Deploy to **Vercel** (restart Claude Code to load Vercel MCP; **Root Directory = `site`**, Astro static).
+- Replace placeholders before launch: contact email/phone/website/address, social links, stats numbers, meta description, Razi bio/photo.
+- Optional: prune dead CSS (unused drift keyframes), reserve yellow further (use as single accent per section).
+
+---
+
 ## 2026-05-28
 
 ### Brand asset cleanup + workspace initialization

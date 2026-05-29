@@ -4,6 +4,13 @@ User-facing / asset-facing changes. Format loosely follows Keep a Changelog.
 
 ## [Unreleased]
 
+### Changed (2026-05-29)
+- Rebuilt the site as a **15-slide deck** with a locked type system and adaptive 15-dot scroll-spy nav; added mobile hamburger overlay.
+- Merged Track Record + Trusted By into the founder section (Razi); aligned all copy to the source catalog; removed em-dashes.
+- Reduced motion (calmer feel), reserved background video/image for Hero + Contact bookends, flattened pillar sections.
+- Trimmed background videos **55 MB → 16 MB**; squashed git history (`.git` 243 MB → 96 MB); pushed to `github.com/fikshb/WOMD`.
+- Added `docs/EXECUTIVE-SUMMARY.md`.
+
 ### Added
 - Workspace structure: `brand/`, `docs/`, `site/`, `.claude/skills/`; git initialized.
 - `brand/design.md` design system reference.
