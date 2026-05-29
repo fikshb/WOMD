@@ -11,6 +11,13 @@ User-facing / asset-facing changes. Format loosely follows Keep a Changelog.
 - Trimmed background videos **55 MB → 16 MB**; squashed git history (`.git` 243 MB → 96 MB); pushed to `github.com/fikshb/WOMD`.
 - Added `docs/EXECUTIVE-SUMMARY.md`.
 
+### Fixed (2026-05-29)
+- Headline descenders (e.g. the "y" in "consultancy") were clipped — bumped section-title `line-height` 0.98 → 1.25 (0.98 sat below Montserrat's ~1.22em glyph height). Revises D-008's tight setting.
+- Mobile: long headline words (e.g. "transformation.") overflowed off-screen — lowered the `text-h2` clamp floor (2.6rem → 1.7rem), trimmed the "What we do" card padding on small screens, and added an `overflow-wrap` safety net on all headings.
+- Replaced the emoji-rendered `↗` arrows (blue on iOS) in the pillar index with brand SVG glyphs.
+- Removed the unused Moderniz `@font-face` + `font-display` Tailwind token from the site (font stays canonical in `brand/fonts/`).
+- Corrected stale docs: `site/README.md` + `CLAUDE.md` referenced `sections.ts` / `Section.astro` (don't exist) → now `content.ts` + inlined `index.astro`.
+
 ### Added
 - Workspace structure: `brand/`, `docs/`, `site/`, `.claude/skills/`; git initialized.
 - `brand/design.md` design system reference.

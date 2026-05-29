@@ -6,6 +6,21 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ## 2026-05-29
 
+### Post-launch fixes: typography clipping + mobile overflow
+
+**Done:**
+- **Descender clipping:** section-title `line-height` 0.98 → **1.25** (`text-h2` token + inline who/belief). 0.98 < Montserrat's ~1.22em glyph height, so line-1 descenders (y/g/p/j) were overlapped by line 2 — on Who-We-Are, covered by the yellow highlight box. Partial revert of D-008.
+- **Mobile word overflow:** clamp floor was 2.6rem (~42px) → long words ("transformation.") overflowed the white card off-screen on iPhone. New curve `clamp(1.7rem, 0.5rem + 6vw, 5.5rem)` (desktop max unchanged), "What we do" card `p-8 → p-6` on mobile, global `overflow-wrap: break-word` on h1–h3 as a hard safety net.
+- **Emoji arrows:** `↗` (U+2197, blue emoji on iOS) in the pillar index → inline brand SVG (currentColor).
+- **Dead CSS:** removed unused Moderniz `@font-face` (global.css) + `display` token (tailwind) + orphan `site/public/fonts/Moderniz.otf`; Moderniz stays canonical in `brand/fonts/`.
+- **Doc drift:** `site/README.md` + `CLAUDE.md` pointed to non-existent `src/data/sections.ts` / `src/components/Section.astro` → corrected to `content.ts` + inlined `index.astro` (mapped `VideoBg.astro`).
+
+**Verified:** dev server serves new clamp + SVG arrow + `p-6`; old 2.6rem clamp and `↗` emoji gone (counts 0).
+
+**Next:** domain (#3 — pending whether `womd.id` is owned); replace dummy contact/stats/social (#2); SEO/OG polish (#5).
+
+---
+
 ### Deck redesign, design polish & delivery prep
 
 **Done:**

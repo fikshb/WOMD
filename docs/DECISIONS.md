@@ -4,6 +4,13 @@ Lightweight ADRs. Record decisions that aren't obvious from the code/files — e
 
 ---
 
+## D-010 — Typography corrections: descender-safe line-height + mobile-safe type floor
+
+- **Date:** 2026-05-29
+- **Decision:** Partially revert D-008's tight `line-height: 0.98` on section titles to **1.25**, and lower the `text-h2` clamp **floor** from `2.6rem` to `1.7rem` (curve `clamp(1.7rem, 0.5rem + 6vw, 5.5rem)`; desktop max unchanged). Added global `overflow-wrap: break-word` on `h1–h3`.
+- **Why:** `0.98` is below Montserrat's intrinsic glyph height (~1.22em), so descenders (y/g/p/j) on the first of a wrapped headline were clipped — most visibly the "y" in "consultancy", where line 2's yellow highlight box painted over the tail. The `2.6rem` (~42px) floor also forced long single words ("transformation.") to overflow off-screen inside the narrow "What we do" card on iPhone. Correctness (no clipped/overflowing letters) outweighs the marginal tightness D-008 wanted.
+- **Also:** "What we do" card padding `p-8 → p-6` on mobile; `↗` (emoji on iOS) → inline SVG; removed the unused Moderniz `@font-face`/token from the site (kept as a brand asset in `brand/fonts/`).
+
 ## D-009 — Delivery polish: motion reduced, backgrounds as "bookends" only
 
 - **Date:** 2026-05-29

@@ -2,14 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Decorative display face — display use only (see brand/design.md §4) */
-@font-face {
-  font-family: "Moderniz";
-  src: url("/fonts/Moderniz.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
+/* Safety net: long single words (e.g. "transformation") must wrap, never
+   overflow the viewport on narrow screens. Applies to all headings. */
+@layer base {
+  h1, h2, h3 {
+    overflow-wrap: break-word;
+  }
 }
+
+/* Note: Moderniz (brand decorative face) is intentionally NOT loaded here —
+   it isn't used anywhere in the markup. It remains a canonical brand asset in
+   brand/fonts/ for non-web use (decks, social). Re-add an @font-face + the
+   Tailwind `display` token if a future page needs it. */
 
 /* Hybrid scroll (D-005): proximity snap on the document.
    Punchy/full-height sections (.snap) gently snap; dense sections scroll freely. */

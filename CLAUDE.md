@@ -39,7 +39,7 @@ Quick brand reference (full detail in `design.md`):
 ## Working conventions
 
 - **Compliance:** Visual/verbal work must pass `brand/design.md`. Use the `brand-guardian` skill to check.
-- **The site:** content lives in `site/src/data/sections.ts`; markup in components. It's a single-page, scroll-snap, deck-style landing (`docs/DECISIONS.md` D-004). Stack rationale: D-003.
+- **The site:** content lives in `site/src/data/content.ts`; all sections are inlined in `site/src/pages/index.astro` (no per-section component). It's a single-page, scroll-snap, deck-style landing (`docs/DECISIONS.md` D-004). Stack rationale: D-003.
 - **Logging:** After meaningful work, append to `docs/WORKLOG.md`. Record non-obvious choices (and *why*) in `docs/DECISIONS.md`. User-facing/asset changes go in `docs/CHANGELOG.md`.
 - **Assets:** `brand/` is canonical; `site/public/` holds copies. If masters change, re-copy.
 - **Skills:** prefer the project skill that matches the task (front-end build → `frontend-designer`, narrative/section order → `deck-architect`, copy → `copywriter`, consistency check → `brand-guardian`).
