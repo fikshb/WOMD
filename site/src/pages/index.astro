@@ -7,14 +7,16 @@ import {
 } from "../data/content";
 
 const V = {
-  splash: "/video/WOMD_bg_liquid-splash_loop_1080.mp4",
-  splashPortrait: "/video/WOMD_bg_liquid-splash_loop_portrait.mp4",
   stripes: "/video/WOMD_bg_yellow-stripes_1080.mp4",
   bubbles: "/video/WOMD_motion_chat-bubbles-yellow-stream_pingpong_1080.mp4",
   cubes: "/video/WOMD_bg_yellow-cube-grid_loop_1080.mp4",
   glassBubbles: "/video/WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4",
+  organic: "/video/WOMD_bg_organic-particles_loop_1080.mp4",
+  tunnel: "/video/WOMD_bg_neon-tunnel_loop_1080.mp4",
+  neonglow: "/video/WOMD_bg_chat-bubbles-glass-neonglow_loop_1080.mp4",
+  sphere: "/video/WOMD_bg_green-sphere_loop_1080.mp4",
+  office: "/video/WOMD_bg_office-sun_loop_1080.mp4",
 };
-const halftone = "background-image:url('/textures/halftone-white.png');background-size:cover;";
 // Per-product icons — order matches pillars[].products (WOMD icon set)
 const productIcons = [
   ["/icons/prod-playbook.svg", "/icons/prod-social.svg", "/icons/prod-leadership.svg"],
@@ -68,7 +70,7 @@ const productIcons = [
     <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 85% 78% at 50% 48%, transparent 22%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.92) 100%)"></div>
     <div class="relative z-10 mx-auto w-full max-w-6xl">
       <p class="reveal font-headline text-[clamp(0.95rem,0.8rem+0.5vw,1.2rem)] font-bold uppercase tracking-[0.28em] text-brand-yellow">{belief.kicker}</p>
-      <h2 class="reveal mt-7 max-w-5xl font-headline text-[clamp(1.7rem,0.5rem+6vw,5.5rem)] font-extrabold leading-[1.25] tracking-[-0.01em]" style="--reveal-delay:80ms">{belief.headline}</h2>
+      <h2 class="reveal mt-7 max-w-5xl font-headline text-[clamp(1.7rem,0.5rem+6vw,5.5rem)] font-extrabold leading-[1.1] tracking-[-0.01em]" style="--reveal-delay:80ms">{belief.headline}</h2>
 
       <ol class="relative mt-16 grid gap-y-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-6">
         <div class="absolute left-0 right-0 top-11 hidden h-px bg-gradient-to-r from-brand-yellow/30 via-brand-yellow/70 to-brand-yellow/30 lg:block"></div>
@@ -118,7 +120,7 @@ const productIcons = [
             </span>
             <span class="font-headline text-6xl font-extrabold leading-none text-ink/20 transition-colors group-hover:text-brand-yellow sm:text-7xl">{p.num}</span>
           </div>
-          <h2 class="mt-6 font-headline text-[clamp(1.9rem,1.2rem+2vw,3.25rem)] font-extrabold leading-[1.25]">{p.title}</h2>
+          <h2 class="mt-6 font-headline text-[clamp(1.9rem,1.2rem+2vw,3.25rem)] font-extrabold leading-[1.1]">{p.title}</h2>
           <p class="mt-5 text-lead text-ink/70">{p.intro}</p>
         </div>
         <div class="grid gap-6 sm:grid-cols-2">
@@ -141,8 +143,8 @@ const productIcons = [
   ))}
 
   <!-- 10. HOW WE WORK — visual timeline -->
-  <section id="process" class="snap relative flex min-h-screen items-center overflow-hidden bg-ink px-6 py-24 text-white sm:px-12 lg:px-20">
-    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
+  <section id="process" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 text-white sm:px-12 lg:px-20">
+    <VideoBg src={V.organic} scrim={50} bg="bg-ink" />
     <div class="relative z-10 mx-auto w-full max-w-3xl">
       <p class="reveal font-headline text-eyebrow font-bold uppercase text-brand-yellow">{process.kicker}</p>
       <h2 class="reveal mt-6 font-headline text-h2 font-extrabold" style="--reveal-delay:80ms">We begin with <span class="text-brand-yellow">clarity.</span></h2>
@@ -206,12 +208,13 @@ const productIcons = [
   </section>
 
   <!-- 11. WHAT MAKES US DIFFERENT -->
-  <section id="different" class="snap relative flex min-h-screen items-center overflow-hidden bg-ink px-6 py-28 text-white sm:px-12 lg:px-20">
-    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
-    <div class="relative z-10 mx-auto w-full max-w-6xl">
+  <section id="different" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-28 text-white sm:px-12 lg:px-20">
+    <VideoBg src={V.sphere} scrim={0} position="object-[85%_25%]" bg="bg-ink" />
+    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 62% 72% at 78% 20%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 24%, rgba(0,0,0,0.92) 62%)"></div>
+    <div class="relative z-10 mx-auto w-full max-w-6xl [text-shadow:0_2px_14px_rgba(0,0,0,0.85)]">
       <div class="reveal">
         <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">{differentiators.kicker}</p>
-        <h2 class="mt-6 max-w-4xl font-headline text-[clamp(1.8rem,1.1rem+2.2vw,3.4rem)] font-extrabold leading-[1.25] tracking-[-0.01em]">We don't start from “what should we make?”<br class="hidden sm:block" /> We start from “what needs to change?”</h2>
+        <h2 class="mt-6 max-w-4xl font-headline text-[clamp(1.8rem,1.1rem+2.2vw,3.4rem)] font-extrabold leading-[1.1] tracking-[-0.01em]">We don't start from “what should we make?”<br class="hidden sm:block" /> We start from “what needs to change?”</h2>
       </div>
       <div class="mt-12 border-t border-white/15">
         {differentiators.items.map((d, i) => (
@@ -228,8 +231,9 @@ const productIcons = [
   </section>
 
   <!-- 12. WHO WE WORK WITH -->
-  <section id="audience" class="snap relative flex min-h-screen items-center overflow-hidden bg-brand-yellow px-6 py-28 text-ink sm:px-12 lg:px-20">
-    <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.08]" style="background:url('/textures/halftone-black.png') center / cover no-repeat;"></div>
+  <section id="audience" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-28 text-ink sm:px-12 lg:px-20">
+    <VideoBg src={V.office} scrim={0} bg="bg-brand-yellow" />
+    <div class="pointer-events-none absolute inset-0 bg-brand-yellow/[0.78]"></div>
     <div class="relative z-10 mx-auto w-full max-w-6xl">
       <div class="reveal">
         <div class="flex items-center gap-3"><span class="font-headline text-eyebrow font-bold uppercase text-ink/60">{audience.kicker}</span></div>
@@ -246,24 +250,24 @@ const productIcons = [
   </section>
 
   <!-- 13a. PRE-CLOSING -->
-  <section id="future" class="snap relative flex min-h-screen items-center justify-center overflow-hidden bg-ink px-6 py-28 text-center text-white">
-    <div class="pointer-events-none absolute inset-0 opacity-[0.06]" style={halftone}></div>
+  <section id="future" class="snap relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-28 text-center text-white">
+    <VideoBg src={V.tunnel} scrim={55} vignette bg="bg-ink" />
+    <div class="pointer-events-none absolute inset-0 bg-black/65"></div>
     <div class="reveal relative z-10 mx-auto max-w-5xl">
       <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">The future</p>
-      <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.25]">{closing.statementLead} <span class="text-brand-yellow">{closing.statementAccent}</span></h2>
+      <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.1]">{closing.statementLead} <span class="text-brand-yellow">{closing.statementAccent}</span></h2>
       <p class="mx-auto mt-10 max-w-3xl text-xl leading-relaxed text-white/80 sm:text-2xl">{closing.statementBody}</p>
       <a href="#contact" class="mt-14 inline-block bg-brand-yellow px-12 py-5 font-headline text-base font-bold uppercase tracking-[0.2em] text-ink transition hover:brightness-95">{closing.kicker}</a>
     </div>
   </section>
 
   <!-- 13b. CONTACT -->
-  <section id="contact" class="snap relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-ink px-6 py-28 text-center text-white">
-    <div class="pointer-events-none absolute inset-0 bg-cover bg-center landscape:block portrait:hidden" style="background-image:url('/imagery/nuclear-explosion-wide.jpg')"></div>
-    <div class="pointer-events-none absolute inset-0 bg-cover bg-center portrait:block landscape:hidden" style="background-image:url('/imagery/nuclear-explosion-portrait.jpg')"></div>
+  <section id="contact" class="snap relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-28 text-center text-white">
+    <VideoBg src={V.neonglow} scrim={0} rate={0.8} bg="bg-ink" />
     <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 88% 78% at 50% 50%, rgba(20,20,20,0.9) 0%, rgba(20,20,20,0.74) 58%, rgba(20,20,20,0.5) 100%)"></div>
     <div class="reveal relative z-10 flex w-full max-w-4xl flex-col items-center [text-shadow:0_2px_14px_rgba(0,0,0,0.6)]">
       <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">{closing.kicker}</p>
-      <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.25]">Make your ideas become public conversations <span class="text-brand-yellow">impossible to ignore.</span></h2>
+      <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.1]">Make your ideas become public conversations <span class="text-brand-yellow">impossible to ignore.</span></h2>
 
       <div class="mt-14 flex flex-col items-center gap-5 text-lg text-white/90 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-x-10 sm:gap-y-4">
         <a href={`mailto:${closing.contact.email}`} class="inline-flex items-center gap-2 transition hover:text-brand-yellow">

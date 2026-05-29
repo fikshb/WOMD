@@ -2,7 +2,7 @@
 
 **Proyek:** Weapons of Mass Discussion (WOMD) — brand system + website company-profile
 **Stack:** Astro + Tailwind (static), single-page deck 15 slide
-**Status:** Selesai dibangun & ter-push ke GitHub (`github.com/fikshb/WOMD`, history bersih). Deploy Vercel pending (menunggu restart untuk load MCP).
+**Status:** Selesai dibangun + **redesign video-rich** (hampir tiap slide kini punya background video sinematik, lazy-loaded). Commit awal ter-push ke GitHub (`github.com/fikshb/WOMD`); batch video besar belum di-commit saat dokumen ini ditulis. Deploy Vercel pending.
 **Dokumen ini:** ringkasan eksekutif — bukan log teknis baris-per-baris (itu ada di `WORKLOG.md` / `DECISIONS.md`).
 
 ---
@@ -23,7 +23,9 @@ Sebuah **landing page deck-style** untuk konsultansi transformasi strategis. Sat
 14. The Future (pre-closing)
 15. Contact (CTA + sosmed, latar "bom")
 
-Fitur: sistem tipografi terkunci (`clamp()` fluid), dot-nav 15 titik dengan scroll-spy + warna adaptif, hamburger overlay di mobile, background video/gambar hanya di titik "bookend".
+Fitur: sistem tipografi terkunci (`clamp()` fluid), dot-nav 15 titik dengan scroll-spy + warna adaptif, hamburger overlay di mobile.
+
+**Background video sinematik (9 section, semua lazy-loaded)** — arc warna: Hero putih (gelembung chat kuning, ping-pong) → Who-We-Are kuning (cube-grid) → Belief gelap (gelembung kaca) → What-we-do (yellow-stripes) → **Different** gelap (bola perak + 1 bola hijau, radial-spotlight) → Process gelap (vortex partikel) → **Audience** kuning (gedung sunrise, tint kuning) → The Future gelap (neon-tunnel) → Contact gelap (gelembung neon, 0.8× speed). Tiap video dioptimalkan (H.264 crf~20-26, faststart, audio dibuang) dan diberi scrim/vignette/tint agar teks tetap kontras. Komponen `VideoBg` punya prop reusable: `bg`, `scrim`, `vignette`, `contain`, `rate` (playback speed), `position` (focal crop).
 
 ---
 
@@ -36,7 +38,8 @@ Fitur: sistem tipografi terkunci (`clamp()` fluid), dot-nav 15 titik dengan scro
 | **3. Konten & build** | Ambil *konten* dari referensi (MHTML artifact), bangun seluruh section, pertajam copy ke brand voice. |
 | **4. Kurasi aset** | ~1,3 GB pack stock + video → diciutkan jadi library **19 MB** (ikon, tekstur, overlay, background). |
 | **5. Polish desain (iteratif)** | Penyetelan panjang: hero (ukuran, splash, vignette, orientasi portrait/landscape), kunci ukuran section-title, redesign tiap section, dot-nav + scroll-spy, mobile nav. |
-| **6. Refactor delivery** | Kurangi animasi (float ikon & drift halftone), ganti 2 video AI → gelap statis, **video 55 MB → 16 MB**, hapus aset orphan, commit, push, **squash history (.git 243 MB → 96 MB)**. |
+| **6. Refactor delivery** | Kurangi animasi, ganti 2 video AI → gelap statis, **video 55 MB → 16 MB**, hapus aset orphan, commit, push, **squash history (.git 243 MB → 96 MB)**. |
+| **7. Redesign video-rich** (sesi ini, Opus 4.8) | 6 video stock baru diproses (chat-bubbles, cube-grid, organic-vortex, neon-tunnel, green-sphere, office-sunrise) → web-friendly + crossfade/ping-pong loop di yang tak seamless. Dipasang sebagai bg di 9 section dengan treatment per-section (scrim, vignette, radial-spotlight, tint kuning, slow-mo). **Lazy-load** semua video (IntersectionObserver: load+play saat terlihat, pause saat keluar, skip untuk reduced-motion/Save-Data). Tuning iteratif (gelap/kuning/spacing), pass line-height (D-012), lalu **cleanup ~34 MB** + update docs. |
 
 ---
 
@@ -61,10 +64,10 @@ Pekerjaan dieksekusi oleh **satu agen (Claude Opus 4.7, 1M context)** yang mener
 |---|---|---|
 | **Logo** | 10 file WhatsApp-export → renamed + web + PNG transparan + favicon | Wordmark (hero), icon speech-bubble (masthead/contact), favicon set, OG image |
 | **Font** | Moderniz (display), Montserrat, Roboto | Montserrat (headline), Roboto (body); Moderniz **tidak terpakai** di markup |
-| **Video** | Stock ~1,2 GB + 2 video AI (Higgsfield) + 1 grid-dots → dioptimalkan | **liquid-splash** (hero, +portrait), **yellow-stripes** (what-we-do). Sisanya dihapus. |
-| **Gambar** | nuclear-explosion (bom), yellow-polygon ×10, 3 webp AI | **nuclear-explosion** (contact, landscape+portrait), **yellow-polygon** (who-we-are) |
-| **Ikon** | Pack nuclear/ui/people/marketing (~200 SVG) | Glyph `ui`/`step` untuk pillar, process, belief, 14 kartu produk. Pack `marketing` ditolak (multicolor, off-brand). |
-| **Tekstur** | halftone (hitam/putih), grain | halftone-white (section gelap), halftone-black (audience), grain (hero) |
+| **Video** | Stock + AI → dioptimalkan | **9 background loop** (chat-bubbles ×2, cube-grid, organic-vortex, neon-tunnel, green-sphere, office-sunrise, yellow-stripes) di `site/public/video` (~34 MB). Library kanonik + masters di `brand/motion/` (web committed, masters lokal/gitignored). Klip stok lama (liquid-splash) + library tak-terpakai dihapus. |
+| **Gambar** | nuclear-explosion, yellow-polygon, 3 webp AI | Diganti video — semua still bg (nuclear, polygon) dihapus saat cleanup. Tersisa: logo, favicon, team photo, client logos. |
+| **Ikon** | Pack nuclear/ui/people/marketing (~200 SVG) | Glyph `ui`/`step` untuk pillar, process, belief, 14 kartu produk. Pack `marketing` ditolak (off-brand). |
+| **Tekstur** | halftone (hitam/putih), grain | halftone-black (team), grain (hero). halftone-white dihapus (orphan). |
 | **Klien** | 10 logo (reuse dari Katalis, basis klien sama) | 10 logo marquee di "Who's Behind It" |
 
 **Efisiensi:** ~1,3 GB pack → **19 MB** library; video situs **16 MB**; `.git` **96 MB** (dari 243 MB setelah squash).
@@ -79,20 +82,21 @@ Pekerjaan dieksekusi oleh **satu agen (Claude Opus 4.7, 1M context)** yang mener
 - Input (uncached) ≈ $15 / 1J token · Cache-read ≈ $1,50 / 1J · Cache-write ≈ $18,75 / 1J · Output ≈ $75 / 1J
 - Kurs asumsi: **Rp 16.300 / USD**
 
-**Skala sesi:** sangat panjang (context sempat penuh → di-ringkas → lanjut ratusan tool-call: ratusan Read/Edit/Bash-build + ~15 analisis gambar). Karakteristik: **input besar tapi mayoritas cache-read**; **output didominasi** oleh blok kode pada banyak operasi Edit.
+**Skala (kumulatif 2 fase besar):** fase 1–6 (build awal) + fase 7 (redesign video-rich, sesi ini). Fase 7 sangat berat: ~6 video diproses (puluhan operasi `ffmpeg`), **~60+ analisis gambar** (frame/composite/screenshot — semua input *vision*), ~40 build, dan **puluhan putaran tuning kecil** dengan context panjang yang dibaca-ulang tiap turn.
 
-| Komponen (estimasi kasar) | Token | Biaya USD |
+| Komponen (estimasi kasar, **kumulatif**) | Token | Biaya USD |
 |---|---|---|
-| Cache-read (konteks berulang tiap turn) | ~18–24 J | ~$27–36 |
-| Cache-write + input baru | ~1,5–2,5 J | ~$25–40 |
-| Output (teks + isi tool/Edit) | ~0,9–1,4 J | ~$68–105 |
-| **Total** | | **~$120–180** |
+| Cache-read (konteks berulang, ratusan turn) | ~35–55 J | ~$50–85 |
+| Cache-write + input baru (termasuk ~60+ gambar) | ~3–5 J | ~$50–90 |
+| Output (teks + blok kode tiap Edit) | ~1,5–2,5 J | ~$110–190 |
+| **Total** | | **~$210–360** |
 
-**Estimasi biaya (confidence: rendah):**
-- Titik tengah: **~$150 ≈ Rp 2,45 juta**
-- Rentang wajar: **~$120–180 ≈ Rp 2,0–2,9 juta**
+**Estimasi biaya kumulatif (confidence: RENDAH):**
+- Titik tengah: **~$285 ≈ Rp 4,6 juta**
+- Rentang wajar: **~$210–360 ≈ Rp 3,4–5,9 juta**
+- Fase 1–6 saja ~$120–180; fase 7 (video) kira-kira melipatgandakannya karena banyak input gambar + iterasi.
 
-> Output token (blok kode di tiap Edit) adalah pendorong biaya terbesar. Sesi yang sangat iteratif (banyak penyetelan kecil + rebuild) menaikkan ini. Untuk proyek serupa ke depan, biaya bisa ditekan dengan menggabungkan revisi (lebih sedikit putaran).
+> Dua pendorong terbesar: **output** (blok kode tiap Edit) dan **input gambar** (tiap screenshot/frame yang di-review ≈ ribuan token). Penghematan ke depan: gabungkan revisi (lebih sedikit putaran), kurangi verifikasi screenshot bila tak kritikal. **Angka pasti hanya di Anthropic Console → Usage.**
 
 ---
 

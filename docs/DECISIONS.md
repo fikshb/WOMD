@@ -4,7 +4,12 @@ Lightweight ADRs. Record decisions that aren't obvious from the code/files — e
 
 ---
 
-## D-011 — Hero is a light-theme yellow-bubble video (partly revises D-009)
+## D-012 — Headline line-height: tight (1.1) by default, wide (1.25) only for boxed accents
+
+- **Date:** 2026-05-29
+- **Decision:** Section-title `line-height` is **1.1** for plain headlines (the `text-h2` token + the explicit non-box `<h2>`s: Belief, What-we-do, Pillar titles, Process, Different, Audience, Future, Contact). Headlines whose accent has a **background box** keep a wide leading: **Who We Are 1.25** (ink box) and the **Hero subhead 1.12** (yellow box).
+- **Why:** D-010 set everything to 1.25 to stop descender clipping — but its own evidence (the "y" in "consultancy" covered by the next line's box on Who We Are) shows the real cause was the **highlight box** painting over the line-above's descenders, not line spacing. Plain headlines have no box, so descenders fit fine at ≥1.0; 1.1 reads tighter/more editorial and stays clip-safe (verified on the wrappy, descender-heavy Belief headline). Only boxed accents genuinely need the extra vertical air.
+- **Rule of thumb:** boxed/highlighted multi-line headline → leading ≥1.25; plain headline → 1.1.
 
 - **Date:** 2026-05-29
 - **Decision:** Replace the dark `liquid-splash` hero with the white-background `WOMD_motion_chat-bubbles-yellow-stream` loop, and rebuild the hero as a **light theme**: white container, `object-contain` video (invisible white letterbox on web + mobile), ink text, a yellow highlight-box subhead accent, and a soft white radial halo behind the content. Added a `bg` prop to `VideoBg`. Made **Who We Are** a **full-yellow** section (`yellow-polygon.jpg` cover, ink text, accent flipped to an ink box with yellow text) so the deck doesn't run two near-white sections back-to-back. Switched the hero logo to the **horizontal** wordmark (the square 1500×1500 PNG's transparent padding made the IMG too tall and pushed the subhead off-screen).

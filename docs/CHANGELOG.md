@@ -9,11 +9,24 @@ User-facing / asset-facing changes. Format loosely follows Keep a Changelog.
 - **Who We Are** now runs a looping **yellow cube-grid video** background (`WOMD_bg_yellow-cube-grid_loop_1080.mp4`) under a yellow scrim, replacing the static polygon image.
 - **Core Belief** now runs a looping **glass chat-bubbles video** (`WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4`) on black, darkened with a scrim + cinematic edge-vignette (section stays dark / white text).
 - **Hero** video now fills the viewport (`cover`) instead of being contained.
+- **How we work / process** now runs a looping **organic particle-vortex video** (`WOMD_bg_organic-particles_loop_1080.mp4`) on black under a scrim (source was a 239 MB MJPEG → 2.0 MB H.264).
+- **The future** (pre-closing) now runs a **yellow neon-tunnel video** (`WOMD_bg_neon-tunnel_loop_1080.mp4`) on black behind the centered statement (scrim + vignette). (Audience / "Who we work with" stays solid yellow.)
+- **Who we work with / audience** now runs a golden **office-building-at-sunrise video** (`WOMD_bg_office-sun_loop_1080.mp4`, crossfade-looped) under a flat brand-yellow tint so it stays a yellow / black-text section.
+- **Why we are different** now runs a **green-sphere-in-a-silver-field video** (`WOMD_bg_green-sphere_loop_1080.mp4`) on a dark vignette; the crop is biased (`object-position`) so the standout green sphere stays visible on both web and mobile. New `position` + `rate` props on `VideoBg`.
+- **Contact** (final slide) now runs the **neon-glow glass-bubbles video** (`WOMD_bg_chat-bubbles-glass-neonglow_loop_1080.mp4`) behind the existing radial scrim, replacing the nuclear-explosion still.
+- **Performance:** all background videos are now **lazy-loaded** — `preload="none"`, downloaded + played only when their section nears the viewport (IntersectionObserver), paused when off-screen or the tab is hidden, and skipped entirely for reduced-motion / Save-Data / 2G users.
 
 ### Added (2026-05-29)
 - New `brand/motion/` library: 8 web-optimized chat-bubble loops in `web/` (H.264 1080p `.mp4`, faststart, video-only) + untouched stock originals in `masters/` + README. Renamed to the `WOMD_<bg|motion>_<slug>_loop_1080.mp4` convention. Not yet used on the site.
 
+### Changed (2026-05-29) — brand cohesion
+- Recolored two off-palette background videos to a **yellow/black duotone** (baked via ffmpeg, no runtime cost): **Process** vortex (was purple/cyan → gold) and **Contact** neon bubbles (was green → yellow-neon). The green "different" sphere on the *Why we are different* slide is kept as a deliberate single accent.
+
+### Removed (2026-05-29)
+- Pre-commit cleanup (~34 MB off the repo): orphaned videos (liquid-splash 1080 + portrait — old hero; the non-ping-pong yellow-stream loop), replaced stills (nuclear-explosion wide/portrait, yellow-polygon), the orphaned `halftone-white.png` texture, and five unused chat-bubble library clips (blue-falling, glossy-iconpack, glass-rotating, glass-rotating-white, single glass-black — regenerable from local masters). Dropped dead code (`V.splash`/`splashPortrait`, the unused `halftone` const).
+
 ### Changed (2026-05-29)
+- Tightened headline `line-height` to **1.1** for plain headlines (punchier/editorial); headlines with a background-box accent (Who We Are, Hero subhead) keep the wider leading they need. (See D-012.)
 - Rebuilt the site as a **15-slide deck** with a locked type system and adaptive 15-dot scroll-spy nav; added mobile hamburger overlay.
 - Merged Track Record + Trusted By into the founder section (Razi); aligned all copy to the source catalog; removed em-dashes.
 - Reduced motion (calmer feel), reserved background video/image for Hero + Contact bookends, flattened pillar sections.

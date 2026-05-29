@@ -1,5 +1,8 @@
 ---
 // Reusable looping background video with a scrim overlay for text contrast.
+// Lazy-loaded + visibility-gated for performance (see <script> below): the video
+// downloads only when its section nears the viewport, plays only while visible,
+// and is skipped entirely for reduced-motion / Save-Data / 2G users.
 interface Props {
   src: string;
   /** optional portrait-oriented source; shown on portrait devices (cover, no bars) */
@@ -13,8 +16,12 @@ interface Props {
   contain?: boolean;
   /** container backdrop behind/around the video (Tailwind class). White-bg clips letterbox invisibly on bg-white. */
   bg?: string;
+  /** playback rate (1 = normal). e.g. 0.67 ≈ 1.5× slower, 0.5 = half speed. */
+  rate?: number;
+  /** object-position class (e.g. "object-[70%_30%]") to keep a focal point in frame when cropped. */
+  position?: string;
 }
-const { src, srcPortrait, poster, scrim = 45, vignette = false, contain = false, bg = "bg-black" } = Astro.props;
+const { src, srcPortrait, poster, scrim = 45, vignette = false, contain = false, bg = "bg-black", rate = 1, position = "" } = Astro.props;
 const overlay = vignette
   ? `radial-gradient(ellipse 72% 62% at 50% 50%, rgba(0,0,0,${scrim / 100}) 0%, rgba(0,0,0,${scrim / 200}) 45%, rgba(0,0,0,0) 78%)`
   : `rgba(0,0,0,${scrim / 100})`;
@@ -26,24 +33,70 @@ const fit = contain ? "object-contain" : "object-cover";
     <>
       <video
         class:list={["h-full w-full landscape:block portrait:hidden", fit]}
-        autoplay muted loop playsinline preload="metadata" poster={poster}
+        muted loop playsinline preload="none" poster={poster} data-rate={rate} data-vbg
       >
-        <source src={src} type="video/mp4" />
+        <source data-src={src} type="video/mp4" />
       </video>
       <video
         class:list={["h-full w-full portrait:block landscape:hidden", fit]}
-        autoplay muted loop playsinline preload="metadata" poster={poster}
+        muted loop playsinline preload="none" poster={poster} data-rate={rate} data-vbg
       >
-        <source src={srcPortrait} type="video/mp4" />
+        <source data-src={srcPortrait} type="video/mp4" />
       </video>
     </>
   ) : (
     <video
-      class:list={["h-full w-full", fit]}
-      autoplay muted loop playsinline preload="metadata" poster={poster}
+      class:list={["h-full w-full", fit, position]}
+      muted loop playsinline preload="none" poster={poster} data-rate={rate} data-vbg
     >
-      <source src={src} type="video/mp4" />
+      <source data-src={src} type="video/mp4" />
     </video>
   )}
   <div class="absolute inset-0" style={`background: ${overlay}`}></div>
 </div>
+
+<script>
+  // Lazy-load + visibility-gated playback for every VideoBg on the page.
+  // Bundled once by Astro regardless of how many times the component is used.
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const conn = (navigator as any).connection;
+  const saveData = !!(conn && (conn.saveData || /(^|\b)(slow-)?2g$/.test(conn.effectiveType || "")));
+
+  // Reduced-motion / data-saver / 2G: never download video — leave poster + bg colour.
+  if (!reduce && !saveData) {
+    const vids = Array.from(document.querySelectorAll<HTMLVideoElement>("video[data-vbg]"));
+
+    const load = (v: HTMLVideoElement) => {
+      if (v.dataset.loaded) return;
+      v.querySelectorAll<HTMLSourceElement>("source[data-src]").forEach((s) => {
+        if (s.dataset.src) s.src = s.dataset.src;
+      });
+      v.load();
+      v.dataset.loaded = "1";
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          const v = e.target as HTMLVideoElement;
+          if (e.isIntersecting) {
+            load(v);
+            const r = Number(v.dataset.rate);
+            if (r && r !== 1) v.playbackRate = r;
+            v.play().catch(() => {});
+          } else {
+            v.pause();
+          }
+        }
+      },
+      { rootMargin: "300px 0px" },
+    );
+
+    vids.forEach((v) => io.observe(v));
+
+    // Pause everything when the tab is backgrounded.
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) vids.forEach((v) => v.pause());
+    });
+  }
+</script>

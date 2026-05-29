@@ -29,22 +29,23 @@ All `web/` clips are normalized to a single, web-friendly profile:
 
 ## Master → web map
 
+Only clips actually used on the site (plus the canonical yellow-stream loop) are kept in `web/`. Five unused chat-bubble options (blue-falling, glossy-iconpack, glass-rotating, glass-rotating-white, single glass-black) were trimmed on 2026-05-29 to keep the repo lean — they're regenerable from `masters/` if ever needed.
+
 | `web/` file | size | source master |
 |---|---|---|
-| `WOMD_bg_chat-bubbles-blue-falling_loop_1080.mp4` | 8.5 MB | `animated-3d-blue-message-bubbles-falling-backgroun-…utc.mov` |
-| `WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4` | 6.4 MB | `glass-speech-bubbles-on-black-bg-able-to-loop-endl-…utc.mp4` (**used behind Core Belief** on the site, with scrim + edge-vignette) |
-| `WOMD_bg_chat-bubbles-glass-neonglow_loop_1080.mp4` | 4.9 MB | `animated-glass-chat-bubbles-with-neon-glow-…utc.mp4` |
-| `WOMD_bg_chat-bubble-glass-black_loop_1080.mp4` | 2.4 MB | `glass-speech-bubble-on-black-bg-able-to-loop-endle-…utc.mp4` (single bubble) |
-| `WOMD_motion_chat-bubbles-glossy-iconpack_loop_1080.mp4` | 3.9 MB | `3d-glossy-chat-bubble-icon-pack-loop-animation-…utc.mov` |
-| `WOMD_motion_chat-bubbles-yellow-stream_loop_1080.mp4` | 3.6 MB | `flying-yellow-chat-bubble-icons-stream-animation-…utc.mov` (brand-yellow; **crossfade seamless loop**, see note above) |
-| `WOMD_motion_chat-bubbles-glass-rotating_loop_1080.mp4` | 2.5 MB | `animated-transparent-glass-speech-bubbles-rotating-…utc.mov` |
-| `WOMD_motion_chat-bubbles-glass-rotating-white_loop_1080.mp4` | 1.2 MB | `animated-3d-glass-chat-bubbles-rotating-on-white-…utc.mov` |
+| `WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4` | 6.4 MB | `glass-speech-bubbles-on-black-bg-able-to-loop-endl-…utc.mp4` (**used behind Core Belief**, scrim + edge-vignette) |
+| `WOMD_bg_chat-bubbles-glass-neonglow_loop_1080.mp4` | 3.9 MB | `animated-glass-chat-bubbles-with-neon-glow-…utc.mp4` (**used behind Contact** / final slide, radial scrim, 0.8× playback). **Recolored to a yellow/black duotone** (`format=gray,lutrgb=g='val*0.85':b='val*0.18'`) — source glow was green (off-brand); now yellow-neon, on-brand. |
+| `WOMD_motion_chat-bubbles-yellow-stream_loop_1080.mp4` | 3.6 MB | `flying-yellow-chat-bubble-icons-stream-animation-…utc.mov` (brand-yellow; **crossfade seamless loop**. NB: the Hero uses a **ping-pong** variant that lives only in `site/public/video/`) |
 
-**Other yellow motion backgrounds** (not chat-bubbles, same `web/` optimization):
+**Other motion backgrounds** (not chat-bubbles, same `web/` optimization):
 
 | `web/` file | size | source master | notes |
 |---|---|---|---|
-| `WOMD_bg_yellow-cube-grid_loop_1080.mp4` | 2.1 MB | `yellow-geometric-cube-grid-waving-motion-backgroun-…utc.mov` | glossy 3D yellow/amber cube grid, waving. **Natively seamless loop** (first≈last frame). Used behind **Who We Are** on the site (with a yellow scrim for black-text legibility). |
+| `WOMD_bg_yellow-cube-grid_loop_1080.mp4` | 2.1 MB | `yellow-geometric-cube-grid-waving-motion-backgroun-…utc.mov` | glossy 3D yellow/amber cube grid, waving. **Natively seamless loop** (first≈last frame). Used behind **Who We Are** (with a yellow scrim for black-text legibility). |
+| `WOMD_bg_organic-particles_loop_1080.mp4` | 2.0 MB | `abstract-organic-background-loop-…utc.mov` | dark purple/cyan particle vortex on black, 1280×1280. Source was a **239 MB MJPEG 2000×2000** → re-encoded H.264 crf20 (black-heavy → tiny). **Natively seamless loop.** Used behind **How we work / process** (dark section, white text + scrim). **Recolored to a gold yellow/black duotone** — source particles were purple/cyan (off-brand); now amber-gold, on-brand. |
+| `WOMD_bg_neon-tunnel_loop_1080.mp4` | 4.1 MB | `futuristic-neon-tunnel-with-yellow-lights-…utc.mov` | bright **yellow neon perspective tunnel** on black — most on-brand (yellow+black). **Natively seamless loop.** Used behind **The future** pre-closing (dark, centered statement; white text + yellow accents + scrim 58 & vignette to tame the bright neon). |
+| `WOMD_bg_green-sphere_loop_1080.mp4` | 1.1 MB | `unique-green-sphere-pulsating-in-abstract-geometri-…utc.mov` | field of silver spheres with one **green ("different") sphere** in the upper-right, pulsating. **Natively seamless loop.** Used behind **Why we are different** — `VideoBg position="object-[85%_25%]"` biases the crop to keep the green sphere visible on both web and mobile-portrait; radial vignette centered on the sphere (spotlight) for a very dark section. |
+| `WOMD_bg_office-sun_loop_1080.mp4` | 4.7 MB | `office-building-with-glass-windows-an-rising-sun-f-…utc.mp4` | golden office building, sun on glass. Source was 16.7 MB / 11 Mbps + didn't loop (camera pan) → re-encoded crf26 **+ crossfade self-loop** (now seamless, 11 s). Used behind **Who we work with / audience** under a **flat `bg-brand-yellow/72` tint** so it reads as the yellow section (black text) with the building as golden texture. |
 
 ## Use on the site
 
