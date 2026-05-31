@@ -4,7 +4,22 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ---
 
-## 2026-05-29
+## 2026-05-30 — Session close (video-rich redesign)
+
+**Shipped & pushed** to `github.com/fikshb/WOMD` (main). Commits this session:
+- `2ba6e22` — first batch: video bgs (hero/who/belief) + motion library.
+- `867895e` — full deck video bgs (9 sections) + lazy-load + `VideoBg` props (`bg`/`rate`/`position`) + brand-yellow duotone recolor (process/contact) + line-height D-012 + ~34 MB cleanup + docs.
+- `a31bf8f` — **perf:** deployed videos shrunk to 720p/CRF28, **33 MB → ~7 MB** (canonical `brand/motion/web` kept HD).
+- `7cd831a` — **frosted-glass header chip** so the fixed brand mark stops colliding with section text.
+
+**End state:** 9 cinematic video sections, all lazy-loaded (preload=none + IntersectionObserver, paused off-screen/tab-hidden, skipped for reduced-motion/Save-Data/2G), brand-cohesive (yellow/black; the one green "different" sphere kept as a deliberate accent), deployed video ~7 MB total.
+
+**Open / handed to user (NOT done — by their call):**
+- **Fit-the-screen:** content-dense sections (what-we-do, process, different, pillar details, belief) overflow the viewport on laptop-768 & mobile; deck "one-slide-one-screen" only holds for the punchy slides. Recommended: let dense sections scroll, snap only the statement slides. (Measured; see review.)
+- **Contact dummy data** (email/phone/social/address + stats + Razi bio) — launch-blocker, needs real values.
+- **9 videos is a lot** for mobile data/battery even with lazy-load — consider trimming.
+- Eyeball legibility (belief/process/future) + autoplay/lazy feel in a **real browser** (`npm run dev`) — headless can't fairly verify autoplay.
+- Deploy: Vercel (root = `site`, Astro static).
 
 ### Pre-commit cleanup + line-height pass
 

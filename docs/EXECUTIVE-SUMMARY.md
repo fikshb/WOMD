@@ -2,7 +2,7 @@
 
 **Proyek:** Weapons of Mass Discussion (WOMD) — brand system + website company-profile
 **Stack:** Astro + Tailwind (static), single-page deck 15 slide
-**Status:** Selesai dibangun + **redesign video-rich** (hampir tiap slide kini punya background video sinematik, lazy-loaded). Commit awal ter-push ke GitHub (`github.com/fikshb/WOMD`); batch video besar belum di-commit saat dokumen ini ditulis. Deploy Vercel pending.
+**Status:** Selesai + **redesign video-rich** (9 slide background video sinematik, lazy-loaded, brand-cohesive). **Semua ter-commit & ter-push** ke GitHub (`github.com/fikshb/WOMD`, main → `7cd831a`). Video deploy diciutkan **33 MB → ~7 MB** (720p/CRF28). Deploy Vercel pending (root = `site`). Sisa sebelum go-live: **contact dummy data** + keputusan **fit-the-screen** untuk section padat (lihat WORKLOG "Session close").
 **Dokumen ini:** ringkasan eksekutif — bukan log teknis baris-per-baris (itu ada di `WORKLOG.md` / `DECISIONS.md`).
 
 ---
