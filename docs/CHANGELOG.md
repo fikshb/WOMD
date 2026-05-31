@@ -19,6 +19,9 @@ User-facing / asset-facing changes. Format loosely follows Keep a Changelog.
 ### Added (2026-05-29)
 - New `brand/motion/` library: 8 web-optimized chat-bubble loops in `web/` (H.264 1080p `.mp4`, faststart, video-only) + untouched stock originals in `masters/` + README. Renamed to the `WOMD_<bg|motion>_<slug>_loop_1080.mp4` convention. Not yet used on the site.
 
+### Changed (2026-05-30) — performance
+- Shrank the **deployed** background videos (`site/public/video`) to **720p / CRF 28**: total **33 MB → ~7 MB (−79%)**, hero 7.4 → 1.7 MB. Detail is masked by each section's scrim/tint so the quality drop is invisible; verified on the most-visible clips. The canonical `brand/motion/web` library is kept at full quality (1080p / CRF 20).
+
 ### Changed (2026-05-29) — brand cohesion
 - Recolored two off-palette background videos to a **yellow/black duotone** (baked via ffmpeg, no runtime cost): **Process** vortex (was purple/cyan → gold) and **Contact** neon bubbles (was green → yellow-neon). The green "different" sphere on the *Why we are different* slide is kept as a deliberate single accent.
 
