@@ -10,6 +10,7 @@ const V = {
   stripes: "/video/WOMD_bg_yellow-stripes_1080.mp4",
   bubbles: "/video/WOMD_motion_chat-bubbles-yellow-stream_pingpong_1080.mp4",
   heroDoodle: "/video/WOMD_bg_hero-doodle-explosion_loop_720.mp4",
+  heroDark: "/video/WOMD_bg_hero-dark_loop_720.mp4",
   cubes: "/video/WOMD_bg_yellow-cube-grid_loop_1080.mp4",
   glassBubbles: "/video/WOMD_bg_chat-bubbles-glass-black_loop_1080.mp4",
   organic: "/video/WOMD_bg_organic-particles_loop_1080.mp4",
@@ -63,6 +64,7 @@ const productIcons = [
 
   <!-- 1. HERO -->
   <section id="hero" class="snap relative flex h-screen flex-col items-center justify-center overflow-hidden bg-ink px-6 py-20 text-center text-white md:pb-[14vh]">
+    <VideoBg src={V.heroDark} scrim={0} bg="bg-ink" />
     <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center">
       <img src="/logo/WOMD_Wordmark_transparent_1500.png" alt="WOMD — Weapons of Mass Discussion" width="760" height="232" class="mx-auto block w-[84vw] max-w-3xl drop-shadow-[0_6px_28px_rgba(0,0,0,0.4)]" />
       <p class="mt-7 font-headline text-eyebrow font-bold uppercase tracking-[0.08em] text-white/80">{hero.tagline}</p>
