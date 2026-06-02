@@ -15,7 +15,7 @@ const mobileItems = [
 ---
 
 <!-- Desktop dot nav — color adapts to the active section (light/dark) via scroll-spy -->
-<nav id="sectionNav" class="fixed right-5 top-1/2 z-50 hidden -translate-y-1/2 text-white transition-colors duration-300 md:block" aria-label="Section navigation">
+<nav id="sectionNav" class="fixed right-3 top-1/2 z-50 hidden -translate-y-1/2 rounded-full bg-black/35 px-2 py-3 text-white shadow-md backdrop-blur-md transition-colors duration-300 md:block" aria-label="Section navigation">
   <ul class="flex flex-col gap-3.5">
     {navItems.map((item) => (
       <li>
@@ -48,10 +48,12 @@ const mobileItems = [
 <style is:global>
   /* Active state: filled bullet + visible label. Color is currentColor —
      adapts via the is-light flip already wired in this component. */
-  .nav-dot.is-active .nav-bullet { background-color: currentColor; }
-  .nav-dot.is-active .nav-label { opacity: 1; }
+  .nav-dot.is-active .nav-bullet { background-color: currentColor !important; }
+  .nav-dot.is-active .nav-label { opacity: 1 !important; }
   /* Hero exception: keep the active dot filled, hide the label entirely. */
-  .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0; }
+  .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0 !important; }
+  /* Light sections: flip nav backdrop to a light frosted panel so dark dots remain readable */
+  #sectionNav.is-light { background-color: rgba(255,255,255,0.5); }
 </style>
 
 <script is:inline>
