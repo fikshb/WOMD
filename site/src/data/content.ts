@@ -288,10 +288,8 @@ export const closing = {
   kicker2: "Make your ideas impossible to ignore.",
   // TODO: replace dummy values with real ones before launch
   contact: {
-    email: "hello@womd.id",
-    website: "womd.id",
+    email: "hello@wmdiscussion.com",
     phone: "+62 811 1000 2000",
-    address: "Jakarta, Indonesia",
   },
 };
 
