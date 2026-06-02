@@ -1,5 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
 import Nav from "../components/Nav.astro";
 import VideoBg from "../components/VideoBg.astro";
 import {
@@ -19,46 +20,10 @@ const V = {
   sphere: "/video/WOMD_bg_green-sphere_loop_1080.mp4",
   office: "/video/WOMD_bg_office-sun_loop_1080.mp4",
 };
-// Per-product icons — order matches pillars[].products (WOMD icon set)
-const productIcons = [
-  ["/icons/prod-playbook.svg", "/icons/prod-social.svg", "/icons/prod-leadership.svg"],
-  ["/icons/prod-brand.svg", "/icons/prod-visual.svg"],
-  ["/icons/prod-research.svg", "/icons/prod-pmf.svg", "/icons/prod-dashboard.svg"],
-  ["/icons/prod-lms.svg", "/icons/prod-ai.svg", "/icons/prod-website.svg"],
-  ["/icons/prod-org.svg", "/icons/prod-training.svg", "/icons/prod-hiring.svg"],
-];
 ---
 
 <Base>
-  <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 transition-all duration-300">
-    <div class="flex items-center px-5 py-4 sm:px-8 sm:py-5">
-      <a href="#hero" class="flex shrink-0 items-center gap-3" aria-label="Weapons of Mass Discussion — Home">
-        <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="" aria-hidden="true" width="44" height="44" class="h-9 w-9 sm:h-10 sm:w-10" />
-        <span class="font-headline text-[0.7rem] font-extrabold uppercase leading-none tracking-[0.1em] whitespace-nowrap sm:text-sm md:text-base lg:text-lg">
-          <span class="header-wordmark">Weapons of Mass Discussion</span><span class="text-brand-yellow">.</span>
-        </span>
-      </a>
-    </div>
-  </header>
-
-  <script is:inline>
-    (function () {
-      const header = document.getElementById("siteHeader");
-      if (!header) return;
-      const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 150);
-      onScroll();
-      window.addEventListener("scroll", onScroll, { passive: true });
-    })();
-  </script>
-
-  <style is:global>
-    /* At top: transparent header, yellow wordmark for hero-stage brand pop */
-    #siteHeader { color: #ffffff; background-color: transparent; border-bottom: 1px solid transparent; backdrop-filter: none; }
-    #siteHeader .header-wordmark { color: #FDD82D; }
-    /* After scrollY > 150px: solid frosted block, white wordmark */
-    #siteHeader.is-scrolled { background-color: rgba(43,43,43,0.85); border-bottom-color: rgba(255,255,255,0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-    #siteHeader.is-scrolled .header-wordmark { color: #ffffff; }
-  </style>
+  <Header />
   <Nav />
 
   <!-- 1. HERO -->
@@ -134,7 +99,7 @@ const productIcons = [
       <p class="mt-4 max-w-3xl text-lead text-ink/70">Together, these pillars help organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.</p>
       <div class="mt-10 border-t border-ink/15">
         {pillars.map((p, i) => (
-          <a href={`#pillar-${p.num}`} class="group flex items-center gap-4 border-b border-ink/15 py-5 sm:gap-6 sm:py-6">
+          <a href={`/what-we-do#pillar-${p.num}`} class="group flex items-center gap-4 border-b border-ink/15 py-5 sm:gap-6 sm:py-6">
             <span class="w-12 shrink-0 font-headline text-4xl font-extrabold leading-none text-ink/20 transition-colors group-hover:text-brand-yellow sm:w-16 sm:text-5xl">{p.num}</span>
             <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-yellow transition-transform group-hover:scale-110"><img src={p.icon} alt="" width="22" height="22" class="h-[22px] w-[22px]" style={`--anim-delay:${i * 0.25}s`} /></span>
             <span class="flex-1 font-headline text-xl font-bold leading-tight sm:text-2xl">{p.title}</span>
@@ -143,42 +108,13 @@ const productIcons = [
           </a>
         ))}
       </div>
+      <div class="mt-10 flex justify-center">
+        <a href="/what-we-do" class="inline-flex items-center gap-2 rounded-full bg-ink px-8 py-4 font-headline text-sm font-bold uppercase tracking-[0.18em] text-white transition hover:bg-brand-yellow hover:text-ink">
+          See all 5 pillars <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </div>
   </section>
-
-  <!-- 5-9. PILLAR DETAIL -->
-  {pillars.map((p, i) => (
-    <section id={`pillar-${p.num}`} class:list={["snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 sm:px-12 lg:px-20 text-ink", i % 2 === 0 ? "bg-white" : "bg-[#f5f5f5]"]}>
-      <img src={i % 2 === 0 ? "/images/whitebg.jpg" : "/images/greybg.jpg"} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
-      <div class="relative z-10 mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.7fr_1.6fr] lg:gap-14">
-        <div class="reveal group lg:sticky lg:top-24 lg:self-start">
-          <div class="flex items-center gap-4">
-            <span class="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-brand-yellow sm:h-20 sm:w-20">
-              <img src={p.icon} alt="" width="40" height="40" class="h-8 w-8 sm:h-10 sm:w-10" />
-            </span>
-            <span class="font-headline text-6xl font-extrabold leading-none text-ink/20 transition-colors group-hover:text-brand-yellow sm:text-7xl">{p.num}</span>
-          </div>
-          <h2 class="mt-6 font-headline text-[clamp(1.9rem,1.2rem+2vw,3.25rem)] font-extrabold leading-[1.1]">{p.title}</h2>
-          <p class="mt-5 text-lead text-ink/70">{p.intro}</p>
-        </div>
-        <div class="grid gap-6 sm:grid-cols-2">
-          {p.products.map((pr, j) => (
-            <div class="reveal flex flex-col border border-ink/15 bg-white p-7 text-ink transition-colors hover:border-brand-yellow" style={`--reveal-delay:${j * 80}ms`}>
-              <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-brand-yellow">
-                <img src={productIcons[i][j]} alt="" width="22" height="22" class="h-[22px] w-[22px]" />
-              </span>
-              <h3 class="mt-4 font-headline text-lg font-bold leading-snug">{pr.name}</h3>
-              <ul class="mt-4 space-y-2.5 text-[15px] text-ink/75">
-                {pr.bullets.map((b) => (
-                  <li class="flex items-start gap-2.5"><span class="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-brand-yellow"></span><span>{b}</span></li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  ))}
 
   <!-- 10. HOW WE WORK — visual timeline -->
   <section id="process" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 text-white sm:px-12 lg:px-20">

@@ -331,16 +331,11 @@ export const team = {
 };
 
 // Dot-nav anchors
-export const navItems = [
+export const homeNavItems = [
   { id: "hero", label: "Top" },
   { id: "who", label: "Who we are" },
   { id: "belief", label: "Core belief" },
   { id: "what-we-do", label: "What we do" },
-  { id: "pillar-01", label: "Digital Transformation" },
-  { id: "pillar-02", label: "Brand" },
-  { id: "pillar-03", label: "Innovation" },
-  { id: "pillar-04", label: "Technology" },
-  { id: "pillar-05", label: "People" },
   { id: "process", label: "How we work" },
   { id: "team", label: "Who's behind it" },
   { id: "different", label: "What makes us different" },
@@ -348,3 +343,15 @@ export const navItems = [
   { id: "future", label: "The future" },
   { id: "contact", label: "Contact" },
 ];
+
+export const whatWeDoNavItems = [
+  { id: "hero", label: "Top" },
+  { id: "pillar-01", label: "Digital Transformation" },
+  { id: "pillar-02", label: "Brand" },
+  { id: "pillar-03", label: "Innovation" },
+  { id: "pillar-04", label: "Technology" },
+  { id: "pillar-05", label: "People" },
+];
+
+// Legacy alias — Nav.astro picks the right list per route.
+export const navItems = homeNavItems;

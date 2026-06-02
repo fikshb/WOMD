@@ -1,17 +1,22 @@
 ---
-import { navItems } from "../data/content";
-// Mobile menu: pillars collapsed into one "Five pillars" entry
-const mobileItems = [
-  { id: "who", label: "Who we are" },
-  { id: "belief", label: "Core belief" },
-  { id: "what-we-do", label: "Five pillars" },
-  { id: "process", label: "How we work" },
-  { id: "team", label: "Who's behind it" },
-  { id: "different", label: "What makes us different" },
-  { id: "audience", label: "Who we work with" },
-  { id: "future", label: "The future" },
-  { id: "contact", label: "Contact" },
-];
+import { homeNavItems, whatWeDoNavItems } from "../data/content";
+const path = Astro.url.pathname.replace(/\/$/, "");
+const isWhatWeDo = path === "/what-we-do";
+const navItems = isWhatWeDo ? whatWeDoNavItems : homeNavItems;
+// Mobile overlay items (same content set per route)
+const mobileItems = isWhatWeDo
+  ? whatWeDoNavItems.filter((i) => i.id !== "hero").map((i) => ({ ...i }))
+  : [
+      { id: "who", label: "Who we are" },
+      { id: "belief", label: "Core belief" },
+      { id: "what-we-do", label: "What we do" },
+      { id: "process", label: "How we work" },
+      { id: "team", label: "Who's behind it" },
+      { id: "different", label: "What makes us different" },
+      { id: "audience", label: "Who we work with" },
+      { id: "future", label: "The future" },
+      { id: "contact", label: "Contact" },
+    ];
 ---
 
 <!-- Desktop dot nav — color adapts to the active section (light/dark) via scroll-spy -->
