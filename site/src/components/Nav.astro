@@ -66,16 +66,28 @@ const mobileItems = [
         dots.forEach((d) => d.classList.toggle("is-active", d.getAttribute("data-nav") === id));
         nav.classList.toggle("is-light", LIGHT.has(id));
       };
-      const sections = dots
-        .map((d) => document.getElementById(d.getAttribute("data-nav")))
-        .filter(Boolean);
-      if ("IntersectionObserver" in window && sections.length) {
-        const io = new IntersectionObserver(
-          (entries) => entries.forEach((e) => e.isIntersecting && apply(e.target.id)),
-          { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-        );
-        sections.forEach((s) => io.observe(s));
-      }
+      const sectionMap = dots
+        .map((d) => ({ id: d.getAttribute("data-nav"), el: document.getElementById(d.getAttribute("data-nav")) }))
+        .filter((s) => s.el);
+      let ticking = false;
+      const update = () => {
+        ticking = false;
+        const vhCenter = window.innerHeight / 2;
+        let activeId = null, minDist = Infinity;
+        for (const s of sectionMap) {
+          const r = s.el.getBoundingClientRect();
+          const center = r.top + r.height / 2;
+          const d = Math.abs(center - vhCenter);
+          if (d < minDist) { minDist = d; activeId = s.id; }
+        }
+        if (activeId) apply(activeId);
+      };
+      const onScroll = () => {
+        if (!ticking) { requestAnimationFrame(update); ticking = true; }
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll, { passive: true });
+      update();
     }
 
     // Mobile hamburger overlay
