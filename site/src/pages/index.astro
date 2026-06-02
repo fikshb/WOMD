@@ -28,10 +28,61 @@ const productIcons = [
 ---
 
 <Base>
-  <a href="#hero" class="fixed left-4 top-4 z-50 flex items-center gap-2.5 rounded-xl border border-white/15 bg-black/25 px-3 py-2 shadow-lg shadow-black/10 backdrop-blur-md sm:left-5 sm:top-5" aria-label="WOMD home">
-    <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="WOMD" width="40" height="40" class="h-9 w-9" />
-    <span class="max-w-[48vw] font-headline text-[0.62rem] font-bold uppercase leading-tight tracking-[0.16em] text-brand-yellow sm:max-w-none sm:text-[0.7rem]" style="text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;">Strategic Transformation<br />Consultancy</span>
-  </a>
+  <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 transition-colors duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 sm:px-8 sm:py-5">
+      <a href="#hero" class="flex shrink-0 items-center gap-3" aria-label="WOMD — Home">
+        <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="" aria-hidden="true" width="44" height="44" class="h-9 w-9 sm:h-10 sm:w-10" />
+        <span class="flex flex-col leading-none">
+          <span class="font-headline text-lg font-extrabold uppercase tracking-[0.06em] sm:text-xl"><span class="header-wordmark">WOMD</span><span class="text-brand-yellow">.</span></span>
+          <span class="mt-1 hidden font-headline text-[0.58rem] font-semibold uppercase tracking-[0.22em] opacity-70 sm:block">Strategic Transformation Consultancy</span>
+        </span>
+      </a>
+      <nav aria-label="Primary" class="hidden items-center gap-7 lg:flex">
+        <a href="#who" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">Who we are</a>
+        <a href="#what-we-do" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">What we do</a>
+        <a href="#process" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">How we work</a>
+        <a href="#different" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">Why us</a>
+      </nav>
+      <a href="#contact" class="header-cta hidden shrink-0 items-center gap-2 rounded-full border-2 px-5 py-2.5 font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors md:inline-flex">
+        Let's talk <span aria-hidden="true">→</span>
+      </a>
+    </div>
+  </header>
+
+  <script is:inline>
+    (function () {
+      const header = document.getElementById("siteHeader");
+      if (!header) return;
+      // Sections whose background is light → header should render dark (ink on yellow/white)
+      const LIGHT = new Set(["who", "pillar-01", "pillar-02", "pillar-03", "pillar-04", "pillar-05", "team", "audience"]);
+      const sections = Array.from(document.querySelectorAll("section[id]"));
+      const apply = (id) => header.classList.toggle("is-light", LIGHT.has(id));
+      if ("IntersectionObserver" in window && sections.length) {
+        const io = new IntersectionObserver(
+          (entries) => entries.forEach((e) => e.isIntersecting && apply(e.target.id)),
+          { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
+        );
+        sections.forEach((s) => io.observe(s));
+      }
+    })();
+  </script>
+
+  <style is:global>
+    /* Default (dark/yellow sections): light text + yellow CTA */
+    #siteHeader { color: #ffffff; }
+    #siteHeader .header-wordmark { color: #ffffff; }
+    #siteHeader .header-link { color: rgba(255,255,255,0.85); }
+    #siteHeader .header-link:hover { color: #FDD82D; }
+    #siteHeader .header-cta { color: #2B2B2B; background-color: #FDD82D; border-color: #FDD82D; }
+    #siteHeader .header-cta:hover { background-color: #ffffff; border-color: #ffffff; }
+    /* Light sections: ink text + ink CTA */
+    #siteHeader.is-light { color: #2B2B2B; }
+    #siteHeader.is-light .header-wordmark { color: #2B2B2B; }
+    #siteHeader.is-light .header-link { color: rgba(43,43,43,0.78); }
+    #siteHeader.is-light .header-link:hover { color: #2B2B2B; }
+    #siteHeader.is-light .header-cta { color: #FDD82D; background-color: #2B2B2B; border-color: #2B2B2B; }
+    #siteHeader.is-light .header-cta:hover { background-color: #ffffff; color: #2B2B2B; border-color: #2B2B2B; }
+  </style>
   <Nav />
 
   <!-- 1. HERO -->

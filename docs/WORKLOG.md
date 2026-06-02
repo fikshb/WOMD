@@ -4,6 +4,18 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ---
 
+## 2026-06-02 — Razi revision queue (WhatsApp, 17:20)
+
+Antrian revisi dari Razi — **belum dieksekusi**, dikerjakan satu per satu sesuai instruksi:
+
+1. **Header mobile blocking** — teks overlap di mobile; ganti tagline jadi "Weapons of Mass Discussion" saja (drop "Strategic Transformation Consultancy" di header).
+2. **Foto Razi** — ganti pakai file dari Google Drive: https://drive.google.com/file/d/1AAqaJGZhU1B8jBxMZeIyqw4C2czeBHkW/view?usp=sharing. Frame: bulat, idealnya dalam bentuk logo WOMD (speech bubble shape).
+3. **Desktop dot-nav (Nav.astro)** — titik default jadi putih; label section muncul otomatis saat section itu active (sekarang labels cuma muncul on hover). Behavior berubah dari hover-reveal → active-reveal.
+4. **"Who's behind it" section**:
+   a. Logo perusahaan: filter — hanya tampilkan brand yang pernah benar-benar dikerjakan oleh Razi (jangan asal pajang). Butuh list final dari Razi.
+   b. Desktop: di section ini bg putih, dot-nav kanan juga putih → menu hilang. Perlu bg adaptif (atau pakai active-reveal logic dari #3, sekaligus dengan label box).
+5. **Font / brand guidelines** — Razi konfirmasi: Montserrat semua? Sudah ada brand guidelines belum? **Jawaban kita:** ya, `brand/design.md` adalah source of truth. Stack: Montserrat (headline), Roboto (body), Moderniz (display/decorative only). Belum semua propagated ke site — saat ini headline pakai Montserrat (Tailwind `font-headline`), body banyak yang fallback ke Inter default. Perlu audit + lock Roboto untuk body.
+
 ## 2026-05-30 — Session close (video-rich redesign)
 
 **Shipped & pushed** to `github.com/fikshb/WOMD` (main). Commits this session:
