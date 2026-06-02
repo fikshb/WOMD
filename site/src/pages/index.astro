@@ -64,7 +64,16 @@ const productIcons = [
 
   <!-- 1. HERO -->
   <section id="hero" class="snap relative flex h-screen flex-col items-center justify-center overflow-hidden bg-ink px-6 py-20 text-center text-white md:pb-[14vh]">
-    <VideoBg src={V.heroDark} poster="/video/WOMD_hero-dark_poster.jpg" scrim={0} bg="bg-ink" />
+    <video
+      class="absolute inset-0 -z-10 h-full w-full object-cover"
+      src="/video/WOMD_bg_hero-dark_loop_720.mp4"
+      poster="/video/WOMD_hero-dark_poster.jpg"
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="auto"
+    ></video>
     <div class="reveal relative z-10 mx-auto flex max-w-4xl flex-col items-center">
       <img src="/logo/WOMD_Wordmark_transparent_1500.png" alt="WOMD — Weapons of Mass Discussion" width="760" height="232" class="mx-auto block w-[84vw] max-w-3xl drop-shadow-[0_6px_28px_rgba(0,0,0,0.4)]" />
       <p class="mt-7 font-headline text-eyebrow font-bold uppercase tracking-[0.08em] text-white/80">{hero.tagline}</p>
