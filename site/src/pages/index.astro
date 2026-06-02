@@ -49,39 +49,14 @@ const productIcons = [
     </div>
   </header>
 
-  <script is:inline>
-    (function () {
-      const header = document.getElementById("siteHeader");
-      if (!header) return;
-      // Sections whose background is light → header should render dark (ink on yellow/white)
-      const LIGHT = new Set(["who", "pillar-01", "pillar-02", "pillar-03", "pillar-04", "pillar-05", "team", "audience"]);
-      const sections = Array.from(document.querySelectorAll("section[id]"));
-      const apply = (id) => header.classList.toggle("is-light", LIGHT.has(id));
-      if ("IntersectionObserver" in window && sections.length) {
-        const io = new IntersectionObserver(
-          (entries) => entries.forEach((e) => e.isIntersecting && apply(e.target.id)),
-          { rootMargin: "-45% 0px -45% 0px", threshold: 0 }
-        );
-        sections.forEach((s) => io.observe(s));
-      }
-    })();
-  </script>
-
   <style is:global>
-    /* Default (dark/yellow sections): light text + yellow CTA, dark frosted bg */
-    #siteHeader { color: #ffffff; background-color: rgba(43,43,43,0.72); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    /* One consistent look — always a solid frosted block, no per-section flip */
+    #siteHeader { color: #ffffff; background-color: rgba(43,43,43,0.85); border-bottom: 1px solid rgba(255,255,255,0.08); }
     #siteHeader .header-wordmark { color: #ffffff; }
     #siteHeader .header-link { color: rgba(255,255,255,0.85); }
     #siteHeader .header-link:hover { color: #FDD82D; }
     #siteHeader .header-cta { color: #2B2B2B; background-color: #FDD82D; border-color: #FDD82D; }
     #siteHeader .header-cta:hover { background-color: #ffffff; border-color: #ffffff; }
-    /* Light sections: ink text + ink CTA, light frosted bg */
-    #siteHeader.is-light { color: #2B2B2B; background-color: rgba(255,255,255,0.78); border-bottom-color: rgba(43,43,43,0.08); }
-    #siteHeader.is-light .header-wordmark { color: #2B2B2B; }
-    #siteHeader.is-light .header-link { color: rgba(43,43,43,0.78); }
-    #siteHeader.is-light .header-link:hover { color: #2B2B2B; }
-    #siteHeader.is-light .header-cta { color: #FDD82D; background-color: #2B2B2B; border-color: #2B2B2B; }
-    #siteHeader.is-light .header-cta:hover { background-color: #ffffff; color: #2B2B2B; border-color: #2B2B2B; }
   </style>
   <Nav />
 
