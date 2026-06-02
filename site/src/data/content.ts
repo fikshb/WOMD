@@ -351,6 +351,7 @@ export const whatWeDoNavItems = [
   { id: "pillar-03", label: "Innovation" },
   { id: "pillar-04", label: "Technology" },
   { id: "pillar-05", label: "People" },
+  { id: "contact", label: "Contact" },
 ];
 
 // Legacy alias — Nav.astro picks the right list per route.
