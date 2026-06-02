@@ -236,11 +236,11 @@ const productIcons = [
 
       <div class="reveal mt-10" style="--reveal-delay:220ms">
         <p class="font-headline text-eyebrow font-bold uppercase text-ink/45">{stats.kicker}</p>
-        <div class="mt-6 grid grid-cols-3 gap-x-3 gap-y-8 sm:gap-x-8">
+        <div class="mt-6 grid grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-8">
           {stats.items.map((s) => (
-            <div>
-              <p class="font-headline text-3xl font-extrabold leading-none text-ink sm:text-5xl lg:text-6xl">{s.value}</p>
-              <p class="mt-2 font-headline text-[0.65rem] font-semibold uppercase tracking-wide text-ink/55 sm:text-sm">{s.label}</p>
+            <div class="min-w-0">
+              <p class="font-headline text-2xl font-extrabold leading-none text-ink sm:text-4xl lg:text-6xl">{s.value}</p>
+              <p class="mt-2 font-headline text-[0.6rem] font-semibold uppercase leading-tight tracking-wide text-ink/55 sm:text-sm">{s.label}</p>
             </div>
           ))}
         </div>
