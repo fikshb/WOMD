@@ -95,7 +95,36 @@ export const pillars: Pillar[] = [
   {
     num: "02",
     icon: "/icons/pillar-02.svg",
-    title: "Innovation & Business Intelligence",
+    title: "Brand Strategy & Visual System",
+    intro:
+      "This category focuses on helping organizations build strong, consistent, and scalable brand foundations across all communication touchpoints.",
+    products: [
+      {
+        name: "Brand Blueprint",
+        bullets: [
+          "Brand positioning",
+          "Value proposition",
+          "Brand personality",
+          "Messaging hierarchy",
+          "Communication direction",
+        ],
+      },
+      {
+        name: "Brand Kit & Visual System",
+        bullets: [
+          "Logo usage guideline",
+          "Typography & color system",
+          "Social media templates",
+          "Presentation template",
+          "Marketing collateral templates",
+        ],
+      },
+    ],
+  },
+  {
+    num: "03",
+    icon: "/icons/pillar-03.svg",
+    title: "Business & Product Innovation",
     intro:
       "This category focuses on helping organizations make sharper business, product, and communication decisions backed by market research, validation, and data.",
     products: [
@@ -132,8 +161,8 @@ export const pillars: Pillar[] = [
     ],
   },
   {
-    num: "03",
-    icon: "/icons/pillar-03.svg",
+    num: "04",
+    icon: "/icons/pillar-04.svg",
     title: "Technology & Digital Products",
     intro:
       "This category focuses on helping organizations build systems, platforms, and digital tools that support modern learning, communication, productivity, and operations.",
@@ -166,35 +195,6 @@ export const pillars: Pillar[] = [
           "UI & copywriting direction",
           "Development & deployment",
           "Basic SEO setup",
-        ],
-      },
-    ],
-  },
-  {
-    num: "04",
-    icon: "/icons/pillar-04.svg",
-    title: "Brand Strategy & Visual System",
-    intro:
-      "This category focuses on helping organizations build strong, consistent, and scalable brand foundations across all communication touchpoints.",
-    products: [
-      {
-        name: "Brand Blueprint",
-        bullets: [
-          "Brand positioning",
-          "Value proposition",
-          "Brand personality",
-          "Messaging hierarchy",
-          "Communication direction",
-        ],
-      },
-      {
-        name: "Brand Kit & Visual System",
-        bullets: [
-          "Logo usage guideline",
-          "Typography & color system",
-          "Social media templates",
-          "Presentation template",
-          "Marketing collateral templates",
         ],
       },
     ],
@@ -329,9 +329,9 @@ export const navItems = [
   { id: "belief", label: "Core belief" },
   { id: "what-we-do", label: "What we do" },
   { id: "pillar-01", label: "Digital Transformation" },
-  { id: "pillar-02", label: "Innovation" },
-  { id: "pillar-03", label: "Technology" },
-  { id: "pillar-04", label: "Brand" },
+  { id: "pillar-02", label: "Brand" },
+  { id: "pillar-03", label: "Innovation" },
+  { id: "pillar-04", label: "Technology" },
   { id: "pillar-05", label: "People" },
   { id: "process", label: "How we work" },
   { id: "team", label: "Who's behind it" },
