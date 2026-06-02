@@ -103,8 +103,9 @@ const productIcons = [
 
   <!-- CORE BELIEF -->
   <section id="belief" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 text-white sm:px-12 lg:px-20">
-    <VideoBg src={V.glassBubbles} scrim={52} bg="bg-ink" />
-    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 85% 78% at 50% 48%, transparent 22%, rgba(0,0,0,0.5) 60%, rgba(0,0,0,0.92) 100%)"></div>
+    <div aria-hidden="true" class="absolute inset-0 bg-ink"></div>
+    <img src="/images/WOMD_dark-slide-bg.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-ink/30"></div>
     <div class="relative z-10 mx-auto w-full max-w-6xl">
       <p class="reveal font-headline text-[clamp(0.95rem,0.8rem+0.5vw,1.2rem)] font-bold uppercase tracking-[0.28em] text-brand-yellow">{belief.kicker}</p>
       <h2 class="reveal mt-7 max-w-5xl font-headline text-[clamp(1.7rem,0.5rem+6vw,5.5rem)] font-extrabold leading-[1.1] tracking-[-0.01em]" style="--reveal-delay:80ms">{belief.headline}</h2>
@@ -181,7 +182,9 @@ const productIcons = [
 
   <!-- 10. HOW WE WORK — visual timeline -->
   <section id="process" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 text-white sm:px-12 lg:px-20">
-    <VideoBg src={V.organic} scrim={50} bg="bg-ink" />
+    <div aria-hidden="true" class="absolute inset-0 bg-ink"></div>
+    <img src="/images/WOMD_dark-slide-bg.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover scale-x-[-1]" loading="lazy" decoding="async" />
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-ink/30"></div>
     <div class="relative z-10 mx-auto w-full max-w-3xl">
       <p class="reveal font-headline text-eyebrow font-bold uppercase text-brand-yellow">{process.kicker}</p>
       <h2 class="reveal mt-6 font-headline text-h2 font-extrabold" style="--reveal-delay:80ms">We begin with <span class="text-brand-yellow">clarity.</span></h2>
@@ -246,8 +249,9 @@ const productIcons = [
 
   <!-- 11. WHAT MAKES US DIFFERENT -->
   <section id="different" class="snap relative flex min-h-screen items-center overflow-hidden px-6 py-28 text-white sm:px-12 lg:px-20">
-    <VideoBg src={V.sphere} scrim={0} position="object-[85%_25%]" bg="bg-ink" />
-    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 62% 72% at 78% 20%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 24%, rgba(0,0,0,0.92) 62%)"></div>
+    <div aria-hidden="true" class="absolute inset-0 bg-ink"></div>
+    <img src="/images/WOMD_dark-slide-bg.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-ink/30"></div>
     <div class="relative z-10 mx-auto w-full max-w-6xl [text-shadow:0_2px_14px_rgba(0,0,0,0.85)]">
       <div class="reveal">
         <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">{differentiators.kicker}</p>
@@ -288,8 +292,9 @@ const productIcons = [
 
   <!-- 13a. PRE-CLOSING -->
   <section id="future" class="snap relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-28 text-center text-white">
-    <VideoBg src={V.tunnel} scrim={55} vignette bg="bg-ink" />
-    <div class="pointer-events-none absolute inset-0 bg-black/65"></div>
+    <div aria-hidden="true" class="absolute inset-0 bg-ink"></div>
+    <img src="/images/WOMD_dark-slide-bg.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover scale-x-[-1]" loading="lazy" decoding="async" />
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-ink/30"></div>
     <div class="reveal relative z-10 mx-auto max-w-5xl">
       <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">The future</p>
       <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.1]">{closing.statementLead} <span class="text-brand-yellow">{closing.statementAccent}</span></h2>
@@ -300,8 +305,9 @@ const productIcons = [
 
   <!-- 13b. CONTACT -->
   <section id="contact" class="snap relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-6 py-28 text-center text-white">
-    <VideoBg src={V.neonglow} scrim={0} rate={0.8} bg="bg-ink" />
-    <div class="pointer-events-none absolute inset-0" style="background:radial-gradient(ellipse 88% 78% at 50% 50%, rgba(20,20,20,0.9) 0%, rgba(20,20,20,0.74) 58%, rgba(20,20,20,0.5) 100%)"></div>
+    <div aria-hidden="true" class="absolute inset-0 bg-ink"></div>
+    <img src="/images/WOMD_dark-slide-bg.jpg" alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+    <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-ink/30"></div>
     <div class="reveal relative z-10 flex w-full max-w-4xl flex-col items-center [text-shadow:0_2px_14px_rgba(0,0,0,0.6)]">
       <p class="font-headline text-eyebrow font-bold uppercase text-brand-yellow">{closing.kicker}</p>
       <h2 class="mt-6 font-headline text-h2 font-extrabold leading-[1.1]">Make your ideas become public conversations <span class="text-brand-yellow">impossible to ignore.</span></h2>
