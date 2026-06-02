@@ -62,6 +62,7 @@ const mobileItems = [
 
 <script is:inline>
   (function () {
+    const init = () => {
     // Section ids whose background is light (dots should be dark there)
     const LIGHT = new Set(["who", "pillar-01", "pillar-02", "pillar-03", "pillar-04", "pillar-05", "team", "audience"]);
 
@@ -118,6 +119,12 @@ const mobileItems = [
         overlay.classList.contains("hidden") ? open() : close()
       );
       overlay.querySelectorAll("a").forEach((a) => a.addEventListener("click", close));
+    }
+    };
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", init);
+    } else {
+      init();
     }
   })();
 </script>
