@@ -46,12 +46,18 @@ const mobileItems = [
 </div>
 
 <style is:global>
-  /* Active state: filled bullet + visible label. Color is currentColor —
-     adapts via the is-light flip already wired in this component. */
-  .nav-dot.is-active .nav-bullet { background-color: currentColor; }
-  .nav-dot.is-active .nav-label { opacity: 1; }
+  /* Bulletproof active state. Explicit white default, ink in is-light. */
+  #sectionNav .nav-dot.is-active .nav-bullet {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+  }
+  #sectionNav.is-light .nav-dot.is-active .nav-bullet {
+    background-color: #2b2b2b !important;
+    border-color: #2b2b2b !important;
+  }
+  #sectionNav .nav-dot.is-active .nav-label { opacity: 1 !important; }
   /* Hero exception: keep the active dot filled, hide the label entirely. */
-  .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0; }
+  #sectionNav .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0 !important; }
 </style>
 
 <script is:inline>
