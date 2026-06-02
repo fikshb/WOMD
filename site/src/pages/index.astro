@@ -30,8 +30,8 @@ const productIcons = [
 ---
 
 <Base>
-  <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 backdrop-blur-md transition-colors duration-300">
-    <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 sm:px-8 sm:py-5">
+  <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 transition-all duration-300">
+    <div class="mx-auto flex max-w-7xl items-center px-5 py-4 sm:px-8 sm:py-5">
       <a href="#hero" class="flex shrink-0 items-center gap-3" aria-label="WOMD — Home">
         <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="" aria-hidden="true" width="44" height="44" class="h-9 w-9 sm:h-10 sm:w-10" />
         <span class="flex flex-col leading-none">
@@ -39,26 +39,26 @@ const productIcons = [
           <span class="mt-1 hidden font-headline text-[0.58rem] font-semibold uppercase tracking-[0.22em] opacity-70 sm:block">Strategic Transformation Consultancy</span>
         </span>
       </a>
-      <nav aria-label="Primary" class="hidden items-center gap-7 lg:flex">
-        <a href="#who" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">Who we are</a>
-        <a href="#what-we-do" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">What we do</a>
-        <a href="#process" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">How we work</a>
-        <a href="#different" class="header-link font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors">Why us</a>
-      </nav>
-      <a href="#contact" class="header-cta hidden shrink-0 items-center gap-2 rounded-full border-2 px-5 py-2.5 font-headline text-[0.78rem] font-bold uppercase tracking-[0.18em] transition-colors md:inline-flex">
-        Let's talk <span aria-hidden="true">→</span>
-      </a>
     </div>
   </header>
 
+  <script is:inline>
+    (function () {
+      const header = document.getElementById("siteHeader");
+      if (!header) return;
+      const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 150);
+      onScroll();
+      window.addEventListener("scroll", onScroll, { passive: true });
+    })();
+  </script>
+
   <style is:global>
-    /* One consistent look — always a solid frosted block, no per-section flip */
-    #siteHeader { color: #ffffff; background-color: rgba(43,43,43,0.85); border-bottom: 1px solid rgba(255,255,255,0.08); }
-    #siteHeader .header-wordmark { color: #ffffff; }
-    #siteHeader .header-link { color: rgba(255,255,255,0.85); }
-    #siteHeader .header-link:hover { color: #FDD82D; }
-    #siteHeader .header-cta { color: #2B2B2B; background-color: #FDD82D; border-color: #FDD82D; }
-    #siteHeader .header-cta:hover { background-color: #ffffff; border-color: #ffffff; }
+    /* At top: transparent header, yellow wordmark for hero-stage brand pop */
+    #siteHeader { color: #ffffff; background-color: transparent; border-bottom: 1px solid transparent; backdrop-filter: none; }
+    #siteHeader .header-wordmark { color: #FDD82D; }
+    /* After scrollY > 150px: solid frosted block, white wordmark */
+    #siteHeader.is-scrolled { background-color: rgba(43,43,43,0.85); border-bottom-color: rgba(255,255,255,0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    #siteHeader.is-scrolled .header-wordmark { color: #ffffff; }
   </style>
   <Nav />
 
