@@ -28,7 +28,7 @@ const productIcons = [
 ---
 
 <Base>
-  <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 transition-colors duration-300">
+  <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 backdrop-blur-md transition-colors duration-300">
     <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-4 sm:px-8 sm:py-5">
       <a href="#hero" class="flex shrink-0 items-center gap-3" aria-label="WOMD — Home">
         <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="" aria-hidden="true" width="44" height="44" class="h-9 w-9 sm:h-10 sm:w-10" />
@@ -68,15 +68,15 @@ const productIcons = [
   </script>
 
   <style is:global>
-    /* Default (dark/yellow sections): light text + yellow CTA */
-    #siteHeader { color: #ffffff; }
+    /* Default (dark/yellow sections): light text + yellow CTA, dark frosted bg */
+    #siteHeader { color: #ffffff; background-color: rgba(43,43,43,0.72); border-bottom: 1px solid rgba(255,255,255,0.08); }
     #siteHeader .header-wordmark { color: #ffffff; }
     #siteHeader .header-link { color: rgba(255,255,255,0.85); }
     #siteHeader .header-link:hover { color: #FDD82D; }
     #siteHeader .header-cta { color: #2B2B2B; background-color: #FDD82D; border-color: #FDD82D; }
     #siteHeader .header-cta:hover { background-color: #ffffff; border-color: #ffffff; }
-    /* Light sections: ink text + ink CTA */
-    #siteHeader.is-light { color: #2B2B2B; }
+    /* Light sections: ink text + ink CTA, light frosted bg */
+    #siteHeader.is-light { color: #2B2B2B; background-color: rgba(255,255,255,0.78); border-bottom-color: rgba(43,43,43,0.08); }
     #siteHeader.is-light .header-wordmark { color: #2B2B2B; }
     #siteHeader.is-light .header-link { color: rgba(43,43,43,0.78); }
     #siteHeader.is-light .header-link:hover { color: #2B2B2B; }
