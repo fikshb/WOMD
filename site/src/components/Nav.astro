@@ -19,11 +19,11 @@ const mobileItems = [
   <ul class="flex flex-col gap-3.5">
     {navItems.map((item) => (
       <li>
-        <a href={`#${item.id}`} data-nav={item.id} class="nav-dot group flex items-center justify-end gap-2" aria-label={item.label}>
-          <span class="nav-label text-[10px] font-semibold uppercase tracking-wider opacity-0 transition-opacity group-hover:opacity-100">
+        <a href={`#${item.id}`} data-nav={item.id} class="nav-dot flex items-center justify-end gap-2" aria-label={item.label}>
+          <span class="nav-label text-[10px] font-semibold uppercase tracking-wider opacity-0 transition-opacity">
             {item.label}
           </span>
-          <span class="nav-bullet block h-2.5 w-2.5 rounded-full border-2 border-current bg-transparent transition-all duration-300 group-hover:bg-current"></span>
+          <span class="nav-bullet block h-2.5 w-2.5 rounded-full border-2 border-current bg-transparent transition-all duration-300"></span>
         </a>
       </li>
     ))}
@@ -44,6 +44,15 @@ const mobileItems = [
     </a>
   ))}
 </div>
+
+<style is:global>
+  /* Active state: filled bullet + visible label. Color is currentColor —
+     adapts via the is-light flip already wired in this component. */
+  .nav-dot.is-active .nav-bullet { background-color: currentColor; }
+  .nav-dot.is-active .nav-label { opacity: 1; }
+  /* Hero exception: keep the active dot filled, hide the label entirely. */
+  .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0; }
+</style>
 
 <script is:inline>
   (function () {
