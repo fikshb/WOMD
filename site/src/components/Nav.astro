@@ -46,17 +46,12 @@ const mobileItems = [
 </div>
 
 <style is:global>
-  /* Every dot gets a subtle drop-shadow so it pops on any bg (busy bg images / icons). */
-  #sectionNav .nav-bullet { filter: drop-shadow(0 1px 2px rgba(0,0,0,0.55)); }
-  #sectionNav.is-light .nav-bullet { filter: drop-shadow(0 1px 2px rgba(255,255,255,0.7)); }
-  #sectionNav .nav-label { text-shadow: 0 1px 3px rgba(0,0,0,0.7); }
-  #sectionNav.is-light .nav-label { text-shadow: 0 1px 3px rgba(255,255,255,0.7); }
   /* Active state: filled bullet + visible label. Color is currentColor —
      adapts via the is-light flip already wired in this component. */
-  .nav-dot.is-active .nav-bullet { background-color: currentColor !important; }
-  .nav-dot.is-active .nav-label { opacity: 1 !important; }
+  .nav-dot.is-active .nav-bullet { background-color: currentColor; }
+  .nav-dot.is-active .nav-label { opacity: 1; }
   /* Hero exception: keep the active dot filled, hide the label entirely. */
-  .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0 !important; }
+  .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0; }
 </style>
 
 <script is:inline>
