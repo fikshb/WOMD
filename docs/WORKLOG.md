@@ -4,6 +4,102 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ---
 
+## 2026-06-02 — Full session: deck overhaul + page split + Razi revisions
+
+Long session, many commits to `main`. Highlights below by area.
+
+### Header
+- Rebuilt as NC-inspired full-width bar, then later simplified: logo-only (no nav links / CTA).
+- **Scroll-aware:** transparent at scrollY ≤ 150, then frosted ink/85 + backdrop-blur + hairline border. Yellow wordmark at top, white after scroll.
+- Wordmark text expanded "WOMD" → "Weapons of Mass Discussion" (uppercase, yellow accent dot). Tagline "Strategic Transformation Consultancy" dropped — Razi rev #1 ✅
+- Logo pinned top-left on wide screens (dropped centered max-w-7xl container).
+- Extracted inline header → `src/components/Header.astro` for reuse across pages.
+
+### Hero (home)
+- Many iterations. Final state: dark hero, custom Higgsfield mushroom-cloud cinematic video (`WOMD_bg_hero-dark_pingpong_720.mp4`, 851 KB), `filter:grayscale(0.8)` + `bg-ink/50` scrim.
+- Pingpong loop (forward+reverse concat via ffmpeg-static) eliminates seam.
+- Layout: `justify-center` + `-mt-[10vh]` shift up, tight `mt-2`/`mt-6` gaps under wordmark.
+- Wordmark PNG swapped square 1500×1500 → horizontal 1500×457 — the square had huge transparent padding causing a big visual gap to the tagline.
+
+### Section backgrounds (all 4 brand-aligned bg images)
+| Section(s) | Image | Notes |
+|---|---|---|
+| `#who`, `#audience` | `WOMD_yellow-slide-bg.jpg` (385 KB ← 2.2 MB PNG) | bg-brand-yellow base + image 25% opacity multiply; body copy bumped to `text-black` for max contrast |
+| `#team`, pillars 01/03/05 (odd) | `whitebg.jpg` (385 KB) | Crumple paper + yellow icons at edges |
+| pillars 02/04 (even) | `greybg.jpg` (498 KB) | Same artwork on grey/cream |
+| `#belief`, `#process`, `#different`, `#future`, `#contact` | `WOMD_dark-slide-bg.jpg` (356 KB) | Dropped per-section VideoBg + custom scrims; alternating `scale-x-[-1]` flip on #process and #future to break visual repeat |
+| `#contact` (override) | `nuclear-explosion.jpg` (288 KB) | Dramatic closing image; ink/80 scrim |
+
+### Pillar reorder + retitle + bullets sync (catalog doc alignment)
+- Order: **DT&L → Brand → Innovation → Tech → People** (was DT&L → Innovation → Tech → Brand → People).
+- Pillar #03 renamed "Innovation & Business Intelligence" → "Business & Product Innovation".
+- Bullets resynced with Razi's catalog doc — added missing items per product: Website visual direction (BR-02), Key findings & recommendations (IN-01), Audience relevance mapping + Strategic recommendation report (IN-02), User role & access mapping (IN-03), Content structure setup (TK-01), Technical requirement guide (TK-02), split UI/Copy on TK-03.
+
+### Nuclear-themed icons (full vocabulary)
+Swapped all 24 icons in pillars/process to the brand's nuclear outline set (`brand/assets/icons/nuclear/outline`):
+- **5 pillar anchors** — Fusion reaction (DT&L), Radioactive (Brand), Radiator Detector (Innovation), Nuclear Power Plant (Tech), Atom (People).
+- **5 process steps** — PET Scan (Diagnose), Radiation Zone (Define), Nucleus Atom (Design), Nuclear Reaction (Develop), Battery (Enable).
+- **14 product cards** — Nuclear Energy / Acid Rain / Proton (DT&L); Radium / Plutonium (Brand); Gamma Ray / Isotope / Cooling Tower (Innovation); Barrel / Biohazard / Radiotherapy (Tech); Hazmat Suit / Uranium / Atom (People).
+
+### Razi photo (Razi rev #2 ✅)
+Drop-in replacement `site/public/team/razi-thalib.jpg`: framed speech-bubble portrait baked into the image (yellow bg + radiation/atom icons + WOMD bubble outline). 1.5 MB PNG → 161 KB JPG.
+
+### Stats section (#team)
+- Mobile awkward 2+1 grid → forced `grid-cols-3` across all viewports. Smaller fonts (text-2xl → text-6xl scale) + `min-w-0` + gap-x-2 to fit in one row on iPhone widths.
+- Block was almost deleted (Razi instruction confusion) but kept — only website + address removed from #contact + email updated to `hello@wmdiscussion.com`.
+
+### Dot-nav (Razi rev #3 ✅)
+- Active dot now fills (white on dark sections, ink on light) + label appears next to it automatically via scroll-spy.
+- Hero exempt — active dot fills white but label hidden (no "TOP").
+- **Critical bug fix:** Nav.astro inline `<script>` ran during HTML parse, before sibling `<section>` elements existed in DOM → `getElementById` returned null for every section → sectionMap empty → `apply()` never called → no class toggle at all. Wrapped init in `DOMContentLoaded`.
+- Also rewrote scroll-spy from `IntersectionObserver` (unreliable under scroll-snap with overlapping min-h-screen sections) to direct `requestAnimationFrame` scroll listener that picks the section whose center is closest to viewport center. Deterministic.
+
+### Page split — new route `/what-we-do`
+- Home was too long with 5 full pillar detail sections inline. Extracted to dedicated route.
+- New page: hero ("What we do" / "Five pillars of transformation." / comprehensive intro) + pill nav to each pillar + 5 pillar detail sections + full contact slide.
+- Home keeps the `#what-we-do` overview list design unchanged + added "See all 5 pillars →" CTA. Each pillar title links to `/what-we-do#pillar-XX`.
+- `navItems` split into `homeNavItems` (10) + `whatWeDoNavItems` (7: Top + 5 pillars + Contact). Nav.astro detects pathname and picks the right list.
+- Header logo links to `/` (works from any page).
+
+### `/what-we-do` hero video (Higgsfield Seedance 2.0)
+- Took 4 attempts to land **exactly 5 atoms** (1 center + 4 corners + 4 dashed connecting lines).
+  - Gen 1: 4 atoms (short).
+  - Gen 2: NSFW flag (probably "pentagonal star" / "radiation symbols" triggered safety filter).
+  - Gen 3: 7 atoms (overshoot).
+  - Gen 4: ✅ position-explicit prompt nailed it.
+- Pingpong + x264 CRF28 → 653 KB. JPG poster 71 KB.
+- ~67.5 credits total burned on this hero alone. Lesson: Seedance miscounts abstract numbers; explicit positions ("center + 4 corners") work better than "EXACTLY FIVE".
+- Hero scrim went through ~6 iterations to balance atom visibility vs text legibility. Final: **inverted radial vignette** (88% solid ink at center where text lives, 15% at corners where corner atoms pop) + heavy text-shadow stack.
+
+### Higgsfield spend this session
+- Hero doodle (first home hero attempt, later replaced) — 22.5 credits.
+- /what-we-do hero (4 gens) — 67.5 credits.
+- Total ~90 credits out of 1200+. Balance still ~1078.
+
+### Razi revision queue status
+- ✅ #1 Header mobile + "Weapons of Mass Discussion"
+- ✅ #2 Razi photo + speech-bubble frame
+- ✅ #3 Dot-nav active reveal + hero exempt
+- ✅ #4b Dot-nav adaptive (via `is-light` flip + currentColor)
+- ⏳ #4a Client logos curation — **blocked on Razi's final brand list**
+- ⏳ #5 Font audit (lock Roboto / Montserrat-only) — not started
+
+### Carry-overs / cleanup
+- 5 dark videos (V.glassBubbles, V.organic, V.sphere, V.tunnel, V.neonglow) no longer referenced after dark-slide image rollout — still in `site/public/video/` + V map in index.astro. Audit + delete pending.
+- `V.bubbles` (home bubble video) also no longer used — same cleanup batch.
+- ffmpeg-static added as dev dep (no-save) for video encoding work. Removed from package.json automatically; binary in node_modules until next clean.
+
+### Commits (chronological highlights)
+Many. Notable: `54ea4df` header tagline drop · `055f054` pillar bullets sync · `2f6966b` nuclear product icons · `73943ba` DOMContentLoaded fix for dot-nav · `1032d2f` /what-we-do page split · `cc86898` contact slide on new page · `482a3e0` 5-atom hero video · `f360e0e` final hero vignette.
+
+**Next session:**
+- Get client logo list from Razi → execute #4a.
+- Font audit: Montserrat-only decision; update `tailwind.config.mjs` default sans + drop Roboto from Google Fonts URL + update `brand/design.md`.
+- Asset cleanup: delete unused dark videos.
+- Visual QA pass on `/what-we-do` end-to-end.
+
+---
+
 ## 2026-06-02 — Razi revision queue (WhatsApp, 17:20)
 
 Antrian revisi dari Razi — **belum dieksekusi**, dikerjakan satu per satu sesuai instruksi:
