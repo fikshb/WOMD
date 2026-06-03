@@ -4,6 +4,9 @@ User-facing / asset-facing changes. Format loosely follows Keep a Changelog.
 
 ## [Unreleased]
 
+### Added (2026-06-03)
+- **Bilingual EN/ID.** Site now available in English (`/`, `/what-we-do`) and Bahasa Indonesia (`/id/`, `/id/what-we-do`). Header gets an EN/ID toggle (top-right). A one-time dismissible suggest-banner appears when the browser's preferred language differs from the page (no auto-redirect; respects explicit choice). Full Indonesian translation drafted — needs native review pass. See D-013.
+
 ### Changed (2026-05-29)
 - **Hero is now a light theme** with the yellow chat-bubble loop (`WOMD_motion_chat-bubbles-yellow-stream`) on white, ink text, and a yellow highlight-box accent (+ poster frame for fast first paint). Hero logo switched to the horizontal wordmark so it fits the viewport. **Who We Are** flipped to dark to keep section rhythm. `VideoBg` gained a `bg` prop for light-background clips. (See D-011.)
 - **Who We Are** now runs a looping **yellow cube-grid video** background (`WOMD_bg_yellow-cube-grid_loop_1080.mp4`) under a yellow scrim, replacing the static polygon image.

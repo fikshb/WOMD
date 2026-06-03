@@ -4,6 +4,17 @@ Lightweight ADRs. Record decisions that aren't obvious from the code/files — e
 
 ---
 
+## D-013 — Bilingual EN/ID: manual toggle + intent-signal banner, no IP geo-redirect
+
+- **Date:** 2026-06-03
+- **Decision:** Site is bilingual EN/ID. EN at `/`, ID at `/id/`. Language is chosen via a manual EN/ID toggle in the header. A one-time dismissible banner suggests the other language **only** when `navigator.languages` indicates a mismatch with the current page lang. **No auto-redirect**; no IP geolocation.
+- **Why:** IP-based auto-redirect is a well-known UX anti-pattern: it punishes Indonesian users abroad, breaks VPN users, confuses search-engine crawlers (US-IP bots only see EN), and overrides users who *intentionally* request the other language. The browser language list is a direct intent signal — closer to what the user wants than where their packets exit. The cookie-of-explicit-choice (`localStorage.womd_lang`) trumps everything else, matching how Google, Wikipedia, and Stripe handle it.
+- **How:** `astro.config.mjs` i18n routing with `prefixDefaultLocale:false`; per-locale content in `data/content.ts` (EN) + `data/content.id.ts` (ID) resolved through `src/i18n.ts`. Page bodies in `HomePage.astro` / `WhatWeDoPage.astro` take a `lang` prop. Banner is client-only, copy lives in the target lang.
+- **Trade-off:** Hosted static (no SSR) means we can't read `Accept-Language` server-side or set a Cookie before first paint. Banner appears post-hydration with a ~900ms delay (avoids fighting the hero entrance). If we later move to Vercel SSR, we can promote this to a header-aware response at the edge without UX changes for the user.
+- **Open:** Product/service names (e.g., "Brand Blueprint") currently stay English in both versions as SKU-like nouns; revisit if user wants full Indonesianization.
+
+---
+
 ## D-012 — Headline line-height: tight (1.1) by default, wide (1.25) only for boxed accents
 
 - **Date:** 2026-05-29

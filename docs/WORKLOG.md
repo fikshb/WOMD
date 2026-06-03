@@ -4,6 +4,31 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ---
 
+## 2026-06-03 — Bilingual EN/ID: toggle + suggest banner
+
+Made the site bilingual. Committed + pushed to `origin/main` as `435049e`.
+
+**Routing.** Enabled Astro i18n (`defaultLocale: "en"`, `locales: ["en","id"]`, `prefixDefaultLocale: false`) → EN at `/` and `/what-we-do`; ID at `/id/` and `/id/what-we-do`. Build emits 4 static HTML pages.
+
+**Content layer.** Added `src/data/content.id.ts` mirroring `content.ts` shape; both feed through `src/i18n.ts` (`getContent(lang)`, `otherLang`, `altLangPath`). Expanded `content.ts` with strings that were previously hardcoded in `.astro` files (`homePage.*`, `whatWeDoPage.*`, `closing.contactHeadlineLead/Accent`, `closing.futureEyebrow`, `process.headlineLead/Accent`, `ui.*`). Page bodies extracted to lang-aware `HomePage.astro` / `WhatWeDoPage.astro`; the 4 page files in `pages/` are now thin wrappers.
+
+**ID translation.** Drafted by Claude — professional consultancy register, anti-jargon; product names (Brand Blueprint, Digital Transformation Playbook, LMS, etc.) intentionally kept English as SKU-like nouns. Process step titles translated (Diagnosa / Definisi / Rancangan / Pengembangan / Aktivasi). Needs human review pass — flagged as draft in the file header.
+
+**UI chrome.** Header gets an `EN / ID` toggle (top-right). Active code yellow, alt code white-60. Click persists `localStorage.womd_lang` so the suggest-banner never overrides an explicit choice. Base layout's `<html lang>` follows the prop. Nav (desktop dots + mobile overlay) labels translate per locale.
+
+**Suggest banner.** New `LangBanner.astro` — fixed bottom-center pill, shows only when `localStorage.womd_lang` is unset AND `navigator.languages` preferred lang ≠ current page lang. Copy is in the **target** language (inviting them to it). CTA navigates + persists; dismiss persists current. **No auto-redirect** (see D-013). Industry-standard pattern: respect explicit choice > intent signal > silent default.
+
+**Verified:** `npm run build` clean; 4 pages emitted; grep confirms `lang="id"`, "mustahil diabaikan", "Lima pilar transformasi", "Strategi Brand", banner copy "This page is available in English" all rendered. Not visually eyeballed in dev server this session.
+
+**Next:**
+- Native ID review pass on `content.id.ts` (tone is formal "kami / Anda"; punchier alternatives welcome).
+- Visual check at `npm run dev` — toggle visibility on hero (dark bg), banner timing on first visit, mobile collision with hamburger.
+- Decide whether product/service names stay English or get ID names too.
+- SEO: add `<link rel="alternate" hreflang>` pair in `<head>` (currently only on the toggle anchor).
+- Consider sitemap.xml with both languages.
+
+---
+
 ## 2026-06-02 — Full session: deck overhaul + page split + Razi revisions
 
 Long session, many commits to `main`. Highlights below by area.
