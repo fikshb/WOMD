@@ -1,22 +1,17 @@
 ---
-import { homeNavItems, whatWeDoNavItems } from "../data/content";
+import { getContent, type Lang } from "../i18n";
+
+interface Props { lang?: Lang }
+const { lang = "en" } = Astro.props;
+const { homeNavItems, whatWeDoNavItems } = getContent(lang);
+
 const path = Astro.url.pathname.replace(/\/$/, "");
-const isWhatWeDo = path === "/what-we-do";
+const isWhatWeDo = path === "/what-we-do" || path === "/id/what-we-do";
 const navItems = isWhatWeDo ? whatWeDoNavItems : homeNavItems;
-// Mobile overlay items (same content set per route)
-const mobileItems = isWhatWeDo
-  ? whatWeDoNavItems.filter((i) => i.id !== "hero").map((i) => ({ ...i }))
-  : [
-      { id: "who", label: "Who we are" },
-      { id: "belief", label: "Core belief" },
-      { id: "what-we-do", label: "What we do" },
-      { id: "process", label: "How we work" },
-      { id: "team", label: "Who's behind it" },
-      { id: "different", label: "What makes us different" },
-      { id: "audience", label: "Who we work with" },
-      { id: "future", label: "The future" },
-      { id: "contact", label: "Contact" },
-    ];
+// Mobile overlay items: same per-route list minus the hero/top entry.
+const mobileItems = (isWhatWeDo ? whatWeDoNavItems : homeNavItems)
+  .filter((i) => i.id !== "hero")
+  .map((i) => ({ ...i }));
 ---
 
 <!-- Desktop dot nav — color adapts to the active section (light/dark) via scroll-spy -->

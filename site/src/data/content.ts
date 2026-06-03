@@ -251,6 +251,8 @@ export const pillars: Pillar[] = [
 export const process = {
   kicker: "How we work",
   headline: "We begin with clarity.",
+  headlineLead: "We begin with",
+  headlineAccent: "clarity.",
   steps: [
     { n: "1", icon: "/icons/step-diagnose.svg", title: "Diagnose", text: "We understand the organization's current condition, challenges, goals, market context, and opportunities." },
     { n: "2", icon: "/icons/step-define.svg", title: "Define", text: "We define the strategic direction, priorities, system, product opportunity, or capability that needs to be built." },
@@ -294,10 +296,51 @@ export const closing = {
   kicker: "Let's build together",
   descriptor: "Strategic Transformation Consultancy for the AI Era",
   kicker2: "Make your ideas impossible to ignore.",
+  futureEyebrow: "The future",
+  contactHeadlineLead: "Make your ideas become public conversations",
+  contactHeadlineAccent: "impossible to ignore.",
   // TODO: replace dummy values with real ones before launch
   contact: {
     email: "hello@wmdiscussion.com",
     phone: "+62 811 1000 2000",
+  },
+};
+
+// Page-chrome strings that previously lived inline in .astro files.
+// Centralised here so they translate alongside everything else.
+export const homePage = {
+  whatWeDoKicker: "What we do",
+  whatWeDoTitle: "Five pillars of transformation.",
+  whatWeDoIntro:
+    "Together, these pillars help organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.",
+  servicesSuffix: "services",
+  seeAllPillars: "See all 5 pillars",
+};
+
+export const whatWeDoPage = {
+  heroEyebrow: "What we do",
+  heroHeadlineLead: "Five pillars of",
+  heroHeadlineAccent: "transformation.",
+  heroIntro:
+    "Together, these pillars help organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.",
+  metaTitle: "What we do — WOMD",
+  metaDescription:
+    "Five pillars of transformation: how WOMD helps organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.",
+};
+
+// UI chrome — labels & banner copy. The banner is shown in the *target* language
+// (i.e. on /id/ a banner that suggests EN reads in English, and vice versa).
+export const ui = {
+  htmlLang: "en",
+  langToggleLabel: "Language",
+  langCodeSelf: "EN",
+  langCodeOther: "ID",
+  langOtherFull: "Bahasa Indonesia",
+  // Banner copy: shown to invite the visitor *to this language*.
+  banner: {
+    message: "This page is available in English.",
+    cta: "Switch to English",
+    dismiss: "Keep current",
   },
 };
 

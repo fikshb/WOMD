@@ -1,0 +1,100 @@
+---
+// One-time language suggest banner. Reads navigator.language client-side
+// (industry-standard intent signal; matches Accept-Language). NO auto-redirect.
+//
+// Behavior:
+//   1. If localStorage.womd_lang is set → respect it. Never show banner.
+//   2. Else if navigator.language preferred lang ≠ current page lang → show banner
+//      in the *suggested* language inviting them to switch.
+//   3. "Switch" → set localStorage.womd_lang = suggested + navigate.
+//   4. "Dismiss" → set localStorage.womd_lang = current page lang (sticky).
+import { altLangPath, otherLang, type Lang } from "../i18n";
+
+interface Props { lang?: Lang }
+const { lang = "en" } = Astro.props;
+// Banner copy is in the *target* language (we're inviting them to that lang).
+// So if current page is EN, the banner shows ID copy (inviting to ID), and vice versa.
+const target = otherLang(lang);
+
+// Pull banner copy from the target language's bundle.
+import { ui as uiEn } from "../data/content";
+import { ui as uiId } from "../data/content.id";
+const targetUI = target === "id" ? uiId : uiEn;
+const switchHref = altLangPath(Astro.url.pathname, target);
+---
+
+<div
+  id="langBanner"
+  class="fixed inset-x-0 bottom-0 z-[60] hidden translate-y-2 opacity-0 transition-all duration-300 ease-out"
+  data-current-lang={lang}
+  data-target-lang={target}
+  role="dialog"
+  aria-live="polite"
+  aria-label="Language suggestion"
+>
+  <div class="mx-auto mb-4 flex w-[min(640px,calc(100vw-2rem))] items-center gap-3 rounded-full bg-ink/95 px-5 py-3 text-white shadow-2xl ring-1 ring-white/10 backdrop-blur">
+    <span class="text-[11px] font-bold uppercase tracking-[0.15em] text-brand-yellow">{target.toUpperCase()}</span>
+    <span class="flex-1 truncate text-sm text-white/90">{targetUI.banner.message}</span>
+    <a
+      href={switchHref}
+      id="langBannerCta"
+      class="shrink-0 rounded-full bg-brand-yellow px-4 py-1.5 font-headline text-[11px] font-extrabold uppercase tracking-[0.15em] text-ink transition hover:brightness-95"
+    >{targetUI.banner.cta}</a>
+    <button
+      type="button"
+      id="langBannerDismiss"
+      class="shrink-0 rounded-full p-1.5 text-white/70 transition hover:bg-white/10 hover:text-white"
+      aria-label={targetUI.banner.dismiss}
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="h-4 w-4"><path d="M6 6l12 12M18 6 6 18"/></svg>
+    </button>
+  </div>
+</div>
+
+<script is:inline>
+  (function () {
+    var el = document.getElementById("langBanner");
+    if (!el) return;
+    var current = el.getAttribute("data-current-lang");
+    var target = el.getAttribute("data-target-lang");
+    var stored = null;
+    try { stored = localStorage.getItem("womd_lang"); } catch (e) {}
+
+    // If user already has a preference, skip entirely.
+    if (stored) return;
+
+    // Read browser preference list. navigator.languages > navigator.language.
+    var langs = (navigator.languages && navigator.languages.length)
+      ? navigator.languages : [navigator.language || ""];
+    var preferred = "en";
+    for (var i = 0; i < langs.length; i++) {
+      var l = String(langs[i] || "").toLowerCase();
+      if (l.indexOf("id") === 0) { preferred = "id"; break; }
+      if (l.indexOf("en") === 0) { preferred = "en"; break; }
+    }
+
+    // Only suggest when the browser preference ≠ current page lang AND matches the alt.
+    if (preferred !== target) return;
+
+    // Show with a brief delay so it doesn't fight the hero entrance.
+    setTimeout(function () {
+      el.classList.remove("hidden");
+      requestAnimationFrame(function () {
+        el.classList.remove("translate-y-2", "opacity-0");
+      });
+    }, 900);
+
+    function persist(choice) {
+      try { localStorage.setItem("womd_lang", choice); } catch (e) {}
+    }
+    function hide() {
+      el.classList.add("translate-y-2", "opacity-0");
+      setTimeout(function () { el.classList.add("hidden"); }, 250);
+    }
+
+    var cta = document.getElementById("langBannerCta");
+    if (cta) cta.addEventListener("click", function () { persist(target); });
+    var dismiss = document.getElementById("langBannerDismiss");
+    if (dismiss) dismiss.addEventListener("click", function () { persist(current); hide(); });
+  })();
+</script>

@@ -1,18 +1,21 @@
 ---
 import "../styles/global.css";
+import type { Lang } from "../i18n";
 
 interface Props {
   title?: string;
   description?: string;
+  lang?: Lang;
 }
 const {
   title = "WOMD — Weapons of Mass Discussion",
   description = "Strategic Transformation Consultancy. We weaponize discussion.",
+  lang = "en",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

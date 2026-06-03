@@ -1,16 +1,30 @@
 ---
 // Persistent site header (transparent at top, frosted-block after scroll).
-// Used on every page via Base layout's slot pattern.
+// Lang-aware: shows an EN/ID toggle that swaps to the same page in the other locale.
+import { altLangPath, otherLang, type Lang } from "../i18n";
+
+interface Props { lang?: Lang }
+const { lang = "en" } = Astro.props;
+const target = otherLang(lang);
+const otherHref = altLangPath(Astro.url.pathname, target);
+const otherLabel = target === "id" ? "ID" : "EN";
+const selfLabel = lang === "id" ? "ID" : "EN";
 ---
 
 <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 transition-all duration-300">
-  <div class="flex items-center px-5 py-4 sm:px-8 sm:py-5">
-    <a href="/" class="flex shrink-0 items-center gap-3" aria-label="Weapons of Mass Discussion — Home">
+  <div class="flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
+    <a href={lang === "id" ? "/id/" : "/"} class="flex shrink-0 items-center gap-3" aria-label="Weapons of Mass Discussion — Home">
       <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="" aria-hidden="true" width="44" height="44" class="h-9 w-9 sm:h-10 sm:w-10" />
       <span class="font-headline text-[0.7rem] font-extrabold uppercase leading-none tracking-[0.1em] whitespace-nowrap sm:text-sm md:text-base lg:text-lg">
         <span class="header-wordmark">Weapons of Mass Discussion</span><span class="text-brand-yellow">.</span>
       </span>
     </a>
+
+    <div class="ml-auto mr-12 flex items-center gap-1 md:mr-0" aria-label="Language">
+      <span class="lang-self inline-flex h-7 items-center px-2 font-headline text-[11px] font-extrabold uppercase tracking-[0.15em]">{selfLabel}</span>
+      <span aria-hidden="true" class="lang-sep text-[11px] opacity-40">/</span>
+      <a href={otherHref} class="lang-other inline-flex h-7 items-center px-2 font-headline text-[11px] font-extrabold uppercase tracking-[0.15em] opacity-60 transition-opacity hover:opacity-100" hreflang={target} rel="alternate" data-lang-target={target}>{otherLabel}</a>
+    </div>
   </div>
 </header>
 
@@ -18,17 +32,24 @@
   (function () {
     const header = document.getElementById("siteHeader");
     if (!header) return;
-    const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 150);
+    var onScroll = function () { header.classList.toggle("is-scrolled", window.scrollY > 150); };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+    var otherLink = header.querySelector("[data-lang-target]");
+    if (otherLink) {
+      otherLink.addEventListener("click", function () {
+        try { localStorage.setItem("womd_lang", otherLink.getAttribute("data-lang-target")); } catch (e) {}
+      });
+    }
   })();
 </script>
 
 <style is:global>
-  /* At top: transparent header, yellow wordmark for hero-stage brand pop */
   #siteHeader { color: #ffffff; background-color: transparent; border-bottom: 1px solid transparent; backdrop-filter: none; }
   #siteHeader .header-wordmark { color: #FDD82D; }
-  /* After scrollY > 150px: solid frosted block, white wordmark */
+  #siteHeader .lang-self { color: #FDD82D; }
+  #siteHeader .lang-other, #siteHeader .lang-sep { color: #ffffff; }
   #siteHeader.is-scrolled { background-color: rgba(43,43,43,0.85); border-bottom-color: rgba(255,255,255,0.08); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
   #siteHeader.is-scrolled .header-wordmark { color: #ffffff; }
+  #siteHeader.is-scrolled .lang-self { color: #FDD82D; }
 </style>
