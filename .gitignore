@@ -35,3 +35,6 @@ npm-debug.log*
 /hf_*.mp4
 *.mhtml
 brand/motion/masters/
+
+# Internal HPP / cost reports — keep local, never push to the site repo
+/reports/
