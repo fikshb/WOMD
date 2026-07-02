@@ -353,8 +353,6 @@ export const clients = {
     { src: "/clients/bank-mandiri.webp", name: "Bank Mandiri" },
     { src: "/clients/bi.webp", name: "Bank Indonesia" },
     { src: "/clients/indosat.webp", name: "Indosat" },
-    { src: "/clients/toyota.webp", name: "Toyota" },
-    { src: "/clients/daihatsu.webp", name: "Daihatsu" },
     { src: "/clients/ahm.webp", name: "Astra Honda Motor" },
     { src: "/clients/roche.webp", name: "Roche" },
     { src: "/clients/binus.webp", name: "BINUS" },

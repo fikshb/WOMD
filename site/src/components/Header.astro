@@ -9,22 +9,26 @@ const target = otherLang(lang);
 const otherHref = altLangPath(Astro.url.pathname, target);
 const otherLabel = target === "id" ? "ID" : "EN";
 const selfLabel = lang === "id" ? "ID" : "EN";
+// ID temporarily hidden — flip to true to bring the EN/ID toggle back.
+const SHOW_LANG_TOGGLE = false;
 ---
 
 <header id="siteHeader" class="fixed inset-x-0 top-0 z-40 transition-all duration-300">
   <div class="flex items-center justify-between px-5 py-4 sm:px-8 sm:py-5">
     <a href={lang === "id" ? "/id/" : "/"} class="flex shrink-0 items-center gap-3" aria-label="Weapons of Mass Discussion — Home">
       <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="" aria-hidden="true" width="44" height="44" class="h-9 w-9 sm:h-10 sm:w-10" />
-      <span class="font-headline text-[0.7rem] font-extrabold uppercase leading-none tracking-[0.1em] whitespace-nowrap sm:text-sm md:text-base lg:text-lg">
-        <span class="header-wordmark">Weapons of Mass Discussion</span><span class="text-brand-yellow">.</span>
+      <span class="font-headline text-sm font-extrabold uppercase leading-none tracking-[0.1em] whitespace-nowrap md:text-base lg:text-lg">
+        <span class="header-wordmark"><span class="sm:hidden">WOMD</span><span class="hidden sm:inline">Weapons of Mass Discussion</span></span><span class="text-brand-yellow">.</span>
       </span>
     </a>
 
+    {SHOW_LANG_TOGGLE && (
     <div class="ml-auto mr-12 flex items-center gap-1 md:mr-0" aria-label="Language">
       <span class="lang-self inline-flex h-7 items-center px-2 font-headline text-[11px] font-extrabold uppercase tracking-[0.15em]">{selfLabel}</span>
       <span aria-hidden="true" class="lang-sep text-[11px] opacity-40">/</span>
       <a href={otherHref} class="lang-other inline-flex h-7 items-center px-2 font-headline text-[11px] font-extrabold uppercase tracking-[0.15em] opacity-60 transition-opacity hover:opacity-100" hreflang={target} rel="alternate" data-lang-target={target}>{otherLabel}</a>
     </div>
+    )}
   </div>
 </header>
 

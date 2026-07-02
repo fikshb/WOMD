@@ -60,7 +60,7 @@ const productIcons = [
   <!-- 5 PILLAR DETAILS -->
   {pillars.map((p, i) => (
     <section id={`pillar-${p.num}`} class:list={["snap relative flex min-h-screen items-center overflow-hidden px-6 py-24 sm:px-12 lg:px-20 text-ink", i % 2 === 0 ? "bg-white" : "bg-[#f5f5f5]"]}>
-      <img src={i % 2 === 0 ? "/images/whitebg.jpg" : "/images/greybg.jpg"} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover" loading="lazy" decoding="async" />
+      <img src={i % 2 === 0 ? "/images/whitebg.jpg" : "/images/greybg.jpg"} alt="" aria-hidden="true" class="absolute inset-0 h-full w-full object-cover opacity-20" loading="lazy" decoding="async" />
       <div class="relative z-10 mx-auto grid w-full max-w-6xl gap-10 lg:grid-cols-[0.7fr_1.6fr] lg:gap-14">
         <div class="reveal group lg:sticky lg:top-24 lg:self-start">
           <div class="flex items-center gap-4">

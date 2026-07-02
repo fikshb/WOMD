@@ -12,6 +12,9 @@ const navItems = isWhatWeDo ? whatWeDoNavItems : homeNavItems;
 const mobileItems = (isWhatWeDo ? whatWeDoNavItems : homeNavItems)
   .filter((i) => i.id !== "hero")
   .map((i) => ({ ...i }));
+// Contact is pulled out as a distinct CTA button; the rest become a numbered list.
+const contactItem = mobileItems.find((i) => i.id === "contact");
+const mobileMain = mobileItems.filter((i) => i.id !== "contact");
 ---
 
 <!-- Desktop dot nav — color adapts to the active section (light/dark) via scroll-spy -->
@@ -37,12 +40,26 @@ const mobileItems = (isWhatWeDo ? whatWeDoNavItems : homeNavItems)
 </button>
 
 <!-- Mobile overlay menu -->
-<div id="navOverlay" class="fixed inset-0 z-[55] hidden flex-col items-center justify-center gap-5 bg-ink/95 px-6 text-center backdrop-blur md:hidden">
-  {mobileItems.map((item) => (
-    <a href={`#${item.id}`} class="font-headline text-2xl font-extrabold uppercase tracking-wide text-white transition-colors active:text-brand-yellow">
-      {item.label}
-    </a>
-  ))}
+<div id="navOverlay" class="fixed inset-0 z-[55] hidden flex-col bg-ink/95 backdrop-blur-xl md:hidden">
+  <div class="flex items-center gap-2.5 px-6 pt-6">
+    <img src="/logo/WOMD_Icon_SpeechBubble_transparent_1500.png" alt="" aria-hidden="true" width="36" height="36" class="h-8 w-8" />
+    <span class="font-headline text-sm font-extrabold uppercase tracking-[0.1em] text-brand-yellow">WOMD<span class="text-white">.</span></span>
+  </div>
+  <nav class="flex flex-1 flex-col overflow-y-auto px-8 py-6" aria-label="Mobile menu">
+    <div class="my-auto flex flex-col gap-4">
+      {mobileMain.map((item, i) => (
+        <a href={`#${item.id}`} class="ov-item group flex items-baseline gap-4" style={`--i:${i}`}>
+          <span class="font-headline text-xs font-bold tabular-nums text-brand-yellow/70">{String(i + 1).padStart(2, "0")}</span>
+          <span class="font-headline text-2xl font-extrabold uppercase leading-tight tracking-wide text-white transition-colors group-active:text-brand-yellow">{item.label}</span>
+        </a>
+      ))}
+      {contactItem && (
+        <a href={`#${contactItem.id}`} class="ov-item mt-5 inline-flex w-fit items-center gap-2 rounded-full bg-brand-yellow px-7 py-3.5 font-headline text-sm font-extrabold uppercase tracking-[0.15em] text-ink" style={`--i:${mobileMain.length}`}>
+          {contactItem.label} <span aria-hidden="true">→</span>
+        </a>
+      )}
+    </div>
+  </nav>
 </div>
 
 <style is:global>
@@ -56,8 +73,22 @@ const mobileItems = (isWhatWeDo ? whatWeDoNavItems : homeNavItems)
     border-color: #2b2b2b !important;
   }
   #sectionNav .nav-dot.is-active .nav-label { opacity: 1 !important; }
+  /* Reveal the section title on hover for any dot (not just the active one). */
+  #sectionNav .nav-dot:hover .nav-label { opacity: 1 !important; }
   /* Hero exception: keep the active dot filled, hide the label entirely. */
   #sectionNav .nav-dot.is-active[data-nav="hero"] .nav-label { opacity: 0 !important; }
+
+  /* Mobile overlay menu — staggered entrance per item when the menu opens (.flex). */
+  #navOverlay .ov-item { opacity: 0; transform: translateY(10px); }
+  #navOverlay.flex .ov-item {
+    animation: ovItemIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation-delay: calc(var(--i, 0) * 45ms + 60ms);
+  }
+  @keyframes ovItemIn { to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) {
+    #navOverlay .ov-item { opacity: 1; transform: none; }
+    #navOverlay.flex .ov-item { animation: none; }
+  }
 </style>
 
 <script is:inline>

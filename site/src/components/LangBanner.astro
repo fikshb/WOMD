@@ -21,7 +21,12 @@ import { ui as uiEn } from "../data/content";
 import { ui as uiId } from "../data/content.id";
 const targetUI = target === "id" ? uiId : uiEn;
 const switchHref = altLangPath(Astro.url.pathname, target);
+// ID temporarily hidden — flip to true to bring the language-suggest banner back.
+const SHOW_BANNER = false;
 ---
+
+{SHOW_BANNER && (
+<Fragment>
 
 <div
   id="langBanner"
@@ -98,3 +103,5 @@ const switchHref = altLangPath(Astro.url.pathname, target);
     if (dismiss) dismiss.addEventListener("click", function () { persist(current); hide(); });
   })();
 </script>
+</Fragment>
+)}
