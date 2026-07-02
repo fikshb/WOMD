@@ -22,6 +22,8 @@ const {
     <script is:inline>document.documentElement.classList.add("js");</script>
     <title>{title}</title>
     <meta name="description" content={description} />
+    {/* ID temporarily hidden — keep the /id/ routes out of search results. */}
+    {lang === "id" && <meta name="robots" content="noindex, nofollow" />}
 
     <!-- Favicon set (see brand/design.md §5) -->
     <link rel="icon" href="/favicon.ico" sizes="any" />
