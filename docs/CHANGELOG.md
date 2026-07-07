@@ -4,6 +4,18 @@ User-facing / asset-facing changes. Format loosely follows Keep a Changelog.
 
 ## [Unreleased]
 
+### Changed (2026-07-07) — final-draft copy pass
+- **Copy synced to the client's final draft** (Google Doc). Hero subhead → "We help you listen, ideate, create, engage and amplify **your products and stories online.**"; Who-we-are P1 rewritten ("Growth begins with research, clear goals and a sound strategy…"); Core belief headline → "Ideas move people when they touch the heart as well as the mind." + beat 1 relabelled **Clear → Empathetic** (all four beats reworded); What-we-do intro reworded; How-we-work steps switched to 2nd person ("your"); Who-we-work-with list expanded to 9 (adds international/Indonesian market entries); Contact headline → "Amplify your products and stories online."
+- **Track record** numbers corrected: 120+ → **100+** projects, 60+ → **50+** brands.
+- **Hero logo** swapped to the white-stroke wordmark (`WOMD_Wordmark_WhiteStroke.png`, designer master by Mufti Hadi) for the outline/offset 3D look; the "Weapons of Mass Discussion" tagline under it now carries a matching outline+offset treatment (yellow fill, ink stroke/offset) so it reads as the primary company-name statement, especially on mobile.
+
+### Added (2026-07-07)
+- **Ken Moore** added to *Who's behind it* (Co-Founder | Data & Education Lead) alongside Razi (now *Founder | Principal Consultant*, bio updated). Ken's photo was composited into the same yellow speech-bubble frame as Razi's (background removed, dropped onto a clean copy of Razi's frame) so the two founders match. Team layout is now a two-up grid.
+- **Desktop header dropdown** "What we do ▾" listing the five pillars (links to `/what-we-do#pillar-0X`); mobile keeps the hamburger.
+
+### Removed (2026-07-07)
+- **Trusted-by** logo strip hidden (`SHOW_CLIENTS = false`) until a real WOMD client list is confirmed — the reused Katalis logos weren't all relevant.
+
 ### Added (2026-06-03)
 - **Bilingual EN/ID.** Site now available in English (`/`, `/what-we-do`) and Bahasa Indonesia (`/id/`, `/id/what-we-do`). Header gets an EN/ID toggle (top-right). A one-time dismissible suggest-banner appears when the browser's preferred language differs from the page (no auto-redirect; respects explicit choice). Full Indonesian translation drafted — needs native review pass. See D-013.
 

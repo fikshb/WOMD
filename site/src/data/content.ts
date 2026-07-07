@@ -5,17 +5,16 @@
 export const hero = {
   eyebrow: "Strategic Transformation Consultancy",
   tagline: "Weapons of Mass Discussion",
-  subheadPre: "We help organizations turn ideas into public conversations",
-  subheadAccent: "impossible to ignore.",
+  subheadPre: "We help you listen, ideate, create, engage and amplify",
+  subheadAccent: "your products and stories online.",
 };
 
 export const stats = {
   kicker: "Track record",
-  // TODO: replace with REAL numbers before launch (placeholders)
   items: [
     { value: "20+", label: "Years in digital" },
-    { value: "120+", label: "Projects delivered" },
-    { value: "60+", label: "Brands & organizations" },
+    { value: "100+", label: "Projects delivered" },
+    { value: "50+", label: "Brands & organizations" },
   ],
 };
 
@@ -24,19 +23,19 @@ export const whoWeAre = {
   headlineLead: "A consultancy built for the",
   headlineAccent: "AI & digital era.",
   paragraphs: [
-    "WOMD is not an agency that simply produces content, manages campaigns, or delivers isolated outputs. We help organizations create clarity, build systems, shape narratives, develop future-ready capabilities, and transform ideas into conversations that matter.",
+    "Growth begins with research, clear goals and a sound strategy, followed by optimal execution. We help you create clarity, build scalable solutions, shape narratives, develop future-ready capabilities, and transform online conversations into impact.",
     "Our work sits at the intersection of strategy, communication, research, innovation, technology, AI, leadership, learning, and human behavior. Because in a rapidly changing world, organizations don't only need to be seen. They need to be understood, trusted, remembered, and talked about.",
   ],
 };
 
 export const belief = {
   kicker: "Our core belief",
-  headline: "Ideas don't move people just because they exist.",
+  headline: "Ideas move people when they touch the heart as well as the mind.",
   beats: [
-    { label: "Clear", text: "They move people only when they're clear.", icon: "/icons/belief-clear.svg" },
-    { label: "Relevant", text: "They spread only when they're relevant.", icon: "/icons/belief-relevant.svg" },
-    { label: "Powerful", text: "They turn powerful when they enter public conversation.", icon: "/icons/belief-powerful.svg" },
-    { label: "Impactful", text: "They create impact when you turn them into systems, stories, and action.", icon: "/icons/belief-impactful.svg" },
+    { label: "Empathetic", text: "The best ideas are built on a shared understanding with your intended audience.", icon: "/icons/belief-clear.svg" },
+    { label: "Relevant", text: "They spread further when they're in tune with your audience's identity, needs and wants.", icon: "/icons/belief-relevant.svg" },
+    { label: "Powerful", text: "They become powerful when they become part of the public conversation.", icon: "/icons/belief-powerful.svg" },
+    { label: "Impactful", text: "They create change when you turn them into systems, stories, and collective action.", icon: "/icons/belief-impactful.svg" },
   ],
 };
 
@@ -254,11 +253,11 @@ export const process = {
   headlineLead: "We begin with",
   headlineAccent: "clarity.",
   steps: [
-    { n: "1", icon: "/icons/step-diagnose.svg", title: "Diagnose", text: "We understand the organization's current condition, challenges, goals, market context, and opportunities." },
-    { n: "2", icon: "/icons/step-define.svg", title: "Define", text: "We define the strategic direction, priorities, system, product opportunity, or capability that needs to be built." },
-    { n: "3", icon: "/icons/step-design.svg", title: "Design", text: "We design the blueprint, playbook, framework, system, roadmap, or product structure needed to move forward." },
-    { n: "4", icon: "/icons/step-develop.svg", title: "Develop", text: "We help develop the required assets, tools, platforms, dashboards, brand systems, or capability structures." },
-    { n: "5", icon: "/icons/step-enable.svg", title: "Enable", text: "We support the organization with implementation guidance, alignment, and capability transfer." },
+    { n: "1", icon: "/icons/step-diagnose.svg", title: "Diagnose", text: "We understand your organization's current condition, challenges, goals, market context, and opportunities." },
+    { n: "2", icon: "/icons/step-define.svg", title: "Define", text: "We help define your strategic direction, priorities, system, product opportunities, or capability that needs to be built." },
+    { n: "3", icon: "/icons/step-design.svg", title: "Design", text: "We design the blueprint, playbook, framework, system, roadmap, or product structure you need to move forward." },
+    { n: "4", icon: "/icons/step-develop.svg", title: "Develop", text: "We help you develop the required assets, tools, platforms, dashboards, brand systems, or capability structures." },
+    { n: "5", icon: "/icons/step-enable.svg", title: "Enable", text: "We support you with implementation guidance, alignment, and capability transfer." },
   ],
 };
 
@@ -277,14 +276,15 @@ export const audience = {
   kicker: "Who we work with",
   headline: "Organizations ready to build for the future.",
   items: [
-    "Companies entering digital transformation",
-    "Organizations adopting AI",
+    "International brands seeking to enter the Indonesian market",
+    "Indonesian brands seeking to grow regionally or globally",
+    "Organizations seeking digital transformation and AI adoption",
     "Brands needing clearer positioning",
     "Product teams validating market opportunities",
     "Leaders building future-ready teams",
     "Institutions developing learning systems",
     "Founders needing strategic clarity",
-    "Organizations preparing for scale",
+    "Organizations preparing for scalability",
   ],
 };
 
@@ -297,9 +297,9 @@ export const closing = {
   descriptor: "Strategic Transformation Consultancy for the AI Era",
   kicker2: "Make your ideas impossible to ignore.",
   futureEyebrow: "The future",
-  contactHeadlineLead: "Make your ideas become public conversations",
-  contactHeadlineAccent: "impossible to ignore.",
-  // TODO: replace dummy values with real ones before launch
+  contactHeadlineLead: "Amplify your",
+  contactHeadlineAccent: "products and stories online.",
+  // TODO: phone is still a placeholder — confirm real number before launch.
   contact: {
     email: "hello@wmdiscussion.com",
     phone: "+62 811 1000 2000",
@@ -312,7 +312,7 @@ export const homePage = {
   whatWeDoKicker: "What we do",
   whatWeDoTitle: "Five pillars of transformation.",
   whatWeDoIntro:
-    "Together, these pillars help organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.",
+    "Together, these pillars help organizations move from understanding current realities to building solutions and teams that lead to meaningful growth.",
   servicesSuffix: "services",
   seeAllPillars: "See all 5 pillars",
 };
@@ -322,10 +322,10 @@ export const whatWeDoPage = {
   heroHeadlineLead: "Five pillars of",
   heroHeadlineAccent: "transformation.",
   heroIntro:
-    "Together, these pillars help organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.",
+    "Together, these pillars help organizations move from understanding current realities to building solutions and teams that lead to meaningful growth.",
   metaTitle: "What we do — WOMD",
   metaDescription:
-    "Five pillars of transformation: how WOMD helps organizations move from ideas to clarity, from clarity to systems, and from systems to meaningful growth.",
+    "Five pillars of transformation: how WOMD helps organizations move from understanding current realities to building solutions and teams that lead to meaningful growth.",
 };
 
 // UI chrome — labels & banner copy. The banner is shown in the *target* language
@@ -364,9 +364,15 @@ export const team = {
   members: [
     {
       name: "Razi Thalib",
-      role: "Transformation Lead",
+      role: "Founder | Principal Consultant",
       photo: "/team/razi-thalib.jpg",
-      bio: "20+ years in digital. Former VP Digital Product at Zalora, Google Developers Launchpad Mentor, and Co-Founder of RevoU.",
+      bio: "20+ years in digital. Former VP of Digital Product and Marketing at Zalora, Google Developers Launchpad Mentor, Founder of Setipe, and Co-Founder of RevoU.",
+    },
+    {
+      name: "Ken Moore",
+      role: "Co-Founder | Data & Education Lead",
+      photo: "/team/ken-moore.jpg",
+      bio: "20+ years experience in education, evaluation and data analytics. Education researcher and former management consultant. Co-Founder of AptoNow.",
     },
   ],
 };

@@ -16,6 +16,10 @@ const { hero, stats, whoWeAre, belief, pillars, process, differentiators, audien
 const V = {
   stripes: "/video/WOMD_bg_yellow-stripes_1080.mp4",
 };
+
+// Client logos hidden until a real, WOMD-specific client list is confirmed
+// (the reused Katalis logos aren't all relevant). Flip to true to bring them back.
+const SHOW_CLIENTS = false;
 ---
 
 <Base lang={lang}>
@@ -38,8 +42,8 @@ const V = {
     ></video>
     <div aria-hidden="true" class="pointer-events-none absolute inset-0 bg-ink/50"></div>
     <div class="reveal relative z-10 mx-auto mt-[10vh] flex max-w-4xl flex-col items-center">
-      <img src="/logo/WOMD_Wordmark_Horizontal_transparent.png" alt="WOMD — Weapons of Mass Discussion" width="1500" height="457" class="mx-auto block w-[84vw] max-w-3xl drop-shadow-[0_6px_28px_rgba(0,0,0,0.4)]" />
-      <p class="mt-2 font-headline text-eyebrow font-bold uppercase tracking-[0.08em] text-white/80">{hero.tagline}</p>
+      <img src="/logo/WOMD_Wordmark_WhiteStroke.png" alt="WOMD — Weapons of Mass Discussion" width="1500" height="470" class="mx-auto block w-[82vw] max-w-2xl drop-shadow-[0_8px_30px_rgba(0,0,0,0.45)]" />
+      <p class="hero-tagline mt-4 font-headline text-[clamp(1rem,0.68rem+1.5vw,1.85rem)] font-extrabold uppercase leading-none tracking-[0.06em]">{hero.tagline}</p>
       <p class="mt-6 max-w-5xl font-headline text-[clamp(1.5rem,1rem+1.6vw,2.4rem)] font-extrabold leading-[1.12] tracking-[-0.01em] text-white">
         {hero.subheadPre} <span class="box-decoration-clone bg-brand-yellow px-2 text-ink">{hero.subheadAccent}</span>
       </p>
@@ -145,17 +149,20 @@ const V = {
     <div class="halftone-anim pointer-events-none absolute inset-0 opacity-[0.07]" style="background:url('/textures/halftone-black.png') center / cover no-repeat;"></div>
     <div class="relative z-10 mx-auto w-full max-w-6xl">
       <p class="reveal font-headline text-eyebrow font-bold uppercase"><span class="box-decoration-clone bg-brand-yellow px-2 py-0.5 text-ink">{team.kicker}</span></p>
-      {team.members.map((m) => (
-        <div class="reveal mt-8 grid gap-8 sm:grid-cols-[auto_1fr] sm:items-center sm:gap-12" style="--reveal-delay:80ms">
-          <img src={m.photo} alt={m.name} width="240" height="320" class="w-40 object-cover sm:w-52" />
-          <div>
-            <h2 class="font-headline text-[clamp(2rem,1.2rem+2.5vw,3.5rem)] font-extrabold leading-[1]">{m.name}</h2>
-            <p class="mt-2 font-headline text-sm font-bold uppercase tracking-wide text-ink">{m.role}</p>
-            <p class="mt-4 max-w-xl text-lead text-ink">{m.bio}</p>
+      <div class="reveal mt-8 grid gap-x-10 gap-y-9 sm:grid-cols-2 sm:gap-y-10" style="--reveal-delay:80ms">
+        {team.members.map((m) => (
+          <div class="flex items-center gap-5 sm:gap-6">
+            <img src={m.photo} alt={m.name} width="240" height="240" class="w-28 shrink-0 sm:w-32 lg:w-36" loading="lazy" decoding="async" />
+            <div class="min-w-0">
+              <h3 class="font-headline text-[clamp(1.35rem,1rem+1.3vw,2.1rem)] font-extrabold leading-[1.03]">{m.name}</h3>
+              <p class="mt-1 font-headline text-xs font-bold uppercase tracking-wide text-ink/85 sm:text-sm">{m.role}</p>
+              <p class="mt-2.5 text-sm leading-relaxed text-ink/90 sm:text-[0.95rem]">{m.bio}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
+      {SHOW_CLIENTS && (
       <div class="reveal mt-12 border-t border-ink/15 pt-9" style="--reveal-delay:160ms">
         <p class="font-headline text-eyebrow font-bold uppercase"><span class="box-decoration-clone bg-brand-yellow px-2 py-0.5 text-ink">{clients.kicker}</span></p>
         <div class="marquee mt-5">
@@ -166,8 +173,9 @@ const V = {
           </div>
         </div>
       </div>
+      )}
 
-      <div class="reveal mt-10" style="--reveal-delay:220ms">
+      <div class="reveal mt-12 border-t border-ink/15 pt-9" style="--reveal-delay:220ms">
         <p class="font-headline text-eyebrow font-bold uppercase"><span class="box-decoration-clone bg-brand-yellow px-2 py-0.5 text-ink">{stats.kicker}</span></p>
         <div class="mt-6 grid grid-cols-3 gap-x-2 gap-y-8 sm:gap-x-8">
           {stats.items.map((s) => (
@@ -274,3 +282,14 @@ const V = {
     </div>
   </section>
 </Base>
+
+<style>
+  /* Hero tagline — outline + offset treatment echoing the wordmark's stroke/offset.
+     On mobile this is the only spot that states the full company name, so it reads big. */
+  .hero-tagline {
+    color: #FDD82D;
+    -webkit-text-stroke: 1.4px #2B2B2B;
+    text-shadow: 3px 3px 0 #2B2B2B, 0 2px 12px rgba(0, 0, 0, 0.4);
+    paint-order: stroke fill;
+  }
+</style>

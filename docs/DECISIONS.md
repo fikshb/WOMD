@@ -4,6 +4,13 @@ Lightweight ADRs. Record decisions that aren't obvious from the code/files — e
 
 ---
 
+## D-014 — Second founder photo composited into the brand speech-bubble frame
+
+- **Date:** 2026-07-07
+- **Decision:** Ken Moore's raw headshot (grey studio wall) was matched to Razi's branded yellow speech-bubble frame by: (1) removing Ken's background with `rembg` (u2net); (2) building a clean "frame plate" from `razi-thalib.jpg` — Razi's silhouette painted over with two sampled-brand-yellow ellipses (head + shoulders) plus a navy-only residual sweep, so Razi is fully gone while the deco motifs (trefoils, atom, badge, dots) in the margins survive; (3) compositing Ken over the plate, scaled/positioned to fill the bubble like Razi (head near top, shoulders reaching down), clipped to the bubble interior. Output → `site/public/team/ken-moore.jpg`. Note: an earlier color-classification erase failed — Razi's warm skin reads as "yellow", so silhouette-cover (not color-erase) is the reliable route.
+- **Why:** The two founders sit side by side; a raw headshot next to Razi's designed bubble would read as unfinished. No vector frame template exists (D-001/#1 gap), so reconstructing from Razi's raster was the only free route to a matching asset. `rembg` was installed locally (one-time) rather than paying a cutout API.
+- **Trade-off:** Ken's bubble isn't pixel-identical to Razi's (deco arrangement differs slightly) — same family, good enough. If the designer later supplies a native framed export, drop it in over `ken-moore.jpg`.
+
 ## D-013 — Bilingual EN/ID: manual toggle + intent-signal banner, no IP geo-redirect
 
 - **Date:** 2026-06-03

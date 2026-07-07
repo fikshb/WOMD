@@ -4,6 +4,22 @@ Reverse-chronological log of meaningful work. One entry per session/task. Keep i
 
 ---
 
+## 2026-07-07 — Final-draft copy sync + white-stroke logo + 2nd founder + header dropdown
+
+Applied the client's final-draft copy (Google Doc `1Emoxh2…`, fetched via the `rtb-finance` service account since it wasn't shared with the Drive MCP account) and three UI asks. Local build green (4 pages); verified every changed surface with Playwright screenshots (desktop + mobile). Not yet deployed.
+
+**Copy (`content.ts`).** Hero subhead, Who-we-are P1, Core-belief headline + 4 beats (Clear→Empathetic), What-we-do intro (+ `whatWeDoPage` meta), How-we-work steps (→ 2nd person), audience list (→ 9 items), contact headline, and Track-record numbers (100+/50+). ID (`content.id.ts`) left stale — still hidden/noindex.
+
+**Hero logo + tagline.** Swapped horizontal wordmark → `WOMD_Wordmark_WhiteStroke.png` (designer master, Mufti Hadi, Drive `1C13y…`). Added `.hero-tagline` (yellow fill + ink `-webkit-text-stroke` + offset `text-shadow`, `paint-order: stroke fill`) so "Weapons of Mass Discussion" gets the outline/offset look and reads as the primary name statement on mobile.
+
+**Founders (`team`).** Razi → "Founder | Principal Consultant" (bio updated). Added Ken Moore. Ken's photo (raw headshot pulled from the doc's embedded images) was composited into Razi's speech-bubble frame — `rembg` cutout + a yellow-filled "frame plate" derived from `razi-thalib.jpg` (deco protected). See D-014. Team markup → two-up grid.
+
+**Header dropdown.** `Header.astro` gained a desktop-only "What we do ▾" (`group`-hover/focus-within) listing the 5 pillars → `/what-we-do#pillar-0X`. Mobile unchanged (hamburger).
+
+**Trusted-by** hidden (`SHOW_CLIENTS=false`) pending a real client list.
+
+**Next / open:** deploy (rsync to Katalis, same as before); real phone number + social links (user doing socials this weekend); confirm which client logos are real → un-hide Trusted-by; retranslate ID if bilingual relaunches.
+
 ## 2026-06-03 — Bilingual EN/ID: toggle + suggest banner
 
 Made the site bilingual. Committed + pushed to `origin/main` as `435049e`.
